@@ -1,4 +1,4 @@
-package julius.sky.voicehud.plugins.voice;
+package julius.sky.voicehud;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
