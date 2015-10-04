@@ -36,7 +36,12 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
+	<repository>
+	    <id>nifty-maven-repo.sourceforge.net</id>
+	    <url>http://nifty-gui.sourceforge.net/nifty-maven-repo</url>
+	</repository>
     </repositories>
+    
   
 
   <dependencies>
@@ -90,6 +95,11 @@
   <groupId>com.jme3</groupId>
   <artifactId>jme3-android</artifactId>
   <version>3.0.10</version>
+</dependency>
+<dependency>
+<groupId>lessvoid</groupId>
+<artifactId>nifty</artifactId>
+<version>1.4.1</version>
 </dependency>
 <!-- <dependency>
 	<groupId>de.dfki.mary</groupId>

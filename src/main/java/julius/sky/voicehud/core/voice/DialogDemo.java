@@ -9,11 +9,12 @@
  * WARRANTIES.
  */
 
-package julius.sky.voicehud.plugins.voice;
+package julius.sky.voicehud.core.voice;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import julius.sky.voicehud.core.hud.HUDGUI;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 //import java.net.uri;
@@ -25,8 +26,7 @@ public class DialogDemo {
     private static final String DICTIONARY_PATH =
         "resource:/edu/cmu/sphinx/models/en-us/cmudict-en-us.dict";
     private static final String GRAMMAR_PATH =
-//        "resource:/edu/cmu/sphinx/demo/dialog/";
-    "resource:/julius/sky/voicehud/plugins/voice/";
+    "resource:/julius/sky/voicehud/core/voice/";
     
 //    		getResource("/assets/dialog.gram");
 
@@ -176,7 +176,10 @@ public class DialogDemo {
         configuration.setLanguageModelPath(LANGUAGE_MODEL);
         LiveSpeechRecognizer lmRecognizer =
             new LiveSpeechRecognizer(configuration);
+        
+        HUDGUI testgui = new HUDGUI();
 
+        
         jsgfRecognizer.startRecognition(true);
         while (true) {
             System.out.println("Choose menu item:");
@@ -194,6 +197,12 @@ public class DialogDemo {
             if (utterance.equals("digits")) {
                 jsgfRecognizer.stopRecognition();
                 recognizeDigits(grxmlRecognizer);
+                jsgfRecognizer.startRecognition(true);
+            }
+            
+            if (utterance.equals("hud")) {
+                jsgfRecognizer.stopRecognition();
+//                new HUDGUI();
                 jsgfRecognizer.startRecognition(true);
             }
             
