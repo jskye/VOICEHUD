@@ -219,6 +219,7 @@ import de.lessvoid.nifty.tools.Color;
 	
 //package julius.sky.voicehud.core.hud;
 
+
 import com.jme3.app.SimpleApplication;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.AnalogListener;
@@ -230,25 +231,30 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
+
 import de.lessvoid.nifty.Nifty;
+
 import java.util.Calendar;
+
+import julius.sky.voicehud.core.voice.DialogDemo;
 
 /**
  * Nifty GUI 1.3 demo using XML for static content 
  * and Java for dynamic content. 
  */
-public class HUDGUI extends SimpleApplication {
+public class HUDGUI extends SimpleApplication implements Runnable {
 
   private int health;
   private MyStartScreen startScreen;
+  private HUDGUI hudgui;
 
-  public static void main(String[] args) {
+//  public static void main(String[] args) {
+  public HUDGUI() {
     AppSettings settings = new AppSettings(true);
     settings.setResolution(640, 480);
-    HUDGUI app = new HUDGUI();
-    app.setShowSettings(false); // splashscreen
-    app.setSettings(settings);
-    app.start();
+//    HUDGUI app = new HUDGUI();
+    this.setShowSettings(false); // splashscreen
+    this.setSettings(settings);
   }
 
   @Override
@@ -290,5 +296,16 @@ public class HUDGUI extends SimpleApplication {
   public String getPlayerName() {
     return System.getProperty("user.name");
   }
+
+public void run() {
+	
+	DialogDemo dd = new DialogDemo(this);
+	Thread dialogThread = new Thread(dd);
+	dialogThread.setDaemon(true);
+    this.start();
+ // run as deamon to terminate this thread when gui terminates.
+	dialogThread.start(); 
+//	dd.run();
+}
 
 }

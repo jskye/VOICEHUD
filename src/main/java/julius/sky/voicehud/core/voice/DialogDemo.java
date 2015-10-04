@@ -19,20 +19,25 @@ import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 //import java.net.uri;
 
-public class DialogDemo {
+public class DialogDemo implements Runnable{
 
     private static final String ACOUSTIC_MODEL =
         "resource:/edu/cmu/sphinx/models/en-us/en-us";
     private static final String DICTIONARY_PATH =
         "resource:/edu/cmu/sphinx/models/en-us/cmudict-en-us.dict";
     private static final String GRAMMAR_PATH =
-    "resource:/julius/sky/voicehud/core/voice/";
-    
-//    		getResource("/assets/dialog.gram");
+    "resource:/julius/sky/voicehud/core/voice/";    
 
-    
     private static final String LANGUAGE_MODEL =
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
+    
+    // the hudgui that the commands will control.
+    private HUDGUI hudgui;
+    
+    public DialogDemo(HUDGUI hg){
+    	this.hudgui = hg;
+    }
+    
     
     private static final Map<String, String> COMMANDS =
     		new HashMap<String, String>();
@@ -155,7 +160,7 @@ public class DialogDemo {
         recognizer.stopRecognition();
     }
 
-    public static void main(String[] args) throws Exception {
+    public void startDialog() throws Exception{
         
     	// setup configuration, acoustic model, dictionary, grammar
     	Configuration configuration = new Configuration();
@@ -177,8 +182,8 @@ public class DialogDemo {
         LiveSpeechRecognizer lmRecognizer =
             new LiveSpeechRecognizer(configuration);
         
-        HUDGUI testgui = new HUDGUI();
-
+//        HUDGUI testgui = new HUDGUI();
+//        testgui.start();
         
         jsgfRecognizer.startRecognition(true);
         while (true) {
@@ -227,4 +232,21 @@ public class DialogDemo {
 
         jsgfRecognizer.stopRecognition();
     }
+
+
+
+
+
+
+
+	public void run() {
+		// TODO Auto-generated method stub
+		try {
+			this.startDialog();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
