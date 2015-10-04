@@ -1,7 +1,7 @@
 package julius.sky.voicehud;
 
 import julius.sky.voicehud.core.hud.HUDGUI;
-import julius.sky.voicehud.core.voice.DialogDemo;
+import julius.sky.voicehud.core.voice.Dialog;
 
 /**
  * Hello world!

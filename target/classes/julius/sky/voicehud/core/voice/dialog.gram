@@ -28,5 +28,17 @@ grammar dialog;
                  deposit <number>       |
                  withdraw <number>      |
                  back                   ;
+                 
+<artist_command> = 	elvis				|
+					moby				|
+					[the] beatles		|
+					sia					;
+
+<song_command> = 	elvis				|
+					moby				|
+					[the] beatles		|
+					sia					;
+					
+<music_command> = [play] [<artist_command>] [<song_command>];
 
 public <command> = <menu_command> | <bank_command>;

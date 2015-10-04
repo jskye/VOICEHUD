@@ -17,9 +17,8 @@ import java.util.Map;
 import julius.sky.voicehud.core.hud.HUDGUI;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
-//import java.net.uri;
 
-public class DialogDemo implements Runnable{
+public class Dialog implements Runnable{
 
     private static final String ACOUSTIC_MODEL =
         "resource:/edu/cmu/sphinx/models/en-us/en-us";
@@ -34,7 +33,7 @@ public class DialogDemo implements Runnable{
     // the hudgui that the commands will control.
     private HUDGUI hudgui;
     
-    public DialogDemo(HUDGUI hg){
+    public Dialog(HUDGUI hg){
     	this.hudgui = hg;
     }
     
@@ -182,8 +181,6 @@ public class DialogDemo implements Runnable{
         LiveSpeechRecognizer lmRecognizer =
             new LiveSpeechRecognizer(configuration);
         
-//        HUDGUI testgui = new HUDGUI();
-//        testgui.start();
         
         jsgfRecognizer.startRecognition(true);
         while (true) {
