@@ -19,8 +19,8 @@ grammar dialog;
 <menu_command> =  digits                     |
                   [go to [the]] bank account |
                   weather forecast           |
-                  music                      |
-                  vee                        |
+                  [play] music               |
+                  v	                         |
                   hud						 |
                   exit [[the] program]       ;
 
@@ -32,13 +32,14 @@ grammar dialog;
 <artist_command> = 	elvis				|
 					moby				|
 					[the] beatles		|
-					sia					;
+					sia					|		
+					random;
 
-<song_command> = 	elvis				|
+<song_command> = 	[a little less] converstion		|
 					moby				|
 					[the] beatles		|
 					sia					;
 					
-<music_command> = [play] [<artist_command>] [<song_command>];
+<music_command> = [play] music;
 
 public <command> = <menu_command> | <bank_command>;

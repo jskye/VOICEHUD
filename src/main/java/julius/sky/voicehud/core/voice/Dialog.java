@@ -172,14 +172,14 @@ public class Dialog implements Runnable{
         LiveSpeechRecognizer jsgfRecognizer =
             new LiveSpeechRecognizer(configuration);
 
-        configuration.setGrammarName("digits.grxml");
-        LiveSpeechRecognizer grxmlRecognizer =
-            new LiveSpeechRecognizer(configuration);
-
-        configuration.setUseGrammar(false);
-        configuration.setLanguageModelPath(LANGUAGE_MODEL);
-        LiveSpeechRecognizer lmRecognizer =
-            new LiveSpeechRecognizer(configuration);
+//        configuration.setGrammarName("digits.grxml");
+//        LiveSpeechRecognizer grxmlRecognizer =
+//            new LiveSpeechRecognizer(configuration);
+//
+//        configuration.setUseGrammar(false);
+//        configuration.setLanguageModelPath(LANGUAGE_MODEL);
+//        LiveSpeechRecognizer lmRecognizer =
+//            new LiveSpeechRecognizer(configuration);
         
         
         jsgfRecognizer.startRecognition(true);
@@ -196,11 +196,11 @@ public class Dialog implements Runnable{
             if (utterance.startsWith("exit") || utterance.startsWith("stop") )
                 break;
 
-            if (utterance.equals("digits")) {
-                jsgfRecognizer.stopRecognition();
-                recognizeDigits(grxmlRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
+//            if (utterance.equals("digits")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizeDigits(grxmlRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
             
             if (utterance.equals("hud")) {
                 jsgfRecognizer.stopRecognition();
@@ -210,7 +210,8 @@ public class Dialog implements Runnable{
             
             if (utterance.equals("music")) {
                 jsgfRecognizer.stopRecognition();
-                System.out.println("which music");
+//                System.out.println("which music");
+                
                 jsgfRecognizer.startRecognition(true);
             }
 
@@ -220,11 +221,11 @@ public class Dialog implements Runnable{
                 jsgfRecognizer.startRecognition(true);
             }
 
-            if (utterance.endsWith("weather forecast")) {
-                jsgfRecognizer.stopRecognition();
-                recognizeWeather(lmRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
+//            if (utterance.endsWith("weather forecast")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizeWeather(lmRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
         }
 
         jsgfRecognizer.stopRecognition();

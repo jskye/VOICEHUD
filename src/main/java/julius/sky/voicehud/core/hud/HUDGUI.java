@@ -247,9 +247,12 @@ public class HUDGUI extends SimpleApplication implements Runnable {
   private int health;
   private MyStartScreen startScreen;
   private HUDGUI hudgui;
+  private AssetManager assetManager;
 
 //  public static void main(String[] args) {
+//  public HUDGUI(AssetManager assetManager) {
   public HUDGUI() {
+//	this.assetManager = assetManager;
     AppSettings settings = new AppSettings(true);
     settings.setResolution(640, 480);
 //    HUDGUI app = new HUDGUI();
