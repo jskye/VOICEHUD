@@ -44,6 +44,7 @@ public class App
         	MusicPlayer musicPlayer = new MusicPlayer();
 			musicPlayer.run();
 			musicPlayer.createMusicNode("Elvis_Presley", "Burning_Love");
+			musicPlayer.playMusic();
 
 
 			

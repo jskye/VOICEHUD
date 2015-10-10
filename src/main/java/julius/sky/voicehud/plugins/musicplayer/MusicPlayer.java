@@ -30,6 +30,8 @@ public class MusicPlayer extends SimpleApplication implements Runnable {
 		// load streaiming (true) ogg file in parrallel.
 		this.currentMusic = new AudioNode(this.assetManager, "Sound/" + artistName + "-" + songName + ".ogg", true); 
 		this.currentMusic.setPositional(false); // play in headspace (same volume no matter where node is).
+	    rootNode.attachChild(currentMusic);
+
 	}
 	
 	public void playMusic(){
