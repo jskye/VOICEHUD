@@ -246,7 +246,6 @@ public class HUDGUI extends SimpleApplication implements Runnable {
   private int health;
   private MyStartScreen startScreen;
   private HUDGUI hudgui;
-  private AssetManager assetManager;
 
 //  public static void main(String[] args) {
 //  public HUDGUI(AssetManager assetManager) {
@@ -269,6 +268,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
      */
     Box b = new Box(Vector3f.ZERO, 1, 1, 1);
     Geometry geom = new Geometry("Box", b);
+    
     Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
     mat.setColor("Color", ColorRGBA.Blue);
     geom.setMaterial(mat);
@@ -300,19 +300,8 @@ public class HUDGUI extends SimpleApplication implements Runnable {
   }
 
 public void run() {
-	
-//	VoiceCommandManager dd = new VoiceCommandManager();
-//	
-//	Thread dialogThread = new Thread(dd);
-	
-	// set to run as deamon to terminate this thread when gui terminates.
-//	dialogThread.setDaemon(true);
-	
-	// start this HUDGUI thread.
+
     this.start();
-    
- // start the dialog thread.
-//	dialogThread.start(); 
 }
 
 }

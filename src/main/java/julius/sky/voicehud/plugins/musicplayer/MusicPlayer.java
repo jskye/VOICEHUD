@@ -1,18 +1,25 @@
 package julius.sky.voicehud.plugins.musicplayer;
 
+import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioNode;
+import com.jme3.system.AppSettings;
 
-public class MusicPlayer implements Runnable {
+public class MusicPlayer extends SimpleApplication implements Runnable {
+	
 	private MusicDatabase musicDatabase;
-	private AssetManager assetManager;
+//	private AssetManager assetManager;
 	private AudioNode currentMusic; 
 	
-	public MusicPlayer(AssetManager assetManager){
-//	public MusicPlayer(){
-		this.musicDatabase = new MusicDatabase();
-		this.assetManager = assetManager;
-	}
+	
+//	public MusicPlayer(AssetManager assetManager){
+		public MusicPlayer(){
+			this.musicDatabase = new MusicDatabase();
+//			this.assetManager = assetManager;
+		    AppSettings settings = new AppSettings(true);
+
+		}	
+	
 	
 	public void createMusicNode(String artistName, String songName){
 		// jme3 supports ogg and wav
@@ -36,6 +43,13 @@ public class MusicPlayer implements Runnable {
 	}
 
 	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void simpleInitApp() {
 		// TODO Auto-generated method stub
 		
 	}
