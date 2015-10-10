@@ -299,7 +299,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 
 public void run() {
 	
-	Dialog dd = new Dialog(this);
+	Dialog dd = new Dialog();
 	Thread dialogThread = new Thread(dd);
 	dialogThread.setDaemon(true);
     this.start();

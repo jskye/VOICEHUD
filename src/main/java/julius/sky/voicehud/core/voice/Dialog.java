@@ -31,10 +31,9 @@ public class Dialog implements Runnable{
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
     
     // the hudgui that the commands will control.
-    private HUDGUI hudgui;
     
-    public Dialog(HUDGUI hg){
-    	this.hudgui = hg;
+    public Dialog(){
+//    	this.hudgui = hg;
     }
     
     
@@ -172,14 +171,14 @@ public class Dialog implements Runnable{
         LiveSpeechRecognizer jsgfRecognizer =
             new LiveSpeechRecognizer(configuration);
 
-        configuration.setGrammarName("digits.grxml");
-        LiveSpeechRecognizer grxmlRecognizer =
-            new LiveSpeechRecognizer(configuration);
-
-        configuration.setUseGrammar(false);
-        configuration.setLanguageModelPath(LANGUAGE_MODEL);
-        LiveSpeechRecognizer lmRecognizer =
-            new LiveSpeechRecognizer(configuration);
+//        configuration.setGrammarName("digits.grxml");
+//        LiveSpeechRecognizer grxmlRecognizer =
+//            new LiveSpeechRecognizer(configuration);
+//
+//        configuration.setUseGrammar(false);
+//        configuration.setLanguageModelPath(LANGUAGE_MODEL);
+//        LiveSpeechRecognizer lmRecognizer =
+//            new LiveSpeechRecognizer(configuration);
         
         
         jsgfRecognizer.startRecognition(true);
@@ -198,7 +197,7 @@ public class Dialog implements Runnable{
 
             if (utterance.equals("digits")) {
                 jsgfRecognizer.stopRecognition();
-                recognizeDigits(grxmlRecognizer);
+//                recognizeDigits(grxmlRecognizer);
                 jsgfRecognizer.startRecognition(true);
             }
             
@@ -222,7 +221,7 @@ public class Dialog implements Runnable{
 
             if (utterance.endsWith("weather forecast")) {
                 jsgfRecognizer.stopRecognition();
-                recognizeWeather(lmRecognizer);
+//                recognizeWeather(lmRecognizer);
                 jsgfRecognizer.startRecognition(true);
             }
         }
