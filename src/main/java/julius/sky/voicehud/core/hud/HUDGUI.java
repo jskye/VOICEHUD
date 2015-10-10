@@ -23,6 +23,7 @@ import de.lessvoid.nifty.tools.Color;
 //import eu.opends.niftyGui.listBox.TextListBoxModel;
 //import eu.opends.niftyGui.HUDGUIController;
 //import eu.opends.niftyGui.KeyMappingGUI.GuiLayer;
+import julius.sky.voicehud.core.voice.voicecommand.VoiceCommandManager;
 
 //public class HUDGUI {
 //	
@@ -300,8 +301,8 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 
 public void run() {
 	
-//	Dialog dd = new Dialog(this);
-	
+//	VoiceCommandManager dd = new VoiceCommandManager();
+//	
 //	Thread dialogThread = new Thread(dd);
 	
 	// set to run as deamon to terminate this thread when gui terminates.
