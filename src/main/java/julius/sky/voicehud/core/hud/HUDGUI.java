@@ -247,6 +247,33 @@ public class HUDGUI extends SimpleApplication implements Runnable {
   private int health;
   private MyStartScreen startScreen;
   private HUDGUI hudgui;
+  
+ // this will probably be moved to router because its a routing of commands to gui layers (views).
+//	public enum GuiLayer 
+//	{
+//		VIEW_STARTUP("startup_view", "keyMappingButton1"), 
+//		VIEW_DEFAULT("keyMappingLayer2", "keyMappingButton2"), 
+//		VIEW3("graphicSettingsLayer", "graphicSettingsButton");
+//		
+//		private String layerName;
+//		private String button;
+//		
+//		GuiLayer(String layerName, String button)
+//		{
+//			this.layerName = layerName;
+//			this.button = button;
+//		}
+//		
+//		public String getLayerName()
+//		{
+//			return layerName;
+//		}
+//		
+//		public String getButton()
+//		{
+//			return button;
+//		}
+//	}
 
 //  public static void main(String[] args) {
 //  public HUDGUI(AssetManager assetManager) {
@@ -314,5 +341,28 @@ public void run() {
 
     this.start();
 }
+
+/**
+* Changes over to the given layer of the (already opened)
+* key mapping and graphic settings GUI.
+* 
+* @param selectedLayer
+* 			Layer name to show.
+*/
+//public void openLayer(GuiLayer selectedLayer)
+//{
+//	Screen screen = nifty.getCurrentScreen();
+//	
+//	// show given layer, hide all others (except "menuLayer" which contains menu buttons)
+//	for(Element layer : screen.getLayerElements())
+//		if(layer.getId().equals(selectedLayer.getLayerName()) || layer.getId().equals("menuLayer"))
+//			layer.show();
+//		else
+//			layer.hide();
+//	
+//	// set focus to button related to the selected layer
+//	Button button = (Button) screen.findNiftyControl(selectedLayer.getButton(), Button.class);
+//	button.setFocus();
+//}
 
 }
