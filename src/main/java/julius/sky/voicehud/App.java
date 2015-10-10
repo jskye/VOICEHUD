@@ -39,12 +39,11 @@ public class App
 //			vcmThread.setDaemon(true);
 //			vcmThread.start(); 
 			
-			// sharing assetmanager between threads might be a mistake.
-//        	Thread musicPlayerThread = new Thread(new MusicPlayer());
-        	MusicPlayer musicPlayer = new MusicPlayer();
-			musicPlayer.run();
-			musicPlayer.createMusicNode("Elvis_Presley", "Burning_Love");
-			musicPlayer.playMusic();
+
+//        	MusicPlayer musicPlayer = new MusicPlayer();
+//			musicPlayer.run();
+//			musicPlayer.createMusicNode("Elvis_Presley", "Burning_Love");
+//			musicPlayer.playMusic();
 
 
 			

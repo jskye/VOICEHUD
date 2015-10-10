@@ -1,6 +1,7 @@
 package julius.sky.voicehud.plugins.musicplayer;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.audio.plugins.*;
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioNode;
 import com.jme3.system.AppSettings;

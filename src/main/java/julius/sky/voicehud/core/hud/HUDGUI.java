@@ -254,9 +254,13 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 //	this.initialize();
 //	this.assetManager = assetManager;
     AppSettings settings = new AppSettings(true);
-    settings.setResolution(640, 480);
+//    settings.setResolution(640, 480);
 //    HUDGUI app = new HUDGUI();
     this.setShowSettings(false); // splashscreen
+    
+    // set to fullscreen. turned off while developing.
+    settings.setFullscreen(true);
+    
     this.setSettings(settings);
   }
 
@@ -278,8 +282,8 @@ public class HUDGUI extends SimpleApplication implements Runnable {
     geom.setMaterial(mat);
     rootNode.attachChild(geom);
 
-    startScreen = new MyStartScreen();
-    stateManager.attach(startScreen);
+//    startScreen = new MyStartScreen();
+//    stateManager.attach(startScreen);
 
     /**
      * Åctivate the Nifty-JME integration: 
@@ -288,8 +292,11 @@ public class HUDGUI extends SimpleApplication implements Runnable {
             assetManager, inputManager, audioRenderer, guiViewPort);
     Nifty nifty = niftyDisplay.getNifty();
     guiViewPort.addProcessor(niftyDisplay);
-    nifty.fromXml("Interface/tutorial/screen3.xml", "start", startScreen);
+//    nifty.fromXml("Interface/tutorial/screen3.xml", "start", startScreen);
 //    nifty.fromXml("Interface/HUDGUI.xml", "start", startScreen);
+    String xmlPath = "Interface/HUDGUI.xml";
+	nifty.fromXml(xmlPath, "start", new HUDGUIController(this));
+
     //nifty.setDebugOptionPanelColors(true);
     
     flyCam.setDragToRotate(true); // you need the mouse for clicking now    
