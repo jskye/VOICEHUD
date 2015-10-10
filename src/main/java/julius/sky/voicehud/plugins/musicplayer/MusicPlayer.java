@@ -17,6 +17,8 @@ public class MusicPlayer extends SimpleApplication implements Runnable {
 			this.musicDatabase = new MusicDatabase();
 //			this.assetManager = assetManager;
 		    AppSettings settings = new AppSettings(true);
+		    settings.setAudioRenderer(AppSettings.LWJGL_OPENAL);
+
 
 		}	
 	

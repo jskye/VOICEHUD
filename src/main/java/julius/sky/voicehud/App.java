@@ -43,7 +43,7 @@ public class App
 //        	Thread musicPlayerThread = new Thread(new MusicPlayer());
         	MusicPlayer musicPlayer = new MusicPlayer();
 			musicPlayer.run();
-//			musicPlayer.createMusicNode("Elvis_Presley", "Burning_Love");
+			musicPlayer.createMusicNode("Elvis_Presley", "Burning_Love");
 
 
 			
