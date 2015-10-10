@@ -41,8 +41,8 @@ public class App
 			
 			// sharing assetmanager between threads might be a mistake.
 //        	Thread musicPlayerThread = new Thread(new MusicPlayer());
-//        	MusicPlayer musicPlayer = new MusicPlayer();
-//			musicPlayer.run();
+        	MusicPlayer musicPlayer = new MusicPlayer();
+			musicPlayer.run();
 //			musicPlayer.createMusicNode("Elvis_Presley", "Burning_Love");
 
 
