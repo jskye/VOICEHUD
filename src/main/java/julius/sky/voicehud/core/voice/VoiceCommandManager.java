@@ -18,7 +18,7 @@ import julius.sky.voicehud.core.hud.HUDGUI;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 
-public class Dialog implements Runnable{
+public class VoiceCommandManager implements Runnable{
 
     private static final String ACOUSTIC_MODEL =
         "resource:/edu/cmu/sphinx/models/en-us/en-us";
@@ -33,8 +33,11 @@ public class Dialog implements Runnable{
     // the hudgui that the commands will control.
     private HUDGUI hudgui;
     
-    public Dialog(HUDGUI hg){
-    	this.hudgui = hg;
+//    public Dialog(HUDGUI hg){
+//    	this.hudgui = hg;
+//    }
+    
+    public VoiceCommandManager(){
     }
     
     

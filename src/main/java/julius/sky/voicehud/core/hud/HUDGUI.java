@@ -236,8 +236,6 @@ import de.lessvoid.nifty.Nifty;
 
 import java.util.Calendar;
 
-import julius.sky.voicehud.core.voice.Dialog;
-
 /**
  * Nifty GUI 1.3 demo using XML for static content 
  * and Java for dynamic content. 
@@ -299,13 +297,18 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 
 public void run() {
 	
-	Dialog dd = new Dialog(this);
-	Thread dialogThread = new Thread(dd);
-	dialogThread.setDaemon(true);
+//	Dialog dd = new Dialog(this);
+	
+//	Thread dialogThread = new Thread(dd);
+	
+	// set to run as deamon to terminate this thread when gui terminates.
+//	dialogThread.setDaemon(true);
+	
+	// start this HUDGUI thread.
     this.start();
- // run as deamon to terminate this thread when gui terminates.
-	dialogThread.start(); 
-//	dd.run();
+    
+ // start the dialog thread.
+//	dialogThread.start(); 
 }
 
 }
