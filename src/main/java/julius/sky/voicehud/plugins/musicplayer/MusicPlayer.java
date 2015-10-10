@@ -14,6 +14,7 @@ public class MusicPlayer extends SimpleApplication implements Runnable {
 	
 //	public MusicPlayer(AssetManager assetManager){
 		public MusicPlayer(){
+//			this.initialize();
 			this.musicDatabase = new MusicDatabase();
 //			this.assetManager = assetManager;
 		    AppSettings settings = new AppSettings(true);
