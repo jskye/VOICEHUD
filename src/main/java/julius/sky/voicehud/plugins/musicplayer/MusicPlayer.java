@@ -26,8 +26,8 @@ public class MusicPlayer extends SimpleApplication implements Runnable {
 	public void createMusicNode(String artistName, String songName){
 		// jme3 supports ogg and wav
 		System.out.println("trying to play filename: " +" Sound/" + artistName + "-" + songName + ".ogg");
-		// load streaiming ogg file.
 		
+		// load streaiming (true) ogg file in parrallel.
 		this.currentMusic = new AudioNode(this.assetManager, "Sound/" + artistName + "-" + songName + ".ogg", true); 
 		this.currentMusic.setPositional(false); // play in headspace (same volume no matter where node is).
 	}
