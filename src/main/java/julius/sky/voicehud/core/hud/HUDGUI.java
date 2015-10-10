@@ -221,6 +221,7 @@ import julius.sky.voicehud.core.voice.voicecommand.VoiceCommandManager;
 //package julius.sky.voicehud.core.hud;
 
 
+
 import com.jme3.app.SimpleApplication;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.AnalogListener;
@@ -250,6 +251,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 //  public static void main(String[] args) {
 //  public HUDGUI(AssetManager assetManager) {
   public HUDGUI() {
+//	this.initialize();
 //	this.assetManager = assetManager;
     AppSettings settings = new AppSettings(true);
     settings.setResolution(640, 480);
@@ -269,6 +271,8 @@ public class HUDGUI extends SimpleApplication implements Runnable {
     Box b = new Box(Vector3f.ZERO, 1, 1, 1);
     Geometry geom = new Geometry("Box", b);
     
+    if(assetManager!=null){System.out.println("assetmanager not null");}
+    else{System.out.println("assetmanager null");}
     Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
     mat.setColor("Color", ColorRGBA.Blue);
     geom.setMaterial(mat);

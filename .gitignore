@@ -5,6 +5,7 @@ target
 *target\*
 *.class
 *.log
+<<<<<<< Updated upstream
 target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 *.lst
 target/surefire-reports/julius.sky.voicehud.AppTest.txt
@@ -15,3 +16,13 @@ target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/create
 target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 target/classes/julius/sky/voicehud/core/hud/MyStartScreen.class
 target/classes/julius/sky/voicehud/App.class
+=======
+
+target/classes/julius/sky/voicehud/App.class
+
+target/classes/julius/sky/voicehud/App.class
+
+*.class
+
+target/classes/julius/sky/voicehud/core/hud/HUDGUI.class
+>>>>>>> Stashed changes
