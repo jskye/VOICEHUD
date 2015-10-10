@@ -4,7 +4,7 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 
 import julius.sky.voicehud.core.hud.HUDGUI;
-import julius.sky.voicehud.core.voice.VoiceCommandManager;
+import julius.sky.voicehud.core.voice.voicecommand.VoiceCommandManager;
 import julius.sky.voicehud.plugins.musicplayer.MusicPlayer;
 
 public class App extends SimpleApplication

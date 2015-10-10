@@ -9,7 +9,7 @@
  * WARRANTIES.
  */
 
-package julius.sky.voicehud.core.voice;
+package julius.sky.voicehud.core.voice.voicecommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +24,7 @@ public class VoiceCommandManager implements Runnable{
     private static final String DICTIONARY_PATH =
         "resource:/edu/cmu/sphinx/models/en-us/cmudict-en-us.dict";
     private static final String GRAMMAR_PATH =
-    "resource:/julius/sky/voicehud/core/voice/";    
-
+    "resource:/julius/sky/voicehud/core/voice/config/";    
     private static final String LANGUAGE_MODEL =
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
     
@@ -63,6 +62,89 @@ public class VoiceCommandManager implements Runnable{
         DIGITS.put("seven", 7);
         DIGITS.put("eight", 8);
         DIGITS.put("nine", 9);
+    }
+    
+    public void run() {
+		// TODO Auto-generated method stub
+		try {
+			this.startDialog();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+    
+    public void startDialog() throws Exception{
+        
+    	// setup configuration, acoustic model, dictionary, grammar
+    	Configuration configuration = new Configuration();
+        configuration.setAcousticModelPath(ACOUSTIC_MODEL);
+        configuration.setDictionaryPath(DICTIONARY_PATH);
+        configuration.setGrammarPath(GRAMMAR_PATH);
+        configuration.setUseGrammar(true);
+
+        configuration.setGrammarName("dialog");
+        LiveSpeechRecognizer jsgfRecognizer =
+            new LiveSpeechRecognizer(configuration);
+
+//        configuration.setGrammarName("digits.grxml");
+//        LiveSpeechRecognizer grxmlRecognizer =
+//            new LiveSpeechRecognizer(configuration);
+//
+//        configuration.setUseGrammar(false);
+//        configuration.setLanguageModelPath(LANGUAGE_MODEL);
+//        LiveSpeechRecognizer lmRecognizer =
+//            new LiveSpeechRecognizer(configuration);
+        
+        
+        jsgfRecognizer.startRecognition(true);
+        while (true) {
+            System.out.println("Choose menu item:");
+            System.out.println("Example: go to the bank account");
+            System.out.println("Example: exit the program");
+            System.out.println("Example: weather forecast");
+            System.out.println("Example: music");
+            System.out.println("Example: digits\n");
+
+            String utterance = jsgfRecognizer.getResult().getHypothesis();
+
+            if (utterance.startsWith("exit") || utterance.startsWith("stop") )
+                break;
+
+//            if (utterance.equals("digits")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizeDigits(grxmlRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
+            
+            if (utterance.equals("hud")) {
+                jsgfRecognizer.stopRecognition();
+//                new HUDGUI();
+                jsgfRecognizer.startRecognition(true);
+            }
+            
+            if (utterance.equals("music")) {
+                jsgfRecognizer.stopRecognition();
+//                System.out.println("which music");
+                
+                jsgfRecognizer.startRecognition(true);
+            }
+
+            if (utterance.equals("bank account")) {
+                jsgfRecognizer.stopRecognition();
+                recognizerBankAccount(jsgfRecognizer);
+                jsgfRecognizer.startRecognition(true);
+            }
+
+//            if (utterance.endsWith("weather forecast")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizeWeather(lmRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
+        }
+
+        jsgfRecognizer.stopRecognition();
     }
 
     private static double parseNumber(String[] tokens) {
@@ -155,92 +237,6 @@ public class VoiceCommandManager implements Runnable{
         recognizer.stopRecognition();
     }
 
-    public void startDialog() throws Exception{
-        
-    	// setup configuration, acoustic model, dictionary, grammar
-    	Configuration configuration = new Configuration();
-        configuration.setAcousticModelPath(ACOUSTIC_MODEL);
-        configuration.setDictionaryPath(DICTIONARY_PATH);
-        configuration.setGrammarPath(GRAMMAR_PATH);
-        configuration.setUseGrammar(true);
-
-        configuration.setGrammarName("dialog");
-        LiveSpeechRecognizer jsgfRecognizer =
-            new LiveSpeechRecognizer(configuration);
-
-//        configuration.setGrammarName("digits.grxml");
-//        LiveSpeechRecognizer grxmlRecognizer =
-//            new LiveSpeechRecognizer(configuration);
-//
-//        configuration.setUseGrammar(false);
-//        configuration.setLanguageModelPath(LANGUAGE_MODEL);
-//        LiveSpeechRecognizer lmRecognizer =
-//            new LiveSpeechRecognizer(configuration);
-        
-        
-        jsgfRecognizer.startRecognition(true);
-        while (true) {
-            System.out.println("Choose menu item:");
-            System.out.println("Example: go to the bank account");
-            System.out.println("Example: exit the program");
-            System.out.println("Example: weather forecast");
-            System.out.println("Example: music");
-            System.out.println("Example: digits\n");
-
-            String utterance = jsgfRecognizer.getResult().getHypothesis();
-
-            if (utterance.startsWith("exit") || utterance.startsWith("stop") )
-                break;
-
-//            if (utterance.equals("digits")) {
-//                jsgfRecognizer.stopRecognition();
-//                recognizeDigits(grxmlRecognizer);
-//                jsgfRecognizer.startRecognition(true);
-//            }
-            
-            if (utterance.equals("hud")) {
-                jsgfRecognizer.stopRecognition();
-//                new HUDGUI();
-                jsgfRecognizer.startRecognition(true);
-            }
-            
-            if (utterance.equals("music")) {
-                jsgfRecognizer.stopRecognition();
-//                System.out.println("which music");
-                
-                jsgfRecognizer.startRecognition(true);
-            }
-
-            if (utterance.equals("bank account")) {
-                jsgfRecognizer.stopRecognition();
-                recognizerBankAccount(jsgfRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
-
-//            if (utterance.endsWith("weather forecast")) {
-//                jsgfRecognizer.stopRecognition();
-//                recognizeWeather(lmRecognizer);
-//                jsgfRecognizer.startRecognition(true);
-//            }
-        }
-
-        jsgfRecognizer.stopRecognition();
-    }
 
 
-
-
-
-
-
-	public void run() {
-		// TODO Auto-generated method stub
-		try {
-			this.startDialog();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 }
