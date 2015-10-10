@@ -14,7 +14,6 @@ package julius.sky.voicehud.core.voice;
 import java.util.HashMap;
 import java.util.Map;
 
-import julius.sky.voicehud.core.hud.HUDGUI;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 
@@ -30,12 +29,6 @@ public class VoiceCommandManager implements Runnable{
     private static final String LANGUAGE_MODEL =
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
     
-    // the hudgui that the commands will control.
-    private HUDGUI hudgui;
-    
-//    public Dialog(HUDGUI hg){
-//    	this.hudgui = hg;
-//    }
     
     public VoiceCommandManager(){
     }
@@ -175,14 +168,14 @@ public class VoiceCommandManager implements Runnable{
         LiveSpeechRecognizer jsgfRecognizer =
             new LiveSpeechRecognizer(configuration);
 
-        configuration.setGrammarName("digits.grxml");
-        LiveSpeechRecognizer grxmlRecognizer =
-            new LiveSpeechRecognizer(configuration);
-
-        configuration.setUseGrammar(false);
-        configuration.setLanguageModelPath(LANGUAGE_MODEL);
-        LiveSpeechRecognizer lmRecognizer =
-            new LiveSpeechRecognizer(configuration);
+//        configuration.setGrammarName("digits.grxml");
+//        LiveSpeechRecognizer grxmlRecognizer =
+//            new LiveSpeechRecognizer(configuration);
+//
+//        configuration.setUseGrammar(false);
+//        configuration.setLanguageModelPath(LANGUAGE_MODEL);
+//        LiveSpeechRecognizer lmRecognizer =
+//            new LiveSpeechRecognizer(configuration);
         
         
         jsgfRecognizer.startRecognition(true);
@@ -199,11 +192,11 @@ public class VoiceCommandManager implements Runnable{
             if (utterance.startsWith("exit") || utterance.startsWith("stop") )
                 break;
 
-            if (utterance.equals("digits")) {
-                jsgfRecognizer.stopRecognition();
-                recognizeDigits(grxmlRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
+//            if (utterance.equals("digits")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizeDigits(grxmlRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
             
             if (utterance.equals("hud")) {
                 jsgfRecognizer.stopRecognition();
@@ -213,7 +206,8 @@ public class VoiceCommandManager implements Runnable{
             
             if (utterance.equals("music")) {
                 jsgfRecognizer.stopRecognition();
-                System.out.println("which music");
+//                System.out.println("which music");
+                
                 jsgfRecognizer.startRecognition(true);
             }
 
@@ -223,11 +217,11 @@ public class VoiceCommandManager implements Runnable{
                 jsgfRecognizer.startRecognition(true);
             }
 
-            if (utterance.endsWith("weather forecast")) {
-                jsgfRecognizer.stopRecognition();
-                recognizeWeather(lmRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
+//            if (utterance.endsWith("weather forecast")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizeWeather(lmRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
         }
 
         jsgfRecognizer.stopRecognition();
