@@ -32,3 +32,13 @@ target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 target/classes/julius/sky/voicehud/App.class
+target/classes/julius/sky/voicehud/core/hud/MyStartScreen.class
+target/classes/julius/sky/voicehud/App.class
+target/classes/Interface/tutorial/screen3.out.xml
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/classes/Interface/tutorial/hud-frame.png
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/surefire-reports/julius.sky.voicehud.AppTest.txt
+target/voicehud-0.0.1-SNAPSHOT.jar
+target/classes/Interface/tutorial/face1.png
+target/classes/grammars/dialog.gram
