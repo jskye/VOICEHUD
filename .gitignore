@@ -27,3 +27,8 @@ target/classes/julius/sky/voicehud/core/hud/HUDGUI.class
 target/classes/julius/sky/voicehud/core/hud/HUDGUI.class
 target/classes/Interface/HUDGUI.xml
 target/classes/julius/sky/voicehud/App.class
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+*.jar
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/classes/julius/sky/voicehud/App.class

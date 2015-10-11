@@ -16,9 +16,11 @@ import java.util.Map;
 
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
+import julius.sky.voicehud.App;
+import julius.sky.voicehud.core.hud.HUDGUI.GuiLayer;
 
 public class VoiceCommandManager implements Runnable{
-
+	private App app;
     private static final String ACOUSTIC_MODEL =
         "resource:/edu/cmu/sphinx/models/en-us/en-us";
     private static final String DICTIONARY_PATH =
@@ -29,7 +31,8 @@ public class VoiceCommandManager implements Runnable{
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
     
     
-    public VoiceCommandManager(){
+    public VoiceCommandManager(App app){
+    	this.app = app;
     }
     
     
@@ -108,6 +111,8 @@ public class VoiceCommandManager implements Runnable{
             System.out.println("Example: digits\n");
 
             String utterance = jsgfRecognizer.getResult().getHypothesis();
+            
+            System.out.println("Utterance heard by sphinx: " + utterance);
 
             if (utterance.startsWith("exit") || utterance.startsWith("stop") )
                 break;
@@ -120,7 +125,8 @@ public class VoiceCommandManager implements Runnable{
             
             if (utterance.equals("hud")) {
                 jsgfRecognizer.stopRecognition();
-//                new HUDGUI();
+//                App.getHUDThread().
+                this.app.getHUDGUI().openLayer(GuiLayer.HUD);
                 jsgfRecognizer.startRecognition(true);
             }
             

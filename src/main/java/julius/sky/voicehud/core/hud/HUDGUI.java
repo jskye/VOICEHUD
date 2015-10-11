@@ -19,6 +19,7 @@ import de.lessvoid.nifty.controls.ListBox.SelectionMode;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.tools.Color;
+import julius.sky.voicehud.App;
 //import eu.opends.basics.SimulationBasics;
 //import eu.opends.niftyGui.listBox.TextListBoxModel;
 //import eu.opends.niftyGui.HUDGUIController;
@@ -244,40 +245,50 @@ import java.util.Calendar;
  */
 public class HUDGUI extends SimpleApplication implements Runnable {
 
+  private App app;
   private int health;
   private MyStartScreen startScreen;
   private HUDGUI hudgui;
+  private Nifty nifty;
   
  // this will probably be moved to router because its a routing of commands to gui layers (views).
-//	public enum GuiLayer 
-//	{
-//		VIEW_STARTUP("startup_view", "keyMappingButton1"), 
-//		VIEW_DEFAULT("keyMappingLayer2", "keyMappingButton2"), 
-//		VIEW3("graphicSettingsLayer", "graphicSettingsButton");
-//		
-//		private String layerName;
-//		private String button;
-//		
-//		GuiLayer(String layerName, String button)
-//		{
-//			this.layerName = layerName;
-//			this.button = button;
-//		}
-//		
-//		public String getLayerName()
-//		{
-//			return layerName;
-//		}
-//		
-//		public String getButton()
-//		{
-//			return button;
-//		}
-//	}
+	public enum GuiLayer 
+	{
+//		HUD("HUDGUI", "keyMappingButton1"), 
+		HUD("HUDGUI"), 
+		VIEW_DEFAULT("keyMappingLayer2", "keyMappingButton2"), 
+		VIEW3("graphicSettingsLayer", "graphicSettingsButton");
+		
+		private String layerName;
+		private String button;
+		
+		
+		GuiLayer(String layerName)
+		{
+			this.layerName = layerName;
+		}
+		
+		GuiLayer(String layerName, String button)
+		{
+			this.layerName = layerName;
+			this.button = button;
+		}
+		
+		public String getLayerName()
+		{
+			return layerName;
+		}
+		
+		public String getButton()
+		{
+			return button;
+		}
+	}
 
 //  public static void main(String[] args) {
 //  public HUDGUI(AssetManager assetManager) {
-  public HUDGUI() {
+  public HUDGUI(App app) {
+	  this.app = app;
 //	this.initialize();
 //	this.assetManager = assetManager;
     AppSettings settings = new AppSettings(true);
@@ -286,7 +297,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
     this.setShowSettings(false); // splashscreen
     
     // set to fullscreen. turned off while developing.
-//    settings.setFullscreen(true);
+    settings.setFullscreen(false);
     
     this.setSettings(settings);
   }
@@ -299,15 +310,15 @@ public class HUDGUI extends SimpleApplication implements Runnable {
     /**
      * Just some simple JME content to show it's really a JME app:
      */
-    Box b = new Box(Vector3f.ZERO, 1, 1, 1);
-    Geometry geom = new Geometry("Box", b);
-    
-    if(assetManager!=null){System.out.println("assetmanager not null");}
-    else{System.out.println("assetmanager null");}
-    Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-    mat.setColor("Color", ColorRGBA.Blue);
-    geom.setMaterial(mat);
-    rootNode.attachChild(geom);
+//    Box b = new Box(Vector3f.ZERO, 1, 1, 1);
+//    Geometry geom = new Geometry("Box", b);
+//    
+//    if(assetManager!=null){System.out.println("assetmanager not null");}
+//    else{System.out.println("assetmanager null");}
+//    Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+//    mat.setColor("Color", ColorRGBA.Blue);
+//    geom.setMaterial(mat);
+//    rootNode.attachChild(geom);
 
 //    startScreen = new MyStartScreen();
 //    stateManager.attach(startScreen);
@@ -317,16 +328,21 @@ public class HUDGUI extends SimpleApplication implements Runnable {
      */
     NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
             assetManager, inputManager, audioRenderer, guiViewPort);
-    Nifty nifty = niftyDisplay.getNifty();
+    setNifty(niftyDisplay.getNifty());
     guiViewPort.addProcessor(niftyDisplay);
 //    nifty.fromXml("Interface/tutorial/screen3.xml", "start", startScreen);
 //    nifty.fromXml("Interface/HUDGUI.xml", "start", startScreen);
-    String xmlPath = "Interface/HUDGUI.xml";
-	nifty.fromXml(xmlPath, "start", new HUDGUIController(this));
+//    String xmlPath = "Interface/HUDGUI.xml";
+//	getNifty().fromXml(xmlPath, "start", new HUDGUIController(this));
 
     //nifty.setDebugOptionPanelColors(true);
     
     flyCam.setDragToRotate(true); // you need the mouse for clicking now    
+
+    //	System.out.println("try open new layer");
+    //	this.getNifty().fromXml("Interface/TEST.xml", "start");
+
+
   }
 
   @Override
@@ -349,20 +365,41 @@ public void run() {
 * @param selectedLayer
 * 			Layer name to show.
 */
-//public void openLayer(GuiLayer selectedLayer)
-//{
-//	Screen screen = nifty.getCurrentScreen();
-//	
-//	// show given layer, hide all others (except "menuLayer" which contains menu buttons)
-//	for(Element layer : screen.getLayerElements())
-//		if(layer.getId().equals(selectedLayer.getLayerName()) || layer.getId().equals("menuLayer"))
-//			layer.show();
-//		else
+public void openLayer(GuiLayer selectedLayer)
+{
+	// get current nifty screen
+	Screen screen = getNifty().getCurrentScreen();
+	String layerXMLPath = "Interface/" + selectedLayer.layerName + ".xml";
+	getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+	
+	
+	// show given layer, hide all others (except "menuLayer" which contains menu buttons)
+//	for(Element layer : screen.getLayerElements()){
+////		if(layer.getId().equals(selectedLayer.getLayerName()) || layer.getId().equals("menuLayer"))
+//		System.out.println("layer id: "+ layer.getId());
+//		if(layer.getId().equals("HUDGUI")){
+//			System.out.println("showing hud layer");
+////			getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+//
+////			layer.show();
+//		}
+//		else{
 //			layer.hide();
-//	
-//	// set focus to button related to the selected layer
-//	Button button = (Button) screen.findNiftyControl(selectedLayer.getButton(), Button.class);
-//	button.setFocus();
-//}
+//		}
+//	}
+	// set focus to button related to the selected layer
+	if (selectedLayer.getButton() != null){
+		Button button = (Button) screen.findNiftyControl(selectedLayer.getButton(), Button.class);
+		button.setFocus();
+	}
+}
+
+public Nifty getNifty() {
+	return nifty;
+}
+
+public void setNifty(Nifty nifty) {
+	this.nifty = nifty;
+}
 
 }
