@@ -134,6 +134,13 @@ public class VoiceCommandManager implements Runnable{
                 jsgfRecognizer.startRecognition(true);
             }
             
+            if (utterance.equals("messages")) {
+                jsgfRecognizer.stopRecognition();
+//                App.getHUDThread().
+                this.app.getHUDGUI().openLayer(GuiLayer.MESSAGES);
+                jsgfRecognizer.startRecognition(true);
+            }
+            
             if (utterance.equals("music")) {
                 jsgfRecognizer.stopRecognition();
 //                System.out.println("which music");

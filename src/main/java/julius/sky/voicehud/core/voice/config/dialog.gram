@@ -17,11 +17,13 @@ grammar dialog;
 <number> = <digit>+ [point <digit>+];
 
 <menu_command> =  digits                     |
+					dash					|					
                   [go to [the]] bank account |
                   weather forecast           |
                   [play] music               |
                   v	                         |
                   hud						 |
+                  messages					 |
                   exit [[the] program]       ;
 
 <bank_command> = [show | check] balance |
