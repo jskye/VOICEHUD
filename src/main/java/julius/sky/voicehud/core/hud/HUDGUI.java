@@ -286,7 +286,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
     this.setShowSettings(false); // splashscreen
     
     // set to fullscreen. turned off while developing.
-    settings.setFullscreen(true);
+//    settings.setFullscreen(true);
     
     this.setSettings(settings);
   }

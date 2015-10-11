@@ -25,3 +25,5 @@ target/classes/julius/sky/voicehud/App.class
 target/classes/julius/sky/voicehud/core/hud/HUDGUI.class
 
 target/classes/julius/sky/voicehud/core/hud/HUDGUI.class
+target/classes/Interface/HUDGUI.xml
+target/classes/julius/sky/voicehud/App.class

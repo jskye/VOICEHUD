@@ -21,7 +21,7 @@
 	<!-- start screen -->
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
 
-	<screen id="start" controller="main/java/julius.sky.voicehud.core.hud.HUDGUIController" width="60%" height="60%">
+	<screen id="start" controller="julius.sky.voicehud.core.hud.HUDGUIController" width="60%" height="60%">
 		
 		<layer id="topLayer" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
          	<panel childLayout="vertical" width="50%" height="100px" backgroundColor="#0f08">

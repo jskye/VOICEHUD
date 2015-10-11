@@ -33,11 +33,11 @@ public class App
 			HUDGUI hudGUI = new HUDGUI();
 			hudGUI.run();
 
-//			VoiceCommandManager vcm = new VoiceCommandManager();
-//			Thread vcmThread = new Thread(vcm);
-//			 // run as deamon to terminate this thread when app terminates.
-//			vcmThread.setDaemon(true);
-//			vcmThread.start(); 
+			VoiceCommandManager vcm = new VoiceCommandManager();
+			Thread vcmThread = new Thread(vcm);
+			 // run as deamon to terminate this thread when app terminates.
+			vcmThread.setDaemon(true);
+			vcmThread.start(); 
 			
 
 //        	MusicPlayer musicPlayer = new MusicPlayer();
