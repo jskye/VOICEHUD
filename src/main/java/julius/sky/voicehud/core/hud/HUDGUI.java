@@ -250,6 +250,8 @@ public class HUDGUI extends SimpleApplication implements Runnable {
   private MyStartScreen startScreen;
   private HUDGUI hudgui;
   private Nifty nifty;
+  private NiftyJmeDisplay niftyDisplay;
+  private boolean hudVisible = false;
   
  // this will probably be moved to router because its a routing of commands to gui layers (views).
 	public enum GuiLayer 
@@ -326,7 +328,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
     /**
      * Åctivate the Nifty-JME integration: 
      */
-    NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(
+    niftyDisplay = new NiftyJmeDisplay(
             assetManager, inputManager, audioRenderer, guiViewPort);
     setNifty(niftyDisplay.getNifty());
     guiViewPort.addProcessor(niftyDisplay);
@@ -369,29 +371,93 @@ public void openLayer(GuiLayer selectedLayer)
 {
 	// get current nifty screen
 	Screen screen = getNifty().getCurrentScreen();
+	System.out.println("current screen: " + "numlayers= " 
+	+ screen.layoutLayersCallCount+ screen.debugOutput());
+
 	String layerXMLPath = "Interface/" + selectedLayer.layerName + ".xml";
-	getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+//	getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+	
 	
 	
 	// show given layer, hide all others (except "menuLayer" which contains menu buttons)
-//	for(Element layer : screen.getLayerElements()){
-////		if(layer.getId().equals(selectedLayer.getLayerName()) || layer.getId().equals("menuLayer"))
-//		System.out.println("layer id: "+ layer.getId());
-//		if(layer.getId().equals("HUDGUI")){
-//			System.out.println("showing hud layer");
-////			getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
-//
-////			layer.show();
-//		}
-//		else{
-//			layer.hide();
-//		}
-//	}
+	for(Element layer : screen.getLayerElements()){
+		if(layer.getId().equals(selectedLayer.getLayerName()) 
+//				|| layer.getId().equals("hud") 
+				&& hudVisible){
+			System.out.println("hiding layer: " + selectedLayer.getLayerName());
+			layer.hide();
+			if(layer.getId().equals("HUDGUI")){hudVisible = !hudVisible;}
+			return;
+		}
+		else if(layer.getId().equals(selectedLayer.getLayerName()) 
+//				|| layer.getId().equals("hud") 
+				&& !hudVisible){
+			System.out.println("showing layer: " + selectedLayer.getLayerName());
+			layer.show();
+			if(layer.getId().equals("HUDGUI")){hudVisible = !hudVisible;}
+			return;
+		}
+	}
+		if (selectedLayer.getLayerName().equals("HUDGUI")){
+			System.out.println("loading layer: " + selectedLayer.getLayerName());
+			getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+			hudVisible = true;
+		}
+
+	
+	
+	
+	
 	// set focus to button related to the selected layer
 	if (selectedLayer.getButton() != null){
 		Button button = (Button) screen.findNiftyControl(selectedLayer.getButton(), Button.class);
 		button.setFocus();
 	}
+}
+
+
+public void toggleHUD(){
+	if(!hudVisible){
+		showHUD();
+	}
+	else{
+		hideHUD();
+		// was having an exception when killing the screen,
+		// so have moved into open layer for now.
+	}
+}
+
+/**
+ * Sets the visibility of the hud display to true.
+ */
+public void showHUD() 
+{
+		// attach the Nifty display to the gui view port as a processor
+		guiViewPort.addProcessor(niftyDisplay);
+		System.out.println("showing HUD screen: ");
+		String layerXMLPath = "Interface/HUDGUI.xml";
+		getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+		hudVisible = true;
+}
+
+/**
+ * Sets the visibility of the HUD to false.
+ */
+public void hideHUD() 
+{		
+		guiViewPort.removeProcessor(niftyDisplay);		
+		hudVisible = false;
+}
+
+
+/**
+ * Close key mapping and graphic settings GUI.
+ */
+private void closeHUDGUI() 
+{
+	nifty.exit();
+    inputManager.setCursorVisible(false);
+    flyCam.setEnabled(true);
 }
 
 public Nifty getNifty() {

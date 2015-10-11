@@ -103,12 +103,15 @@ public class VoiceCommandManager implements Runnable{
         
         jsgfRecognizer.startRecognition(true);
         while (true) {
-            System.out.println("Choose menu item:");
-            System.out.println("Example: go to the bank account");
-            System.out.println("Example: exit the program");
-            System.out.println("Example: weather forecast");
-            System.out.println("Example: music");
-            System.out.println("Example: digits\n");
+//            System.out.println("Choose menu item:");
+//            System.out.println("Example: go to the bank account");
+//            System.out.println("Example: exit the program");
+//            System.out.println("Example: weather forecast");
+//            System.out.println("Example: music");
+//            System.out.println("Example: digits\n");
+         
+        	System.out.println("voicehud is listening");
+
 
             String utterance = jsgfRecognizer.getResult().getHypothesis();
             
@@ -123,17 +126,18 @@ public class VoiceCommandManager implements Runnable{
 //                jsgfRecognizer.startRecognition(true);
 //            }
             
-            if (utterance.equals("hud")) {
+            if (utterance.equals("hud") || utterance.equals("hide")) {
                 jsgfRecognizer.stopRecognition();
 //                App.getHUDThread().
                 this.app.getHUDGUI().openLayer(GuiLayer.HUD);
+//                this.app.getHUDGUI().toggleHUD();
                 jsgfRecognizer.startRecognition(true);
             }
             
             if (utterance.equals("music")) {
                 jsgfRecognizer.stopRecognition();
 //                System.out.println("which music");
-                
+                recognizeMusic(jsgfRecognizer);
                 jsgfRecognizer.startRecognition(true);
             }
 
@@ -166,12 +170,7 @@ public class VoiceCommandManager implements Runnable{
         return Double.parseDouble(sb.toString());
     }
     
-    
-    
-    
-    
-    
-    
+
     private static void recognizeDigits(LiveSpeechRecognizer recognizer) {
         System.out.println("Digits recognition (using GrXML)");
         System.out.println("--------------------------------");
@@ -226,11 +225,6 @@ public class VoiceCommandManager implements Runnable{
     }
 
     private static void recognizeWeather(LiveSpeechRecognizer recognizer) {
-        System.out.println("Try some forecast. End with \"the end\"");
-        System.out.println("-------------------------------------");
-        System.out.println("Example: mostly dry some fog patches tonight");
-        System.out.println("Example: sunny spells on wednesday");
-        System.out.println("-------------------------------------");
 
         recognizer.startRecognition(true);
         while (true) {
@@ -242,6 +236,20 @@ public class VoiceCommandManager implements Runnable{
         }
         recognizer.stopRecognition();
     }
+    
+    private static void recognizeMusic(LiveSpeechRecognizer recognizer) {
+
+        recognizer.startRecognition(true);
+        while (true) {
+            String utterance = recognizer.getResult().getHypothesis();
+            if (utterance.equals("the end"))
+                break;
+            else
+                System.out.println(utterance);
+        }
+        recognizer.stopRecognition();
+    }
+    
 
 
 
