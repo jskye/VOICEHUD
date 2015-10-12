@@ -9,7 +9,7 @@
  * WARRANTIES.
  */
 
-package julius.sky.voicehud.core.voice.voicecommand;
+package julius.sky.voicehud.core.voice;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,7 @@ public class VoiceCommandManager implements Runnable{
     private static final String DICTIONARY_PATH =
         "resource:/edu/cmu/sphinx/models/en-us/cmudict-en-us.dict";
     private static final String GRAMMAR_PATH =
-    "resource:/julius/sky/voicehud/core/voice/config/";    
+    "resource:/julius/sky/voicehud/core/voice/";    
     private static final String LANGUAGE_MODEL =
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
     

@@ -18,7 +18,8 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.tools.Color;
 import julius.sky.voicehud.App;
-import julius.sky.voicehud.core.voice.voicecommand.VoiceCommandManager;
+import julius.sky.voicehud.core.voice.VoiceCommandManager;
+
 import com.jme3.app.SimpleApplication;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.AnalogListener;
@@ -173,14 +174,21 @@ public void openLayer(GuiLayer selectedLayer)
 	
 	
 	
-	// show given layer, hide all others (except "menuLayer" which contains menu buttons)
+	// got through all current layers first to determine whether or not to hide.
 	for(Element layer : screen.getLayerElements()){
 		
 		
 		// when hud spoken when visible, all layers should hide.
 		if(selectedLayer.getLayerName().equals("HUDGUI") && hudVisible){
-			System.out.println("hiding hud. hiding this layer");
-			layer.hide();
+			
+			for(Element visiblelayer : screen.getLayerElements()){
+				System.out.println("hiding hud's visible layer: "+visiblelayer +"("+visiblelayer.isVisible()+")");
+				visiblelayer.hide();
+				visiblelayer.setVisible(false);
+				System.out.println(visiblelayer+" is now visible?: "+visiblelayer.isVisible());
+			}			
+			if(layer.getId().equals("HUDGUI")){hudVisible = false;}
+			return;
 		}
 		
 		// when non-hud layer spoken when visible and hud visible, hide layer.
@@ -190,7 +198,8 @@ public void openLayer(GuiLayer selectedLayer)
 				&& hudVisible){
 			System.out.println("hiding layer: " + selectedLayer.getLayerName());
 			layer.hide();
-			if(layer.getId().equals("HUDGUI")){hudVisible = false;}
+			layer.setVisible(false);
+//			if(layer.getId().equals("HUDGUI")){hudVisible = false;}
 			return;
 		}
 		// when non-hud layer selected and not visible and hud visible, show layer.
@@ -203,6 +212,7 @@ public void openLayer(GuiLayer selectedLayer)
 			
 			System.out.println("showing layer: " + selectedLayer.getLayerName());
 			layer.show();
+			layer.setVisible(true);
 			if(layer.getId().equals("HUDGUI")){hudVisible = true;}
 			return;
 		}
@@ -216,6 +226,8 @@ public void openLayer(GuiLayer selectedLayer)
 			System.out.println("loading layer: " + selectedLayer.toString() + selectedLayer.getLayerName());
 			getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
 			hudVisible = true;
+			return; // might need to take out fo for loop. 
+			
 		}
 
 	
