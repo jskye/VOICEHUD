@@ -18,21 +18,16 @@
 	</style>
 
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
-	<!-- messages view -->
+	<!-- time view -->
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
 
-	<screen id="start" controller="julius.sky.voicehud.core.hud.MessagesController" width="60%" height="60%">
-		<layer id="HUDGUI" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
+	<screen id="start" controller="julius.sky.voicehud.core.hud.DateController" width="60%" height="60%">
+		<layer id="HUD" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
          	<panel childLayout="vertical" width="50%" height="100px" backgroundColor="#0f08">
 			</panel>
 	    </layer>
-		<layer id="MESSAGES" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
-					<image filename="Interface/images/mum.png" childLayout="overlay" width="70" height="50"/>
-		  	   		<control name="label" id = "nameLabel1" text="name" color="#0f88"
-					align="center" valign="top" height="50px" >
-		<!-- 							font="Interface/Fonts/Arial32px.fnt">-->						
-					</control>
-					<control name="label" id = "messageLabel1" text="hello" color="#0f88"
+		<layer id="DATE" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
+					<control name="label" id = "dateLabel1" text="time" color="#0f88"
 					align="center" valign="center" height="50px" >
 		<!-- 							font="Interface/Fonts/Arial32px.fnt">-->						
 					</control>

@@ -24,6 +24,7 @@ grammar dialog;
                   v	                         |
                   hud						 |
                   messages					 |
+                  clock	| time				 |
                   exit [[the] program]       ;
 
 <bank_command> = [show | check] balance |

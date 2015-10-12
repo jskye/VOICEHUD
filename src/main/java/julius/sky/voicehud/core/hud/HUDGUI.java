@@ -53,28 +53,38 @@ public class HUDGUI extends SimpleApplication implements Runnable {
  // this will probably be moved to router because its a routing of commands to gui layers (views).
 	public enum GuiLayer 
 	{
-		HUD("HUDGUI", "HUDGUIController"), 
-		MESSAGES("MESSAGES", "MessagesController"), 
-		VIEW3("graphicSettingsLayer");
+		// MAPS COMMAND(VIEW_NAME, VIEW_ID, VIEW_CONTROLLER)
+		HUD("HUD_VIEW", "HUD", "HUDGUIController"), 
+		MESSAGES("MESSAGES_VIEW", "MESSAGES", "MessagesController"), 
+		TIME("CLOCK_VIEW","CLOCK", "ClockController"),
+		DATE("DATE_VIEW", "DATE", "DateController");
 		
 		private String layerName;
+		private String layerId;
 		private String controller;
 		
 		
 		GuiLayer(String layerName)
 		{
+			System.out.println("thisgetcalled");
 			this.layerName = layerName;
 		}
 		
-		GuiLayer(String layerName, String controller)
+		GuiLayer(String layerName, String layerId, String controller)
 		{
 			this.layerName = layerName;
+			this.layerId = layerId;
 			this.controller = controller;
 		}
 		
 		public String getLayerName()
 		{
 			return layerName;
+		}
+		
+		public String getLayerId()
+		{
+			return layerId;
 		}
 		
 		public String getControllerName()
@@ -180,9 +190,10 @@ public void openLayer(GuiLayer selectedLayer)
 	// got through all current layers first to determine whether or not to hide.
 	for(Element layer : screen.getLayerElements()){
 		
+		System.out.println("looking through existing layers");
 		
 		// when hud spoken when visible, all layers should hide.
-		if(selectedLayer.getLayerName().equals("HUDGUI") && hudVisible){
+		if(selectedLayer.getLayerName().equals("HUD_VIEW") && hudVisible){
 			
 			for(Element visiblelayer : screen.getLayerElements()){
 				System.out.println("hiding hud's visible layer: "+visiblelayer +"("+visiblelayer.isVisible()+")");
@@ -190,45 +201,53 @@ public void openLayer(GuiLayer selectedLayer)
 				visiblelayer.setVisible(false);
 				System.out.println(visiblelayer+" is now visible?: "+visiblelayer.isVisible());
 			}			
-			if(layer.getId().equals("HUDGUI")){hudVisible = false;}
+			if(layer.getId().equals("HUD")){hudVisible = false;}
 			return;
 		}
 		
 		// when non-hud layer spoken when visible and hud visible, hide layer.
-		else if(		!layer.getId().equals("hud")
-				&& layer.getId().equals(selectedLayer.getLayerName()) 
+		else if(!layer.getId().equals("HUD")
+				&& layer.getId().equals(selectedLayer.getLayerId()) 
 				&& layer.isVisible() 
 				&& hudVisible){
 			System.out.println("hiding layer: " + selectedLayer.getLayerName());
 			layer.hide();
 			layer.setVisible(false);
-//			if(layer.getId().equals("HUDGUI")){hudVisible = false;}
+//			if(layer.getId().equals("HUD_VIEW")){hudVisible = false;}
 			return;
 		}
 		// when non-hud layer selected and not visible and hud visible, show layer.
 		// or when hud not visible and layer is hud then show it. 
 		else if(
-				(!selectedLayer.getLayerName().equals("HUDGUI") 
-				&& layer.getId().equals(selectedLayer.getLayerName()) 
+				(!selectedLayer.getLayerName().equals("HUD_VIEW") 
+				&& layer.getId().equals(selectedLayer.getLayerId()) 
 				&& !layer.isVisible() && hudVisible) 
-			|| (selectedLayer.getLayerName().equals("HUDGUI") && !hudVisible)){
+			|| (selectedLayer.getLayerName().equals("HUD_VIEW") && !hudVisible)){
 			
 			System.out.println("showing layer: " + selectedLayer.getLayerName());
+			if(layer.getId().equals("CLOCK")){
+				ClockController cc = (ClockController)getNifty().findScreenController("ClockController");	
+//				cc.updateTime();
+			}
 			layer.show();
 			layer.setVisible(true);
-			if(layer.getId().equals("HUDGUI")){hudVisible = true;}
+			if(layer.getId().equals("HUD")){hudVisible = true;}
 			return;
 		}
+		
+		System.out.println(!layer.getId().equals("HUD"));
+		System.out.println( layer.getId().equals(selectedLayer.getLayerId()));
+		System.out.println( layer.isVisible() );
+		System.out.println( hudVisible);
+
 	}
 	
+
+	
 		// if non-hud layer hasn't been loaded yet and hud is visible load it.
-	
-		
-	
-	
 		// if hud layer hasnt been loaded yet and is not visible load it.
-		if (!selectedLayer.getLayerName().equals("HUDGUI") && hudVisible
-				|| (selectedLayer.getLayerName().equals("HUDGUI") && !hudVisible)){
+		if (!selectedLayer.getLayerName().equals("HUD_VIEW") && hudVisible
+				|| (selectedLayer.getLayerName().equals("HUD_VIEW") && !hudVisible)){
 			
 			System.out.println("loading layer: " + selectedLayer.toString() + selectedLayer.getLayerName());			
 			
@@ -247,27 +266,28 @@ public void openLayer(GuiLayer selectedLayer)
 //				e.printStackTrace();
 //			}
 			
-			if(selectedLayer.getLayerName().equals("HUDGUI")){
+			if(selectedLayer.getLayerName().equals("HUD_VIEW")){
 				System.out.println("constructing hudgui controller");
 				layersViewController = new HUDGUIController(this);
 			}
-			else if(selectedLayer.getLayerName().equals("MESSAGES")){
+			else if(selectedLayer.getLayerName().equals("MESSAGES_VIEW")){
 				System.out.println("constructing messages controller");
 				layersViewController = new MessagesController(this);
 			}
-				
-				
-				
+			else if(selectedLayer.getLayerName().equals("CLOCK_VIEW")){
+				System.out.println("constructing clock controller");
+				layersViewController = new ClockController(this);
+			}
+			else if(selectedLayer.getLayerName().equals("DATE_VIEW")){
+				System.out.println("constructing clock controller");
+				layersViewController = new DateController(this);
+			}
+					
+//			getNifty().registerScreenController(layersViewController);	
 			getNifty().fromXml(layerXMLPath, "start", layersViewController);
-
-			
-//			getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
-			
-			
-			
 			
 			hudVisible = true;
-			return; // might need to take out fo for loop. 
+			return; 
 		}
 
 }

@@ -18,17 +18,16 @@
 	</style>
 
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
-	<!-- time view -->
+	<!-- messages view -->
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
 
-	<screen id="start" controller="julius.sky.voicehud.core.hud.HUDGUIController" width="60%" height="60%">
-		<layer id="HUDGUI" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
+	<screen id="start" controller="julius.sky.voicehud.core.hud.ClockController" width="60%" height="60%">
+		<layer id="HUD" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
          	<panel childLayout="vertical" width="50%" height="100px" backgroundColor="#0f08">
 			</panel>
 	    </layer>
-		<layer id="MESSAGES" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
-					<image filename="Interface/images/soundicon.png" childLayout="overlay" width="70" height="50"/>
-		  	   		<control name="label" text="dash" color="#0f88"
+		<layer id="CLOCK" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
+					<control name="label" id = "clockLabel1" text="time" color="#0f88"
 					align="center" valign="center" height="50px" >
 		<!-- 							font="Interface/Fonts/Arial32px.fnt">-->						
 					</control>

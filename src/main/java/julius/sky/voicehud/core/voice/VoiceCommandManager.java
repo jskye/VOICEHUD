@@ -128,7 +128,6 @@ public class VoiceCommandManager implements Runnable{
             
             if (utterance.equals("hud") || utterance.equals("hide")) {
                 jsgfRecognizer.stopRecognition();
-//                App.getHUDThread().
                 this.app.getHUDGUI().openLayer(GuiLayer.HUD);
 //                this.app.getHUDGUI().toggleHUD();
                 jsgfRecognizer.startRecognition(true);
@@ -136,8 +135,19 @@ public class VoiceCommandManager implements Runnable{
             
             if (utterance.equals("messages")) {
                 jsgfRecognizer.stopRecognition();
-//                App.getHUDThread().
                 this.app.getHUDGUI().openLayer(GuiLayer.MESSAGES);
+                jsgfRecognizer.startRecognition(true);
+            }
+            
+            if (utterance.equals("time") || utterance.equals("clock")) {
+                jsgfRecognizer.stopRecognition();
+                this.app.getHUDGUI().openLayer(GuiLayer.TIME);
+                jsgfRecognizer.startRecognition(true);
+            }
+            
+            if (utterance.equals("date")) {
+                jsgfRecognizer.stopRecognition();
+                this.app.getHUDGUI().openLayer(GuiLayer.DATE);
                 jsgfRecognizer.startRecognition(true);
             }
             
