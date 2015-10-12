@@ -28,6 +28,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.system.AppSettings;
@@ -62,44 +63,33 @@ import de.lessvoid.nifty.screen.ScreenController;
  * 
  * @author Rafael Math
  */
-public class HUDGUIController implements ScreenController 
+public class HUDGUIController extends SimpleApplication implements ScreenController 
 {
 	
 	
 //	private SimulationBasics sim;
 	private Nifty nifty;
 	private HUDGUI hudGUI;
+	private Screen screen;
 //	private DropDown<ResolutionDropDownModel> resolutionDropDown;
 //	private DropDown<FrequencyDropDownModel> frequencyDropDown;
 //	private DropDown<ColorDepthDropDownModel> colorDepthDropDown;
 //	private DropDown<SamplesDropDownModel> samplesDropDown;
-	private CheckBox fullScreenCheckBox;
-	private CheckBox vSyncCheckBox;
-	private List<DisplayMode> availableDisplayModes = new ArrayList<DisplayMode>();
+//	private CheckBox fullScreenCheckBox;
+//	private CheckBox vSyncCheckBox;
+//	private List<DisplayMode> availableDisplayModes = new ArrayList<DisplayMode>();
 //	private ResolutionDropDownModel lastResolutionDropDownSelection;
 	
 	
 	/**
-	 * Creates a new controller instance for the key mapping and graphic 
-	 * settings nifty-gui.
-	 * 
-	 * @param sim
-	 * 			Simulator.
-	 * 
-	 * @param keyMappingGUI
-	 * 			Instance of the key mapping and graphic settings GUI.
+	 * Creates a new controller instance for nifty-gui.
 	 */
 	public HUDGUIController(HUDGUI hudGUI) 
 	{
 //		this.sim = sim;
 		this.hudGUI = hudGUI;
-//		this.nifty = hudGUI.getNifty();
-		
-		try {
-			this.availableDisplayModes = Arrays.asList(Display.getAvailableDisplayModes());
-		} catch (LWJGLException e) {
-			e.printStackTrace();
-		}
+		this.nifty = hudGUI.getNifty();
+		this.screen = nifty.getCurrentScreen();
 	}
 
 	
@@ -126,8 +116,14 @@ public class HUDGUIController implements ScreenController
 //	@Override
 	public void onStartScreen() 
 	{
-//		showKeyMapping();
-//		showGraphicSettings();
+
+	}
+
+
+	@Override
+	public void simpleInitApp() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

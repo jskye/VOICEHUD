@@ -1,6 +1,8 @@
 package julius.sky.voicehud.core.hud;
 
 import java.util.Calendar;
+import java.lang.reflect.*;
+
 import java.util.GregorianCalendar;
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioRenderer;
@@ -16,6 +18,7 @@ import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBox.SelectionMode;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.Color;
 import julius.sky.voicehud.App;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
@@ -42,7 +45,6 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 
   private App app;
   private int health;
-  private MyStartScreen startScreen;
   private HUDGUI hudgui;
   private Nifty nifty;
   private NiftyJmeDisplay niftyDisplay;
@@ -51,13 +53,12 @@ public class HUDGUI extends SimpleApplication implements Runnable {
  // this will probably be moved to router because its a routing of commands to gui layers (views).
 	public enum GuiLayer 
 	{
-//		HUD("HUDGUI", "keyMappingButton1"), 
-		HUD("HUDGUI"), 
-		MESSAGES("MESSAGES"), 
-		VIEW3("graphicSettingsLayer", "graphicSettingsButton");
+		HUD("HUDGUI", "HUDGUIController"), 
+		MESSAGES("MESSAGES", "MessagesController"), 
+		VIEW3("graphicSettingsLayer");
 		
 		private String layerName;
-		private String button;
+		private String controller;
 		
 		
 		GuiLayer(String layerName)
@@ -65,10 +66,10 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 			this.layerName = layerName;
 		}
 		
-		GuiLayer(String layerName, String button)
+		GuiLayer(String layerName, String controller)
 		{
 			this.layerName = layerName;
-			this.button = button;
+			this.controller = controller;
 		}
 		
 		public String getLayerName()
@@ -76,9 +77,9 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 			return layerName;
 		}
 		
-		public String getButton()
+		public String getControllerName()
 		{
-			return button;
+			return controller;
 		}
 	}
 
@@ -86,6 +87,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
 //  public HUDGUI(AssetManager assetManager) {
   public HUDGUI(App app) {
 	  this.app = app;
+	  this.hudgui = this;
 //	this.initialize();
 //	this.assetManager = assetManager;
     AppSettings settings = new AppSettings(true);
@@ -162,6 +164,7 @@ public void run() {
 * @param selectedLayer
 * 			Layer name to show.
 */
+@SuppressWarnings("unchecked")
 public void openLayer(GuiLayer selectedLayer)
 {
 	// get current nifty screen
@@ -219,26 +222,59 @@ public void openLayer(GuiLayer selectedLayer)
 	}
 	
 		// if non-hud layer hasn't been loaded yet and hud is visible load it.
+	
+		
+	
+	
 		// if hud layer hasnt been loaded yet and is not visible load it.
 		if (!selectedLayer.getLayerName().equals("HUDGUI") && hudVisible
 				|| (selectedLayer.getLayerName().equals("HUDGUI") && !hudVisible)){
 			
-			System.out.println("loading layer: " + selectedLayer.toString() + selectedLayer.getLayerName());
-			getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+			System.out.println("loading layer: " + selectedLayer.toString() + selectedLayer.getLayerName());			
+			
+			//TODO: workout why this doesnt work
+			// hacky onthefly parameterised controller construction.
+			ScreenController layersViewController= null;
+//			try{
+//				HUDGUI hudgui = null;
+//				String className = selectedLayer.getControllerName();
+//				Class cl =  Class.forName(className);
+//				Constructor con = cl.getConstructor(HUDGUI.class);
+//				Object layersViewControllerObj = con.newInstance(hudgui);
+//				layersViewController = (ScreenController) layersViewControllerObj;
+//				
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			}
+			
+			if(selectedLayer.getLayerName().equals("HUDGUI")){
+				System.out.println("constructing hudgui controller");
+				layersViewController = new HUDGUIController(this);
+			}
+			else if(selectedLayer.getLayerName().equals("MESSAGES")){
+				System.out.println("constructing messages controller");
+				layersViewController = new MessagesController(this);
+			}
+				
+				
+				
+			getNifty().fromXml(layerXMLPath, "start", layersViewController);
+
+			
+//			getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+			
+			
+			
+			
 			hudVisible = true;
 			return; // might need to take out fo for loop. 
-			
 		}
 
+}
+
+
+public void loadView(){
 	
-	
-	
-	
-	// set focus to button related to the selected layer
-	if (selectedLayer.getButton() != null){
-		Button button = (Button) screen.findNiftyControl(selectedLayer.getButton(), Button.class);
-		button.setFocus();
-	}
 }
 
 
