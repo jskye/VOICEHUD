@@ -18,22 +18,16 @@
 	</style>
 
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
-	<!-- start screen -->
+	<!-- hud view -->
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
 
-	<screen id="start" controller="main/java/julius.sky.voicehud.core.hud.HUDGUIController" width="60%" height="60%">
+	<screen id="start" controller="julius.sky.voicehud.core.hud.HUDGUIController" width="60%" height="60%">
 		
-		<layer id="topLayer" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
+		<layer id="HUDGUI" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
          	<panel childLayout="vertical" width="50%" height="100px" backgroundColor="#0f08">
-        				<image filename="Interface/soundicon.png" childLayout="overlay" width="70" height="50"/>
-	        	   		<control name="label" text="VOICEHUD" color="#0f08"
-							align="center" valign="center" height="50px" >
-<!-- 							font="Interface/Fonts/Arial32px.fnt">-->						
-</control>
 			</panel>
-
 	    </layer>
-
+		
 	</screen>
 
 </nifty>
