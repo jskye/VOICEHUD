@@ -54,9 +54,6 @@
 	    <url>http://nifty-gui.sourceforge.net/nifty-maven-repo</url>
 	</repository>
     </repositories>
-    
-  
-
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

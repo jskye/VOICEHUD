@@ -127,9 +127,9 @@ public class HUDGUI extends SimpleApplication implements Runnable {
             assetManager, inputManager, audioRenderer, guiViewPort);
     setNifty(niftyDisplay.getNifty());
     guiViewPort.addProcessor(niftyDisplay);
-//    nifty.fromXml("Interface/tutorial/screen3.xml", "start", startScreen);
-//    nifty.fromXml("Interface/HUDGUI.xml", "start", startScreen);
-//    String xmlPath = "Interface/HUDGUI.xml";
+//    nifty.fromXml("Interface/views/tutorial/screen3.xml", "start", startScreen);
+//    nifty.fromXml("Interface/views/HUDGUI.xml", "start", startScreen);
+//    String xmlPath = "Interface/views/HUDGUI.xml";
 //	getNifty().fromXml(xmlPath, "start", new HUDGUIController(this));
 
     //nifty.setDebugOptionPanelColors(true);
@@ -137,7 +137,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
     flyCam.setDragToRotate(true); // you need the mouse for clicking now    
 
     //	System.out.println("try open new layer");
-    //	this.getNifty().fromXml("Interface/TEST.xml", "start");
+    //	this.getNifty().fromXml("Interface/views/TEST.xml", "start");
 
 
   }
@@ -169,7 +169,7 @@ public void openLayer(GuiLayer selectedLayer)
 //	System.out.println("current screen: " + "numlayers= " 
 //	+ screen.layoutLayersCallCount+ screen.debugOutput());
 
-	String layerXMLPath = "Interface/" + selectedLayer.layerName + ".xml";
+	String layerXMLPath = "Interface/views/" + selectedLayer.layerName + ".xml";
 //	getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
 	
 	
@@ -261,7 +261,7 @@ public void showHUD()
 		// attach the Nifty display to the gui view port as a processor
 		guiViewPort.addProcessor(niftyDisplay);
 		System.out.println("showing HUD screen: ");
-		String layerXMLPath = "Interface/HUDGUI.xml";
+		String layerXMLPath = "Interface/views/HUDGUI.xml";
 		getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
 		hudVisible = true;
 }
