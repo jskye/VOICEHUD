@@ -19,6 +19,7 @@ import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import julius.sky.voicehud.App;
 import julius.sky.voicehud.core.hud.HUDGUI.GuiLayer;
 
+@Slf4j
 public class VoiceCommandManager implements Runnable{
 	private App app;
     private static final String ACOUSTIC_MODEL =
@@ -30,7 +31,7 @@ public class VoiceCommandManager implements Runnable{
     private static final String LANGUAGE_MODEL =
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
     
-    
+
     public VoiceCommandManager(App app){
     	this.app = app;
     }
