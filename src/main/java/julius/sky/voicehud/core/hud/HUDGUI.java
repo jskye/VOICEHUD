@@ -227,7 +227,6 @@ public void openLayer(GuiLayer selectedLayer)
 			System.out.println("showing layer: " + selectedLayer.getLayerName());
 			if(layer.getId().equals("CLOCK")){
 				ClockController cc = (ClockController)getNifty().findScreenController("ClockController");	
-//				cc.updateTime();
 			}
 			layer.show();
 			layer.setVisible(true);
@@ -277,6 +276,7 @@ public void openLayer(GuiLayer selectedLayer)
 			else if(selectedLayer.getLayerName().equals("CLOCK_VIEW")){
 				System.out.println("constructing clock controller");
 				layersViewController = new ClockController(this);
+
 			}
 			else if(selectedLayer.getLayerName().equals("DATE_VIEW")){
 				System.out.println("constructing clock controller");

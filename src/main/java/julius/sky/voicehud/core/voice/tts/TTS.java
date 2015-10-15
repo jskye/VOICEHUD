@@ -5,15 +5,43 @@ import java.util.Locale;
 import javax.speech.AudioException;  
 import javax.speech.Central;  
 import javax.speech.EngineException;  
-import javax.speech.EngineStateError;  
+import javax.speech.EngineStateError;
+import javax.speech.synthesis.SpeakableAdapter;
 import javax.speech.synthesis.Synthesizer;  
 import javax.speech.synthesis.SynthesizerModeDesc;  
 import javax.speech.synthesis.Voice;  
-public class TTS {
+
+public class TTS implements Runnable{
 
 	  SynthesizerModeDesc desc;  
 	  Synthesizer synthesizer;  
 	  Voice voice;  
+	  String texttospeak;
+	 
+	  public TTS(String text) throws EngineException, AudioException, EngineStateError, PropertyVetoException {
+		  this.init("kevin16");
+		  this.texttospeak = text;
+	  }
+	  
+		public void run() {
+			
+			try {
+				this.doSpeak(texttospeak);
+			} catch (EngineException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AudioException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}  
+	  
 	  public void init(String voiceName)  
 	      throws EngineException, AudioException, EngineStateError,  
 	      PropertyVetoException {  
@@ -38,19 +66,19 @@ public class TTS {
 	    synthesizer.getSynthesizerProperties().setVoice(voice);  
 	   }  
 	  }  
+	  
+	  public void doSpeak(String speakText)  
+		      throws EngineException, AudioException, IllegalArgumentException,  
+		      InterruptedException {  
+			   synthesizer.speakPlainText(speakText, null);  
+		   synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);  
+		   
+		  }  
+	  
+	  // terminates the TTS
 	  public void terminate() throws EngineException, EngineStateError {  
 	   synthesizer.deallocate();  
 	  }  
-	  public void doSpeak(String speakText)  
-	      throws EngineException, AudioException, IllegalArgumentException,  
-	      InterruptedException {  
-	   synthesizer.speakPlainText(speakText, null);  
-	   synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);  
-	  }  
-	  public static void main(String[] args) throws Exception {  
-	   TTS su = new TTS();  
-	   su.init("kevin16");  
-	   su.doSpeak("Hello world! Time is 3:20");  
-	   su.terminate();  
-	  }  
+
+
 	 } 
