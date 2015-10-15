@@ -18,6 +18,7 @@ import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import julius.sky.voicehud.App;
 import julius.sky.voicehud.core.hud.HUDGUI.GuiLayer;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class VoiceCommandManager implements Runnable{
