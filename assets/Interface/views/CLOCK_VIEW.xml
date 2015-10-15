@@ -28,7 +28,7 @@
 	    </layer>
 		<layer id="CLOCK" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
 					<control name="label" id = "clockLabel1" text="time" color="#0f88"
-					align="center" valign="center" height="50px" >
+					align="center" valign="center" height="50px" width="100px">
 		<!-- 							font="Interface/Fonts/Arial32px.fnt">-->						
 					</control>
 		</layer>
