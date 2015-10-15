@@ -18,8 +18,13 @@ public class TTS implements Runnable{
 	  Voice voice;  
 	  String texttospeak;
 	 
-	  public TTS(String text) throws EngineException, AudioException, EngineStateError, PropertyVetoException {
+	  public TTS() throws EngineException, AudioException, EngineStateError, PropertyVetoException {
 		  this.init("kevin16");
+//		  this.texttospeak = text;
+	  }
+	  
+	  
+	  public void setTextToSpeak(String text){
 		  this.texttospeak = text;
 	  }
 	  

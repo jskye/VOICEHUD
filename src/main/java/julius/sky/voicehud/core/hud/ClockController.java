@@ -28,7 +28,8 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	private Screen screen;
     private String currentTime;
 
-
+	private TTS alert;
+	private Thread alertThread;
 
 
 
@@ -41,6 +42,22 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 		this.hudGUI = hudGUI;
 		this.nifty = hudGUI.getNifty();
 		this.screen = nifty.getCurrentScreen();
+		try {
+			this.alert = new TTS();
+		} catch (EngineException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AudioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EngineStateError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.alertThread = null;
 	}
 
 	public void bind(Nifty arg0, Screen arg1) {
@@ -57,42 +74,63 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 		// TODO Auto-generated method stub
 		updateTime();
 		speakTime();
+		try {
+			Thread.sleep(3);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		disappear();
+	}
+	
+	public void disappear(){
+		this.screen.getLayerElements().clear();
 	}
 	
 	@NiftyEventSubscriber(id="CLOCK")
 	public void onElementShow(final String id, ElementShowEvent showevent ) {
 		updateTime();
 		speakTime();
+		try {
+			Thread.sleep(3);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		disappear();		
 	}
 	
 	// needs to be called when command is recognised and layer shown.
 	public void updateTime(){
        Calendar cal = Calendar.getInstance();
-       SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+       SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
        setCurrentTime(sdf.format(cal.getTime()));
        System.out.println(sdf.format(cal.getTime()));
        setTextToElement("clockLabel1", getCurrentTime().toString());
+       this.alert.setTextToSpeak(getCurrentTime());
+       this.alertThread = new Thread(this.alert);
 
 	}
 	
 	public void speakTime(){
-		TTS alert = null;
 		
-		try {
-			alert = new TTS(currentTime);
-		} catch (EngineException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (AudioException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (EngineStateError e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (PropertyVetoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			alert = new TTS(currentTime);
+//			Thread alertThread = new Thread(alert);
+			alertThread.start();
+//		} catch (EngineException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (AudioException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (EngineStateError e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (PropertyVetoException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 
 	}
 	
