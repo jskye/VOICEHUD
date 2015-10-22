@@ -2,8 +2,8 @@ package julius.sky.voicehud.core.hud;
 
 import java.util.Calendar;
 import java.lang.reflect.*;
-
 import java.util.GregorianCalendar;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioRenderer;
 import com.jme3.input.FlyByCamera;
@@ -12,6 +12,7 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Spatial.CullHint;
 import com.jme3.texture.Image;
+
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.ListBox;
@@ -19,8 +20,8 @@ import de.lessvoid.nifty.controls.ListBox.SelectionMode;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import de.lessvoid.nifty.tools.Color;
 import julius.sky.voicehud.App;
+import julius.sky.voicehud.core.router.Router.GuiLayer;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 
 import com.jme3.app.SimpleApplication;
@@ -34,13 +35,11 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
+
 import de.lessvoid.nifty.Nifty;
+
 import java.util.Calendar;
 
-/**
- * Nifty GUI 1.3 demo using XML for static content 
- * and Java for dynamic content. 
- */
 public class HUDGUI extends SimpleApplication implements Runnable {
 
   private App app;
@@ -50,48 +49,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
   private NiftyJmeDisplay niftyDisplay;
   private boolean hudVisible = false;
   
- // this will probably be moved to router because its a routing of commands to gui layers (views).
-	public enum GuiLayer 
-	{
-		// MAPS COMMAND(VIEW_NAME, VIEW_ID, VIEW_CONTROLLER)
-		HUD("HUD_VIEW", "HUD", "HUDGUIController"), 
-		MESSAGES("MESSAGES_VIEW", "MESSAGES", "MessagesController"), 
-		TIME("CLOCK_VIEW","CLOCK", "ClockController"),
-		DATE("DATE_VIEW", "DATE", "DateController");
-		
-		private String layerName;
-		private String layerId;
-		private String controller;
-		
-		
-		GuiLayer(String layerName)
-		{
-			System.out.println("thisgetcalled");
-			this.layerName = layerName;
-		}
-		
-		GuiLayer(String layerName, String layerId, String controller)
-		{
-			this.layerName = layerName;
-			this.layerId = layerId;
-			this.controller = controller;
-		}
-		
-		public String getLayerName()
-		{
-			return layerName;
-		}
-		
-		public String getLayerId()
-		{
-			return layerId;
-		}
-		
-		public String getControllerName()
-		{
-			return controller;
-		}
-	}
+
 
 //  public static void main(String[] args) {
 //  public HUDGUI(AssetManager assetManager) {
@@ -182,9 +140,8 @@ public void openLayer(GuiLayer selectedLayer)
 //	System.out.println("current screen: " + "numlayers= " 
 //	+ screen.layoutLayersCallCount+ screen.debugOutput());
 
-	String layerXMLPath = "Interface/views/" + selectedLayer.layerName + ".xml";
+	String layerXMLPath = "Interface/views/" + selectedLayer.getLayerName() + ".xml";
 //	getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
-	
 	
 	
 	// got through all current layers first to determine whether or not to hide.
