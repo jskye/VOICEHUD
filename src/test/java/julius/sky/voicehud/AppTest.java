@@ -6,6 +6,7 @@ import junit.framework.TestSuite;
 
 /**
  * Unit test for simple App.
+ * this is a demo test class provided by maven junit.
  */
 public class AppTest 
     extends TestCase
