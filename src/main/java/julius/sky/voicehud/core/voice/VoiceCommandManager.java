@@ -17,7 +17,7 @@ import java.util.Map;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import julius.sky.voicehud.App;
-import julius.sky.voicehud.core.hud.HUDGUI.GuiLayer;
+import julius.sky.voicehud.core.router.Router;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -130,26 +130,26 @@ public class VoiceCommandManager implements Runnable{
             
             if (utterance.equals("hud") || utterance.equals("hide")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(GuiLayer.HUD);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.HUD);
 //                this.app.getHUDGUI().toggleHUD();
                 jsgfRecognizer.startRecognition(true);
             }
             
             if (utterance.equals("messages")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(GuiLayer.MESSAGES);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.MESSAGES);
                 jsgfRecognizer.startRecognition(true);
             }
             
             if (utterance.equals("time") || utterance.equals("clock")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(GuiLayer.TIME);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.TIME);
                 jsgfRecognizer.startRecognition(true);
             }
             
             if (utterance.equals("date")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(GuiLayer.DATE);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.DATE);
                 jsgfRecognizer.startRecognition(true);
             }
             
