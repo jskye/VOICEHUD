@@ -3,7 +3,7 @@ package julius.sky.voicehud;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 
-import julius.sky.voicehud.core.hud.HUDGUI;
+import julius.sky.voicehud.core.hud.HUDGUIApp;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.plugins.musicplayer.MusicPlayer;
 
@@ -12,7 +12,7 @@ public class App
 {
 	
 //	private static MusicPlayer musicPlayer;
-	private HUDGUI HUDGUI;
+	private HUDGUIApp HUDGUI;
 	private VoiceCommandManager vcm;
 	private Thread HUDThread;
 	private Thread voiceThread;
@@ -33,7 +33,7 @@ public class App
 //	public void simpleInitApp() {
 		try {
 
-			HUDGUI = new HUDGUI(app);
+			HUDGUI = new HUDGUIApp(app);
 			HUDThread = new Thread(HUDGUI);
 			HUDGUI.run();
 			
@@ -71,7 +71,7 @@ public class App
     	return this.voiceThread;
     }
 
-	public HUDGUI getHUDGUI() {
+	public HUDGUIApp getHUDGUI() {
 		return HUDGUI;
 	}
 

@@ -1,9 +1,22 @@
 package julius.sky.voicehud.core.router;
 
+/**
+ * University of Newcastle
+ * CSSE, Sofware Engineering 
+ * FINAL INDIVIDUAL THESIS PROJECT 
+ * VoiceHud
+ * Author: Julius Myszkowski
+ * Student Id: c3155112
+ * Email: julius.skye@gmail.com
+ */
+
+/**
+ * Router class routes commands to their views and controllers
+ */
 
 public class Router {
 		
-		// the router class contains a map of commands to their views and controllers
+		// the router class 
 		public enum GuiLayer 
 		{
 			// MAPS COMMAND(VIEW_NAME, VIEW_ID, VIEW_CONTROLLER)
