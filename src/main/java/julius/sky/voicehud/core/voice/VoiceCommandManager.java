@@ -93,6 +93,10 @@ public class VoiceCommandManager implements Runnable{
         LiveSpeechRecognizer jsgfRecognizer =
             new LiveSpeechRecognizer(configuration);
 
+        
+// use more grammars, models etc.
+// bug in sphinx on windows where only one speech recogniser can be used at once.
+        
 //        configuration.setGrammarName("digits.grxml");
 //        LiveSpeechRecognizer grxmlRecognizer =
 //            new LiveSpeechRecognizer(configuration);
@@ -105,12 +109,6 @@ public class VoiceCommandManager implements Runnable{
         
         jsgfRecognizer.startRecognition(true);
         while (true) {
-//            System.out.println("Choose menu item:");
-//            System.out.println("Example: go to the bank account");
-//            System.out.println("Example: exit the program");
-//            System.out.println("Example: weather forecast");
-//            System.out.println("Example: music");
-//            System.out.println("Example: digits\n");
          
         	System.out.println("voicehud is listening");
 
@@ -121,12 +119,6 @@ public class VoiceCommandManager implements Runnable{
 
             if (utterance.startsWith("exit") || utterance.startsWith("stop") )
                 break;
-
-//            if (utterance.equals("digits")) {
-//                jsgfRecognizer.stopRecognition();
-//                recognizeDigits(grxmlRecognizer);
-//                jsgfRecognizer.startRecognition(true);
-//            }
             
             if (utterance.equals("hud") || utterance.equals("hide")) {
                 jsgfRecognizer.stopRecognition();
@@ -155,7 +147,6 @@ public class VoiceCommandManager implements Runnable{
             
             if (utterance.equals("music")) {
                 jsgfRecognizer.stopRecognition();
-//                System.out.println("which music");
                 recognizeMusic(jsgfRecognizer);
                 jsgfRecognizer.startRecognition(true);
             }

@@ -11,14 +11,14 @@ import de.lessvoid.nifty.screen.ScreenController;
 
 public class MessagesController implements ScreenController{
 	
-	private HUDGUI hudGUI;
+	private HUDGUIApp hudGUI;
 	private Nifty nifty;
 	private Screen screen;
 
 	/**
 	 * Creates a new controller instance for nifty-gui.
 	 */
-	public MessagesController(HUDGUI hudGUI) 
+	public MessagesController(HUDGUIApp hudGUI) 
 	{
 //		this.sim = sim;
 		this.hudGUI = hudGUI;
