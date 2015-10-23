@@ -28,10 +28,6 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	private Screen screen;
     private String currentTime;
 
-
-
-
-
 	/**
 	 * Creates a new controller instance for nifty-gui.
 	 */
