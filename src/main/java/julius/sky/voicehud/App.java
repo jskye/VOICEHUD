@@ -58,22 +58,21 @@ public class App extends SimpleApplication
 
 		try {
 			
+			SimpleMovieState sm = new SimpleMovieState(app);
+			getStateManager().attach(sm);
+			
 			HUDGUI = new HUDGUIState(app);
 			getStateManager().attach(HUDGUI);
 
 //			HUDThread = new Thread(HUDGUI);
 //			HUDThread.start();
 			
-//			SimpleMovieState sm = new SimpleMovieState(app);
-//			getStateManager().attach(sm);
+
 
 //			movieThread = new Thread(sm);
 //			sm.run();
 			
-			
-
-			
-
+	
 			vcm = new VoiceCommandManager(app);
 			voiceThread = new Thread(vcm);
 			 // run as deamon to terminate this thread when app terminates.

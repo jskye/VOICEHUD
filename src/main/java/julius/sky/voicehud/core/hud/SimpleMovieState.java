@@ -32,6 +32,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
+import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -51,11 +52,13 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 	  private ViewPort          viewPort;
 	  private ViewPort guiViewPort;
 	  private AudioRenderer audioRenderer;
+	  private RenderManager renderManager;
 	  private Camera cam;
 	  private FlyByCamera flyCam;
 	
 	private TextureMovie	textureMovie;
 	private MediaPlayer		moviePlayer;
+	private ViewPort movieViewPort;
 
 	  private Node movieNode = new Node("movieNode");  // some custom class fields...    
 	  public Node getMovieNode(){ return movieNode; }  // some custom methods... 
@@ -71,13 +74,13 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 		  this.inputManager = this.app.getInputManager();
 		  this.assetManager = this.app.getAssetManager();
 		  this.audioRenderer = this.app.getAudioRenderer();
+		  this.renderManager = this.app.getRenderManager();
 		  this.rootNode = this.app.getRootNode();
 
 		  
 //		  this.viewPort = this.app.getViewPort();
 		  this.cam = this.app.getCamera();
-		  ViewPort movieViewPort = new ViewPort("movieView", cam);
-		  
+	      this.movieViewPort = renderManager.createMainView("movieView", this.cam);
 		  this.guiViewPort = this.app.getGuiViewPort();
 		  this.flyCam = this.app.getFlyByCamera();
 		
@@ -91,17 +94,16 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 		  super.initialize(stateManager, app); 
 	      this.app = (SimpleApplication) app;          // cast to a more specific class
 
+
 	    // init stuff that is independent of whether state is PAUSED or RUNNING
-	      this.app.getRootNode().attachChild(getMovieNode()); // modify scene graph...
-	    
-//			/**
-//			* Åctivate the Nifty-JME integration: 
-//			*/
-//			niftyDisplay = new NiftyJmeDisplay(
-//			       assetManager, inputManager, audioRenderer, guiViewPort);
-//			setNifty(niftyDisplay.getNifty());
-//			guiViewPort.addProcessor(niftyDisplay);
-//			flyCam.setDragToRotate(true); // you need the mouse for clicking now 
+	      
+	      // modify scene graph...
+	      
+	      // attach movie node to root node
+	      this.app.getRootNode().attachChild(getMovieNode());
+	      // attach root node to the movie viewport
+	      this.movieViewPort.attachScene(this.rootNode);
+
 	      this.initMovie();
 	 }
 
@@ -109,6 +111,7 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 	  public void cleanup() {
 	    super.cleanup();
 	    // unregister all my listeners, detach all my nodes, etc...
+//	    this.movieViewPort.clearScenes();
 	    this.app.getRootNode().detachChild(getMovieNode()); // modify scene graph...
 //	    this.app.doSomethingElse();                 // call custom methods...
 	  }
@@ -130,6 +133,7 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 	  @Override
 	  public void update(float tpf) {
 	    // do the following while game is RUNNING
+//		this.movieViewPort.getScenes().get(0).scale(tpf);
 	    this.app.getRootNode().getChild("movieNode").scale(tpf); // modify scene graph...
 //	    x.setUserData(...);                                 // call some methods...
 	  }
@@ -139,10 +143,10 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 		
         System.out.println( "getting media" );
 
-////		 setDisplayFps(false);
+////     setDisplayFps(false);
 //		 setDisplayStatView(false);
 //		 getInputManager().setCursorVisible(true);
-		 this.flyCam.setEnabled(false);
+		 this.flyCam.setEnabled(true);
 //		 
 		@SuppressWarnings("restriction")
 		final Media media = new Media("file:////Users/juliusskye/Desktop/FYPI/simplevoicehud/assets/Video/sydriveHQ.flv");
@@ -162,7 +166,7 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 		this.moviePlayer = new MediaPlayer(media);
 	    moviePlayer.setAutoPlay(true);
 		this.moviePlayer.play();
-//
+
 		this.textureMovie = new TextureMovie(this.app, this.moviePlayer, LetterboxMode.VALID_LETTERBOX);
 		this.textureMovie.setLetterboxColor(ColorRGBA.Black);
 
@@ -173,8 +177,8 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 		s1mat.setInt("SwizzleMode", this.textureMovie.useShaderSwizzle());
 		screenGeometry1.setMaterial(s1mat);
 		this.rootNode.attachChild(screenGeometry1);
-
-		this.app.getCamera().setLocation(new Vector3f(10, 10, 15));
+		
+		this.cam.setLocation(new Vector3f(10, 10, 15));
 
 	}
 
