@@ -2,18 +2,20 @@ package julius.sky.voicehud;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
+import com.jme3.niftygui.NiftyJmeDisplay;
+import com.jme3.system.AppSettings;
 
-import julius.sky.voicehud.core.hud.HUDGUIApp;
-import julius.sky.voicehud.core.hud.SimpleMovie;
+import julius.sky.voicehud.core.hud.HUDGUIState;
+import julius.sky.voicehud.core.hud.SimpleMovieState;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.plugins.musicplayer.MusicPlayer;
 
-//public class App extends SimpleApplication
-public class App
+public class App extends SimpleApplication
+//public class App
 {
 	
 //	private static MusicPlayer musicPlayer;
-	private HUDGUIApp HUDGUI;
+	private HUDGUIState HUDGUI;
 	private VoiceCommandManager vcm;
 	private Thread HUDThread;
 	private Thread voiceThread;
@@ -26,22 +28,50 @@ public class App
         App thisApp = new App();
         thisApp.app = thisApp;
         thisApp.start(); // start the app
-
+        
     }
     
-//    public static void main( String[] args ){
-    public void start(){
-//    @Override
-//	public void simpleInitApp() {
+	/* (non-Javadoc)
+	 * @see com.jme3.app.SimpleApplication#simpleInitApp()
+	 * initialise application and its scenes
+	 */
+	@Override
+	public void simpleInitApp() {
+
+	      System.out.println( "initialising App" );
+
+		  AppSettings settings = new AppSettings(true);
+		  this.setShowSettings(false); // splashscreen
+		  // set to fullscreen. turned off while developing.
+		  settings.setFullscreen(false);
+		  this.setSettings(settings);
+		  setDisplayFps(false);
+		  setDisplayStatView(false);
+		  this.initialiseStates();
+	}
+	
+    
+    // start the application
+    public void initialiseStates(){
+        
+    	System.out.println( "attaching states" );
+
 		try {
 			
-			SimpleMovie sm = new SimpleMovie(app);
-			movieThread = new Thread(sm);
-			sm.run();
+			HUDGUI = new HUDGUIState(app);
+			getStateManager().attach(HUDGUI);
+
+//			HUDThread = new Thread(HUDGUI);
+//			HUDThread.start();
 			
-			HUDGUI = new HUDGUIApp(app);
-			HUDThread = new Thread(HUDGUI);
-			HUDGUI.run();
+//			SimpleMovieState sm = new SimpleMovieState(app);
+//			getStateManager().attach(sm);
+
+//			movieThread = new Thread(sm);
+//			sm.run();
+			
+			
+
 			
 
 			vcm = new VoiceCommandManager(app);
@@ -77,13 +107,15 @@ public class App
     	return this.voiceThread;
     }
 
-	public HUDGUIApp getHUDGUI() {
+	public HUDGUIState getHUDGUI() {
 		return HUDGUI;
 	}
 
 	public VoiceCommandManager getVcm() {
 		return vcm;
 	}
+
+
     
     
 }

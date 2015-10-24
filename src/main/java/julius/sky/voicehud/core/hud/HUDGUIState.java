@@ -3,14 +3,18 @@ package julius.sky.voicehud.core.hud;
 import java.util.Calendar;
 import java.lang.reflect.*;
 import java.util.GregorianCalendar;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioRenderer;
 import com.jme3.input.FlyByCamera;
 import com.jme3.input.InputManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
+import com.jme3.renderer.Camera;
 import com.jme3.renderer.ViewPort;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial.CullHint;
 import com.jme3.texture.Image;
+
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.ListBox;
@@ -21,7 +25,11 @@ import de.lessvoid.nifty.screen.ScreenController;
 import julius.sky.voicehud.App;
 import julius.sky.voicehud.core.router.Router.GuiLayer;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
+
+import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.MouseButtonTrigger;
@@ -32,7 +40,9 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
+
 import de.lessvoid.nifty.Nifty;
+
 import java.util.Calendar;
 
 /**
@@ -49,68 +59,109 @@ import java.util.Calendar;
  * HUDGUI class sets up the JME application.
  */
 
-public class HUDGUIApp extends SimpleApplication implements Runnable {
+//public class HUDGUIApp extends SimpleApplication implements Runnable {
+public class HUDGUIState extends AbstractAppState implements Runnable {
+	
 
-  private App app;
+  // access main application fields
+  private SimpleApplication app;
+  private Node              rootNode;
+  private AssetManager      assetManager;
+  private AppStateManager   stateManager;
+  private InputManager      inputManager;
+  private ViewPort          viewPort;
+  private ViewPort guiViewPort;
+  private AudioRenderer audioRenderer;
+  private FlyByCamera flyCam;
+  
   private int health;
-  private HUDGUIApp hudgui;
+  private HUDGUIState hudgui;
   private Nifty nifty;
   private NiftyJmeDisplay niftyDisplay;
   private boolean hudVisible = false;
   
+  private Node x = new Node("x");  // some custom class fields...    
+  public Node getX(){ return x; }  // some custom methods... 
+  
 
-  public HUDGUIApp(App app) {
+  public HUDGUIState(App app) {
+	  
+      System.out.println( "constructing HUDGUI" );
+	  
 	  this.app = app;
+	  this.inputManager = this.app.getInputManager();
+	  this.assetManager = this.app.getAssetManager();
+	  this.audioRenderer = this.app.getAudioRenderer();
+	  this.viewPort = this.app.getViewPort();
+	  this.guiViewPort = this.app.getGuiViewPort();
+	  this.flyCam = this.app.getFlyByCamera();
 	  this.hudgui = this;
-	  AppSettings settings = new AppSettings(true);
-	  this.setShowSettings(false); // splashscreen
+	  
+  }
+  
+  @Override
+  public void initialize(AppStateManager stateManager, Application app) {
+	  
+      System.out.println( "initialising HUDGUI" );
+
+	  
+	  super.initialize(stateManager, app); 
+      this.app = (SimpleApplication) app;          // cast to a more specific class
+
+    // init stuff that is independent of whether state is PAUSED or RUNNING
+      this.app.getRootNode().attachChild(getX()); // modify scene graph...
+//    this.app.doSomething();                     // call custom methods...
     
-	  // set to fullscreen. turned off while developing.
-	  settings.setFullscreen(false);
-	  this.setSettings(settings);
+		/**
+		* Åctivate the Nifty-JME integration: 
+		*/
+		niftyDisplay = new NiftyJmeDisplay(
+		       assetManager, inputManager, audioRenderer, guiViewPort);
+		setNifty(niftyDisplay.getNifty());
+		guiViewPort.addProcessor(niftyDisplay);
+		flyCam.setDragToRotate(true); // you need the mouse for clicking now 
+    
+ }
+
+ @Override
+  public void cleanup() {
+    super.cleanup();
+    // unregister all my listeners, detach all my nodes, etc...
+    this.app.getRootNode().detachChild(getX()); // modify scene graph...
+//    this.app.doSomethingElse();                 // call custom methods...
   }
 
   @Override
-  public void simpleInitApp() {
-    setDisplayFps(false);
-    setDisplayStatView(false);
-
-    /**
-     * Just some simple JME content to show it's really a JME app:
-     */
-//    Box b = new Box(Vector3f.ZERO, 1, 1, 1);
-//    Geometry geom = new Geometry("Box", b);  
-//    if(assetManager!=null){System.out.println("assetmanager not null");}
-//    else{System.out.println("assetmanager null");}
-//    Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-//    mat.setColor("Color", ColorRGBA.Blue);
-//    geom.setMaterial(mat);
-//    rootNode.attachChild(geom);
-//    startScreen = new MyStartScreen();
-//    stateManager.attach(startScreen);
-
-    /**
-     * Åctivate the Nifty-JME integration: 
-     */
-    niftyDisplay = new NiftyJmeDisplay(
-            assetManager, inputManager, audioRenderer, guiViewPort);
-    setNifty(niftyDisplay.getNifty());
-    guiViewPort.addProcessor(niftyDisplay);
-//    flyCam.setDragToRotate(true); // you need the mouse for clicking now    
-
+  public void setEnabled(boolean enabled) {
+    // Pause and unpause
+    super.setEnabled(enabled);
+    if(enabled){
+      // init stuff that is in use while this state is RUNNING
+      this.app.getRootNode().attachChild(getX()); // modify scene graph...
+//      this.app.doSomethingElse();                 // call custom methods...
+    } else {
+      // take away everything not needed while this state is PAUSED
+    }
   }
 
+  // Note that update is only called while the state is both attached and enabled.
   @Override
-  public void simpleUpdate(float tpf) {
+  public void update(float tpf) {
+    // do the following while game is RUNNING
+    this.app.getRootNode().getChild("x").scale(tpf); // modify scene graph...
+//    x.setUserData(...);                                 // call some methods...
   }
+
+//  @Override
+//  public void simpleUpdate(float tpf) {
+//  }
 
   public String getPlayerName() {
     return System.getProperty("user.name");
   }
 
 public void run() {
-
-    this.start();
+	this.initialize(stateManager, app);
 }
 
 /**
@@ -290,5 +341,6 @@ public Nifty getNifty() {
 public void setNifty(Nifty nifty) {
 	this.nifty = nifty;
 }
+
 
 }

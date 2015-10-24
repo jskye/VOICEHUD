@@ -23,7 +23,7 @@ import  javax.speech.synthesis.SpeakableAdapter;
 
 public class ClockController extends SpeakableAdapter implements ScreenController{
 	
-	private HUDGUIApp hudGUI;
+	private HUDGUIState hudGUI;
 	private Nifty nifty;
 	private Screen screen;
     private String currentTime;
@@ -31,7 +31,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	/**
 	 * Creates a new controller instance for nifty-gui.
 	 */
-	public ClockController(HUDGUIApp hudGUI) 
+	public ClockController(HUDGUIState hudGUI) 
 	{
 //		this.sim = sim;
 		this.hudGUI = hudGUI;

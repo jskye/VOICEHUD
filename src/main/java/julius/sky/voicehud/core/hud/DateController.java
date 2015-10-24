@@ -11,14 +11,14 @@ import de.lessvoid.nifty.screen.ScreenController;
 
 public class DateController implements ScreenController{
 	
-	private HUDGUIApp hudGUI;
+	private HUDGUIState hudGUI;
 	private Nifty nifty;
 	private Screen screen;
 
 	/**
 	 * Creates a new controller instance for nifty-gui.
 	 */
-	public DateController(HUDGUIApp hudGUI) 
+	public DateController(HUDGUIState hudGUI) 
 	{
 //		this.sim = sim;
 		this.hudGUI = hudGUI;
