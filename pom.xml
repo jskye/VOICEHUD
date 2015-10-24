@@ -65,7 +65,27 @@
 	    <id>nifty-maven-repo.sourceforge.net</id>
 	    <url>http://nifty-gui.sourceforge.net/nifty-maven-repo</url>
 	</repository>
+	<repository>
+<snapshots>
+<enabled>false</enabled>
+</snapshots>
+<id>bintray-empirephoenix-VGS-OSS-Releases</id>
+<name>bintray</name>
+<url>http://dl.bintray.com/empirephoenix/VGS-OSS-Releases</url>
+</repository>
     </repositories>
+    <pluginRepositories>
+<pluginRepository>
+<snapshots>
+<enabled>false</enabled>
+</snapshots>
+<id>bintray-empirephoenix-VGS-OSS-Releases</id>
+<name>bintray-plugins</name>
+<url>http://dl.bintray.com/empirephoenix/VGS-OSS-Releases</url>
+</pluginRepository>
+</pluginRepositories>
+
+
   <dependencies>
     <dependency>
     <!--  junit unit testing -->
@@ -225,6 +245,11 @@
 	<artifactId>voice-cmu-slt-hsmm</artifactId>
 	<version>${marytts.version}</version>
 </dependency> -->
+<dependency>
+	<groupId>com.jme3x</groupId>
+	<artifactId>jfx</artifactId>
+	<version>1.164.2015-10-09_172619-c221abc</version>
+</dependency>
 </dependencies>
 <!--  <modules>
 	<module>src/main/java/julius/sky/voicehud/core/voice/marytts</module>

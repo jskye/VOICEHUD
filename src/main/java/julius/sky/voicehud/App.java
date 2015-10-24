@@ -4,6 +4,7 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 
 import julius.sky.voicehud.core.hud.HUDGUIApp;
+import julius.sky.voicehud.core.hud.SimpleMovie;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.plugins.musicplayer.MusicPlayer;
 
@@ -16,6 +17,7 @@ public class App
 	private VoiceCommandManager vcm;
 	private Thread HUDThread;
 	private Thread voiceThread;
+	private Thread movieThread;
 	private App app;
 	
     public static void main( String[] args )
@@ -32,7 +34,11 @@ public class App
 //    @Override
 //	public void simpleInitApp() {
 		try {
-
+			
+			SimpleMovie sm = new SimpleMovie(app);
+			movieThread = new Thread(sm);
+			sm.run();
+			
 			HUDGUI = new HUDGUIApp(app);
 			HUDThread = new Thread(HUDGUI);
 			HUDGUI.run();
