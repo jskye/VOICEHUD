@@ -19,6 +19,11 @@ log/
 
 
 target
+<<<<<<< HEAD
+*/target/**
+*/target/*
+*.log
+=======
 bin
 *.pydevproject
 .metadata
@@ -65,3 +70,4 @@ local.properties
 >>>>>>> master
 =======
 >>>>>>> simple-voicehud
+>>>>>>> freetts
