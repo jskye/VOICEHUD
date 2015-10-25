@@ -73,6 +73,8 @@ public class HUDGUIState extends AbstractAppState implements Runnable {
   private ViewPort guiViewPort;
   private AudioRenderer audioRenderer;
   private FlyByCamera flyCam;
+  private Camera cam;
+
   
   private int health;
   private HUDGUIState hudgui;
@@ -120,7 +122,8 @@ public class HUDGUIState extends AbstractAppState implements Runnable {
 		setNifty(niftyDisplay.getNifty());
 		guiViewPort.addProcessor(niftyDisplay);
 		flyCam.setDragToRotate(true); // you need the mouse for clicking now 
-    
+//        cam.setViewPort(0f, 0.5f, 0f, 0.5f);
+//		nifty.setDebugOptionPanelColors(true);
  }
 
  @Override
@@ -219,9 +222,9 @@ public void openLayer(GuiLayer selectedLayer)
 			|| (selectedLayer.getLayerName().equals("HUD_VIEW") && !hudVisible)){
 			
 			System.out.println("showing layer: " + selectedLayer.getLayerName());
-			if(layer.getId().equals("CLOCK")){
-				ClockController cc = (ClockController)getNifty().findScreenController("ClockController");	
-			}
+//			if(layer.getId().equals("CLOCK")){
+//				ClockController cc = (ClockController)getNifty().findScreenController("ClockController");	
+//			}
 			layer.show();
 			layer.setVisible(true);
 			if(layer.getId().equals("HUD")){hudVisible = true;}

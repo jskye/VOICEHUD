@@ -7,6 +7,7 @@ import com.jme3.system.AppSettings;
 
 import julius.sky.voicehud.core.hud.HUDGUIState;
 import julius.sky.voicehud.core.hud.SimpleMovieState;
+import julius.sky.voicehud.core.hud.StartScreenState;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.plugins.musicplayer.MusicPlayer;
 
@@ -15,6 +16,7 @@ public class App extends SimpleApplication
 {
 	
 //	private static MusicPlayer musicPlayer;
+	private StartScreenState startScreen;
 	private HUDGUIState HUDGUI;
 	private VoiceCommandManager vcm;
 	private Thread HUDThread;
@@ -47,15 +49,37 @@ public class App extends SimpleApplication
 		  this.setSettings(settings);
 		  setDisplayFps(false);
 		  setDisplayStatView(false);
-		  this.initialiseStates();
+//		  startScreen = new StartScreenState();
+//		  getStateManager().attach(startScreen);
+		  this.initialiseVoiceRecognition();
+		// sleep main thread 5 seconds whilst the voice recognition gets ready
+			try {
+				Thread.sleep(6000);
+//				this.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		  this.initialiseAppStates();
 	}
 	
     
-    // start the application
-    public void initialiseStates(){
-        
-    	System.out.println( "attaching states" );
+    /**
+	 * 
+	 */
+	private void initialiseVoiceRecognition() {
+		// TODO Auto-generated method stub
+		vcm = new VoiceCommandManager(app);
+		voiceThread = new Thread(vcm);
+		 // run as deamon to terminate this thread when app terminates.
+		voiceThread.setDaemon(true);
+		voiceThread.start(); 
+	}
 
+	// start the application
+    public void initialiseAppStates(){
+        
+    	System.out.println( "attaching app states" );
 		try {
 			
 			SimpleMovieState sm = new SimpleMovieState(app);
@@ -73,11 +97,7 @@ public class App extends SimpleApplication
 //			sm.run();
 			
 	
-			vcm = new VoiceCommandManager(app);
-			voiceThread = new Thread(vcm);
-			 // run as deamon to terminate this thread when app terminates.
-			voiceThread.setDaemon(true);
-			voiceThread.start(); 
+
 			
 			
 //			guiThread.sleep(2000);

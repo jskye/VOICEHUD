@@ -108,11 +108,11 @@ public class VoiceCommandManager implements Runnable{
         
         
         jsgfRecognizer.startRecognition(true);
+//    	app.notify();
         while (true) {
          
         	System.out.println("voicehud is listening");
-
-
+        	
             String utterance = jsgfRecognizer.getResult().getHypothesis();
             
             System.out.println("Utterance heard by sphinx: " + utterance);
