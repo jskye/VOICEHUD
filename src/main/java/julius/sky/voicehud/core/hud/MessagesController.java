@@ -41,6 +41,7 @@ public class MessagesController implements ScreenController{
 	public void onStartScreen() {
 		// TODO Auto-generated method stub
 		setTextToElement("nameLabel1", "Mum");
+		setTextToElement("messageLabel1", "Hello son, how are you today?");
 	}
 	
 	/**

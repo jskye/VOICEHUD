@@ -210,7 +210,6 @@ public void openLayer(GuiLayer selectedLayer)
 			System.out.println("hiding layer: " + selectedLayer.getLayerName());
 			layer.hide();
 			layer.setVisible(false);
-//			if(layer.getId().equals("HUD_VIEW")){hudVisible = false;}
 			return;
 		}
 		// when non-hud layer selected and not visible and hud visible, show layer.
@@ -222,9 +221,6 @@ public void openLayer(GuiLayer selectedLayer)
 			|| (selectedLayer.getLayerName().equals("HUD_VIEW") && !hudVisible)){
 			
 			System.out.println("showing layer: " + selectedLayer.getLayerName());
-//			if(layer.getId().equals("CLOCK")){
-//				ClockController cc = (ClockController)getNifty().findScreenController("ClockController");	
-//			}
 			layer.show();
 			layer.setVisible(true);
 			if(layer.getId().equals("HUD")){hudVisible = true;}
@@ -249,6 +245,9 @@ public void openLayer(GuiLayer selectedLayer)
 			
 			//TODO: workout why this doesnt work
 			// hacky onthefly parameterised controller construction.
+			// this is needed because the HUDGUIState shouldnt need to know
+			// which layers it needs to load, actually router should call this method.
+			// TODO: route commands to layers in router class.
 			ScreenController layersViewController= null;
 //			try{
 //				HUDGUI hudgui = null;
