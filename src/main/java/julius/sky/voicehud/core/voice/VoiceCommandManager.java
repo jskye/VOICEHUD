@@ -17,7 +17,7 @@ import java.util.Map;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import julius.sky.voicehud.App;
-import julius.sky.voicehud.core.hud.HUDGUI.GuiLayer;
+import julius.sky.voicehud.core.router.Router;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -93,6 +93,10 @@ public class VoiceCommandManager implements Runnable{
         LiveSpeechRecognizer jsgfRecognizer =
             new LiveSpeechRecognizer(configuration);
 
+        
+// use more grammars, models etc.
+// bug in sphinx on windows where only one speech recogniser can be used at once.
+        
 //        configuration.setGrammarName("digits.grxml");
 //        LiveSpeechRecognizer grxmlRecognizer =
 //            new LiveSpeechRecognizer(configuration);
@@ -105,12 +109,6 @@ public class VoiceCommandManager implements Runnable{
         
         jsgfRecognizer.startRecognition(true);
         while (true) {
-//            System.out.println("Choose menu item:");
-//            System.out.println("Example: go to the bank account");
-//            System.out.println("Example: exit the program");
-//            System.out.println("Example: weather forecast");
-//            System.out.println("Example: music");
-//            System.out.println("Example: digits\n");
          
         	System.out.println("voicehud is listening");
 
@@ -121,41 +119,34 @@ public class VoiceCommandManager implements Runnable{
 
             if (utterance.startsWith("exit") || utterance.startsWith("stop") )
                 break;
-
-//            if (utterance.equals("digits")) {
-//                jsgfRecognizer.stopRecognition();
-//                recognizeDigits(grxmlRecognizer);
-//                jsgfRecognizer.startRecognition(true);
-//            }
             
             if (utterance.equals("hud") || utterance.equals("hide")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(GuiLayer.HUD);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.HUD);
 //                this.app.getHUDGUI().toggleHUD();
                 jsgfRecognizer.startRecognition(true);
             }
             
             if (utterance.equals("messages")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(GuiLayer.MESSAGES);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.MESSAGES);
                 jsgfRecognizer.startRecognition(true);
             }
             
             if (utterance.equals("time") || utterance.equals("clock")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(GuiLayer.TIME);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.TIME);
                 jsgfRecognizer.startRecognition(true);
             }
             
             if (utterance.equals("date")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(GuiLayer.DATE);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.DATE);
                 jsgfRecognizer.startRecognition(true);
             }
             
             if (utterance.equals("music")) {
                 jsgfRecognizer.stopRecognition();
-//                System.out.println("which music");
                 recognizeMusic(jsgfRecognizer);
                 jsgfRecognizer.startRecognition(true);
             }

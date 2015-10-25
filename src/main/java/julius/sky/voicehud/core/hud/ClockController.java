@@ -23,7 +23,7 @@ import  javax.speech.synthesis.SpeakableAdapter;
 
 public class ClockController extends SpeakableAdapter implements ScreenController{
 	
-	private HUDGUI hudGUI;
+	private HUDGUIApp hudGUI;
 	private Nifty nifty;
 	private Screen screen;
     private String currentTime;
@@ -36,7 +36,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	/**
 	 * Creates a new controller instance for nifty-gui.
 	 */
-	public ClockController(HUDGUI hudGUI) 
+	public ClockController(HUDGUIApp hudGUI) 
 	{
 //		this.sim = sim;
 		this.hudGUI = hudGUI;
@@ -85,6 +85,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	
 	public void disappear(){
 		this.screen.getLayerElements().clear();
+
 	}
 	
 	@NiftyEventSubscriber(id="CLOCK")
@@ -98,6 +99,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 			e1.printStackTrace();
 		}
 		disappear();		
+
 	}
 	
 	// needs to be called when command is recognised and layer shown.
@@ -110,9 +112,11 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
        this.alert.setTextToSpeak(getCurrentTime());
        this.alertThread = new Thread(this.alert);
 
+
 	}
 	
 	public void speakTime(){
+//<<<<<<< HEAD
 		
 //		try {
 //			alert = new TTS(currentTime);
@@ -131,6 +135,25 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 //			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 //		}
+//=======
+//		TTS alert = null;
+//		
+//		try {
+//			alert = new TTS(currentTime);
+//		} catch (EngineException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (AudioException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (EngineStateError e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (PropertyVetoException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//>>>>>>> freetts
 
 	}
 	

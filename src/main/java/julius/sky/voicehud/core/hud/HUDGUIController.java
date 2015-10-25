@@ -69,7 +69,7 @@ public class HUDGUIController extends SimpleApplication implements ScreenControl
 	
 //	private SimulationBasics sim;
 	private Nifty nifty;
-	private HUDGUI hudGUI;
+	private HUDGUIApp hudGUI;
 	private Screen screen;
 //	private DropDown<ResolutionDropDownModel> resolutionDropDown;
 //	private DropDown<FrequencyDropDownModel> frequencyDropDown;
@@ -84,7 +84,7 @@ public class HUDGUIController extends SimpleApplication implements ScreenControl
 	/**
 	 * Creates a new controller instance for nifty-gui.
 	 */
-	public HUDGUIController(HUDGUI hudGUI) 
+	public HUDGUIController(HUDGUIApp hudGUI) 
 	{
 //		this.sim = sim;
 		this.hudGUI = hudGUI;
