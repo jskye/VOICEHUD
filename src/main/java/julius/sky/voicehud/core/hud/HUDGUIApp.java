@@ -2,7 +2,6 @@ package julius.sky.voicehud.core.hud;
 
 import java.util.Calendar;
 import java.lang.reflect.*;
-
 import java.util.GregorianCalendar;
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioRenderer;
@@ -19,10 +18,9 @@ import de.lessvoid.nifty.controls.ListBox.SelectionMode;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import de.lessvoid.nifty.tools.Color;
 import julius.sky.voicehud.App;
+import julius.sky.voicehud.core.router.Router.GuiLayer;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
-
 import com.jme3.app.SimpleApplication;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.AnalogListener;
@@ -38,77 +36,38 @@ import de.lessvoid.nifty.Nifty;
 import java.util.Calendar;
 
 /**
- * Nifty GUI 1.3 demo using XML for static content 
- * and Java for dynamic content. 
+ * University of Newcastle
+ * CSSE, Sofware Engineering 
+ * FINAL INDIVIDUAL THESIS PROJECT 
+ * VoiceHud
+ * Author: Julius Myszkowski
+ * Student Id: c3155112
+ * Email: julius.skye@gmail.com
  */
-public class HUDGUI extends SimpleApplication implements Runnable {
+
+/**
+ * HUDGUI class sets up the JME application.
+ */
+
+public class HUDGUIApp extends SimpleApplication implements Runnable {
 
   private App app;
   private int health;
-  private HUDGUI hudgui;
+  private HUDGUIApp hudgui;
   private Nifty nifty;
   private NiftyJmeDisplay niftyDisplay;
   private boolean hudVisible = false;
   
- // this will probably be moved to router because its a routing of commands to gui layers (views).
-	public enum GuiLayer 
-	{
-		// MAPS COMMAND(VIEW_NAME, VIEW_ID, VIEW_CONTROLLER)
-		HUD("HUD_VIEW", "HUD", "HUDGUIController"), 
-		MESSAGES("MESSAGES_VIEW", "MESSAGES", "MessagesController"), 
-		TIME("CLOCK_VIEW","CLOCK", "ClockController"),
-		DATE("DATE_VIEW", "DATE", "DateController");
-		
-		private String layerName;
-		private String layerId;
-		private String controller;
-		
-		
-		GuiLayer(String layerName)
-		{
-			System.out.println("thisgetcalled");
-			this.layerName = layerName;
-		}
-		
-		GuiLayer(String layerName, String layerId, String controller)
-		{
-			this.layerName = layerName;
-			this.layerId = layerId;
-			this.controller = controller;
-		}
-		
-		public String getLayerName()
-		{
-			return layerName;
-		}
-		
-		public String getLayerId()
-		{
-			return layerId;
-		}
-		
-		public String getControllerName()
-		{
-			return controller;
-		}
-	}
 
-//  public static void main(String[] args) {
-//  public HUDGUI(AssetManager assetManager) {
-  public HUDGUI(App app) {
+  public HUDGUIApp(App app) {
 	  this.app = app;
 	  this.hudgui = this;
-//	this.initialize();
-//	this.assetManager = assetManager;
-    AppSettings settings = new AppSettings(true);
-//    settings.setResolution(640, 480);
-//    HUDGUI app = new HUDGUI();
-    this.setShowSettings(false); // splashscreen
+	  AppSettings settings = new AppSettings(true);
+	  this.setShowSettings(false); // splashscreen
     
-    // set to fullscreen. turned off while developing.
-    settings.setFullscreen(false);
-    
-    this.setSettings(settings);
+	  // set to fullscreen. turned off while developing.
+	  settings.setFullscreen(false);
+	  this.setSettings(settings);
   }
 
   @Override
@@ -120,15 +79,13 @@ public class HUDGUI extends SimpleApplication implements Runnable {
      * Just some simple JME content to show it's really a JME app:
      */
 //    Box b = new Box(Vector3f.ZERO, 1, 1, 1);
-//    Geometry geom = new Geometry("Box", b);
-//    
+//    Geometry geom = new Geometry("Box", b);  
 //    if(assetManager!=null){System.out.println("assetmanager not null");}
 //    else{System.out.println("assetmanager null");}
 //    Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
 //    mat.setColor("Color", ColorRGBA.Blue);
 //    geom.setMaterial(mat);
 //    rootNode.attachChild(geom);
-
 //    startScreen = new MyStartScreen();
 //    stateManager.attach(startScreen);
 
@@ -139,18 +96,7 @@ public class HUDGUI extends SimpleApplication implements Runnable {
             assetManager, inputManager, audioRenderer, guiViewPort);
     setNifty(niftyDisplay.getNifty());
     guiViewPort.addProcessor(niftyDisplay);
-//    nifty.fromXml("Interface/views/tutorial/screen3.xml", "start", startScreen);
-//    nifty.fromXml("Interface/views/HUDGUI.xml", "start", startScreen);
-//    String xmlPath = "Interface/views/HUDGUI.xml";
-//	getNifty().fromXml(xmlPath, "start", new HUDGUIController(this));
-
-    //nifty.setDebugOptionPanelColors(true);
-    
-    flyCam.setDragToRotate(true); // you need the mouse for clicking now    
-
-    //	System.out.println("try open new layer");
-    //	this.getNifty().fromXml("Interface/views/TEST.xml", "start");
-
+//    flyCam.setDragToRotate(true); // you need the mouse for clicking now    
 
   }
 
@@ -182,17 +128,14 @@ public void openLayer(GuiLayer selectedLayer)
 //	System.out.println("current screen: " + "numlayers= " 
 //	+ screen.layoutLayersCallCount+ screen.debugOutput());
 
-	String layerXMLPath = "Interface/views/" + selectedLayer.layerName + ".xml";
-//	getNifty().fromXml(layerXMLPath, "start", new HUDGUIController(this));
+	String layerXMLPath = "Interface/views/" + selectedLayer.getLayerName() + ".xml";	
 	
-	
-	
-	// got through all current layers first to determine whether or not to hide.
+	// go through all current layers first to determine whether or not to hide.
 	for(Element layer : screen.getLayerElements()){
 		
 		System.out.println("looking through existing layers");
 		
-		// when hud spoken when visible, all layers should hide.
+		// when HUD heard when visible, all layers should hide.
 		if(selectedLayer.getLayerName().equals("HUD_VIEW") && hudVisible){
 			
 			for(Element visiblelayer : screen.getLayerElements()){
@@ -205,7 +148,7 @@ public void openLayer(GuiLayer selectedLayer)
 			return;
 		}
 		
-		// when non-hud layer spoken when visible and hud visible, hide layer.
+		// when non-HUD layer heard when visible and HUD visible, hide layer.
 		else if(!layer.getId().equals("HUD")
 				&& layer.getId().equals(selectedLayer.getLayerId()) 
 				&& layer.isVisible() 
@@ -227,7 +170,6 @@ public void openLayer(GuiLayer selectedLayer)
 			System.out.println("showing layer: " + selectedLayer.getLayerName());
 			if(layer.getId().equals("CLOCK")){
 				ClockController cc = (ClockController)getNifty().findScreenController("ClockController");	
-//				cc.updateTime();
 			}
 			layer.show();
 			layer.setVisible(true);
@@ -277,6 +219,7 @@ public void openLayer(GuiLayer selectedLayer)
 			else if(selectedLayer.getLayerName().equals("CLOCK_VIEW")){
 				System.out.println("constructing clock controller");
 				layersViewController = new ClockController(this);
+
 			}
 			else if(selectedLayer.getLayerName().equals("DATE_VIEW")){
 				System.out.println("constructing clock controller");
@@ -338,8 +281,6 @@ public void hideHUD()
 private void closeHUDGUI() 
 {
 	nifty.exit();
-    inputManager.setCursorVisible(false);
-    flyCam.setEnabled(true);
 }
 
 public Nifty getNifty() {

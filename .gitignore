@@ -1,7 +1,5 @@
 # Eclipse
 .classpath
-.project
-.settings/
 
 # Intellij
 .idea/
@@ -16,12 +14,10 @@
 
 # Maven
 log/
-target/
-target
-*/target/**
-*/target/*
-=======
-.classpath
+*.log
+/bin/
+
+
 target
 bin
 *.pydevproject
@@ -65,4 +61,7 @@ local.properties
 # TeXlipse plugin
 .texlipse
 .settings/org.eclipse.jdt.core.prefs
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> simple-voicehud

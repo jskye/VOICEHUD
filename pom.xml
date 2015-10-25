@@ -71,7 +71,7 @@
     <!--  junit unit testing -->
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.11</version>
       <scope>test</scope>
     </dependency>
    <dependency>
@@ -115,18 +115,19 @@
   <groupId>com.jme3</groupId>
   <artifactId>jme3-plugins</artifactId>
   <version>3.0.10</version>
-</dependency>
-    <!--   nifty plugin -->
-<dependency>
-<groupId>lessvoid</groupId>
-<artifactId>nifty</artifactId>
-<version>1.4.1</version>
-</dependency>
+  </dependency>
+  
     <!--   java monkey engine 3 nifty gui -->
 <dependency>
   <groupId>com.jme3</groupId>
   <artifactId>jme3-niftygui</artifactId>
   <version>3.0.10</version>
+</dependency>
+    <!--   nifty plugin. this has to come after the jme3 niftygui plugin-->
+<dependency>
+<groupId>lessvoid</groupId>
+<artifactId>nifty</artifactId>
+<version>1.4.1</version>
 </dependency>
 <dependency>
     <!--   java monkey engine 3 java ogg for .ogg sound file support -->
@@ -145,12 +146,6 @@
 	<groupId>com.jme3</groupId>
 	<artifactId>jme3-blender</artifactId>
 	<version>3.0.10</version>
-</dependency>
-    <!--   java monkey engine 3 java ogg for .ogg sound file support -->
-<dependency>
-	<groupId>com.jme3-lib</groupId>
-	<artifactId>oggd</artifactId>
-	<version>1.0.0</version>
 </dependency>
     <!--   java monkey engine 3 java ogg for android -->
 <dependency>
