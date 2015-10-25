@@ -27,7 +27,7 @@
 			</panel>
 	    </layer>
 		<layer id="DASH" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
-					<control name="label" id = "dateLabel1" text="time" color="#0f88"
+					<control name="label" id = "dashLabel1" text="time" color="#0f88"
 					align="center" valign="center" height="50px" 
 					font="Interface/fonts/verdana-48-regular.fnt">					
 					</control>
