@@ -11,11 +11,21 @@ assets/Video/sydriveHQ.flv
 *.iml
 *.iws
 
+#logs
+*.log
+
 # Mac
 .DS_Store
 
 # Maven
 log/
+*.log
+/bin/
+
+
+target
+*/target/**
+*/target/*
 *.log
 /bin/
 
@@ -63,3 +73,5 @@ local.properties
 # TeXlipse plugin
 .texlipse
 .settings/org.eclipse.jdt.core.prefs
+
+src/main/java/julius/sky/voicehud/core/hud/HUDGUI.java

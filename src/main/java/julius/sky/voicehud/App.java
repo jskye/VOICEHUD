@@ -5,6 +5,7 @@ import com.jme3.asset.AssetManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 
+
 import julius.sky.voicehud.core.hud.HUDGUIState;
 import julius.sky.voicehud.core.hud.SimpleMovieState;
 import julius.sky.voicehud.core.hud.StartScreenState;
@@ -16,8 +17,9 @@ public class App extends SimpleApplication
 {
 	
 //	private static MusicPlayer musicPlayer;
-	private StartScreenState startScreen;
-	private HUDGUIState HUDGUI;
+
+	private StartScreenState startScreenState;
+	private HUDGUIState hudGuiState;
 	private VoiceCommandManager vcm;
 	private Thread HUDThread;
 	private Thread voiceThread;
@@ -85,30 +87,8 @@ public class App extends SimpleApplication
 			SimpleMovieState sm = new SimpleMovieState(app);
 			getStateManager().attach(sm);
 			
-			HUDGUI = new HUDGUIState(app);
-			getStateManager().attach(HUDGUI);
-
-//			HUDThread = new Thread(HUDGUI);
-//			HUDThread.start();
-			
-
-
-//			movieThread = new Thread(sm);
-//			sm.run();
-			
-	
-
-			
-			
-//			guiThread.sleep(2000);
-//			System.out.println("try open new layer");
-//			hudGUI.openLayer(GuiLayer.VIEW_DEFAULT);
-//			hudGUI.getNifty().addXml("Interface/TEST.xml");
-
-//        	MusicPlayer musicPlayer = new MusicPlayer();
-//			musicPlayer.run();
-//			musicPlayer.createMusicNode("Elvis_Presley", "Burning_Love");
-//			musicPlayer.playMusic();
+			hudGuiState = new HUDGUIState(app);
+			getStateManager().attach(hudGuiState);
 
 
 			
@@ -126,8 +106,9 @@ public class App extends SimpleApplication
     	return this.voiceThread;
     }
 
+
 	public HUDGUIState getHUDGUI() {
-		return HUDGUI;
+		return hudGuiState;
 	}
 
 	public VoiceCommandManager getVcm() {
