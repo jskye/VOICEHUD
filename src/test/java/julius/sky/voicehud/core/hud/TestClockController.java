@@ -10,7 +10,11 @@
 package julius.sky.voicehud.core.hud;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import  org.junit.*;
+
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.elements.events.ElementShowEvent;
 /**
  * @author juliusskye
  *
@@ -43,6 +47,7 @@ public class TestClockController {
 //	       String dummyClockLabel2 = currentTime;
 	       Assert.assertNotEquals(dummyClockLabel, militaryTime);
 		}
+	
 
     /**
 	 * @param format
@@ -51,5 +56,7 @@ public class TestClockController {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

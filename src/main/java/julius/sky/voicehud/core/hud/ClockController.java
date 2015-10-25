@@ -31,6 +31,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 
 	private TTS alert;
 	private Thread alertThread;
+	private int clockElementShownCount;
 
 
 
@@ -94,9 +95,11 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	}
 	
 	@NiftyEventSubscriber(id="CLOCK")
-	public void onElementShow(final String id, ElementShowEvent showevent ) {
+	public int onElementShow(final String id, ElementShowEvent showevent ) {
 		updateTime();
+		System.out.println("speaking time");
 		speakTime();
+		clockElementShownCount++;
 		try {
 			Thread.sleep(3);
 		} catch (InterruptedException e1) {
@@ -104,6 +107,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 			e1.printStackTrace();
 		}
 		disappear();		
+		return clockElementShownCount;
 
 	}
 	
@@ -116,7 +120,6 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
        setTextToElement("clockLabel1", getCurrentTime().toString());
        this.alert.setTextToSpeak(getCurrentTime());
        this.alertThread = new Thread(this.alert);
-
 
 	}
 	
