@@ -2,20 +2,28 @@ package julius.sky.voicehud;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
+import com.jme3.niftygui.NiftyJmeDisplay;
+import com.jme3.system.AppSettings;
 
-import julius.sky.voicehud.core.hud.HUDGUIApp;
+
+import julius.sky.voicehud.core.hud.HUDGUIState;
+import julius.sky.voicehud.core.hud.SimpleMovieState;
+import julius.sky.voicehud.core.hud.StartScreenState;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.plugins.musicplayer.MusicPlayer;
 
-//public class App extends SimpleApplication
-public class App
+public class App extends SimpleApplication
+//public class App
 {
 	
 //	private static MusicPlayer musicPlayer;
-	private HUDGUIApp HUDGUI;
+
+	private StartScreenState startScreenState;
+	private HUDGUIState hudGuiState;
 	private VoiceCommandManager vcm;
 	private Thread HUDThread;
 	private Thread voiceThread;
+	private Thread movieThread;
 	private App app;
 	
     public static void main( String[] args )
@@ -24,36 +32,63 @@ public class App
         App thisApp = new App();
         thisApp.app = thisApp;
         thisApp.start(); // start the app
-
+        
     }
     
-//    public static void main( String[] args ){
-    public void start(){
-//    @Override
-//	public void simpleInitApp() {
+	/* (non-Javadoc)
+	 * @see com.jme3.app.SimpleApplication#simpleInitApp()
+	 * initialise application and its scenes
+	 */
+	@Override
+	public void simpleInitApp() {
+
+	      System.out.println( "initialising App" );
+
+		  AppSettings settings = new AppSettings(true);
+		  this.setShowSettings(false); // splashscreen
+		  // set to fullscreen. turned off while developing.
+		  settings.setFullscreen(false);
+		  this.setSettings(settings);
+		  setDisplayFps(false);
+		  setDisplayStatView(false);
+//		  startScreen = new StartScreenState();
+//		  getStateManager().attach(startScreen);
+		  this.initialiseVoiceRecognition();
+		// sleep main thread 5 seconds whilst the voice recognition gets ready
+			try {
+				Thread.sleep(6000);
+//				this.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		  this.initialiseAppStates();
+	}
+	
+    
+    /**
+	 * 
+	 */
+	private void initialiseVoiceRecognition() {
+		// TODO Auto-generated method stub
+		vcm = new VoiceCommandManager(app);
+		voiceThread = new Thread(vcm);
+		 // run as deamon to terminate this thread when app terminates.
+		voiceThread.setDaemon(true);
+		voiceThread.start(); 
+	}
+
+	// start the application
+    public void initialiseAppStates(){
+        
+    	System.out.println( "attaching app states" );
 		try {
-
-			HUDGUI = new HUDGUIApp(app);
-			HUDThread = new Thread(HUDGUI);
-			HUDGUI.run();
 			
-
-			vcm = new VoiceCommandManager(app);
-			voiceThread = new Thread(vcm);
-			 // run as deamon to terminate this thread when app terminates.
-			voiceThread.setDaemon(true);
-			voiceThread.start(); 
+			SimpleMovieState sm = new SimpleMovieState(app);
+			getStateManager().attach(sm);
 			
-			
-//			guiThread.sleep(2000);
-//			System.out.println("try open new layer");
-//			hudGUI.openLayer(GuiLayer.VIEW_DEFAULT);
-//			hudGUI.getNifty().addXml("Interface/TEST.xml");
-
-//        	MusicPlayer musicPlayer = new MusicPlayer();
-//			musicPlayer.run();
-//			musicPlayer.createMusicNode("Elvis_Presley", "Burning_Love");
-//			musicPlayer.playMusic();
+			hudGuiState = new HUDGUIState(app);
+			getStateManager().attach(hudGuiState);
 
 
 			
@@ -71,13 +106,16 @@ public class App
     	return this.voiceThread;
     }
 
-	public HUDGUIApp getHUDGUI() {
-		return HUDGUI;
+
+	public HUDGUIState getHUDGUI() {
+		return hudGuiState;
 	}
 
 	public VoiceCommandManager getVcm() {
 		return vcm;
 	}
+
+
     
     
 }

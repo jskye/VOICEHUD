@@ -23,7 +23,8 @@ import  javax.speech.synthesis.SpeakableAdapter;
 
 public class ClockController extends SpeakableAdapter implements ScreenController{
 	
-	private HUDGUIApp hudGUI;
+
+	private HUDGUIState hudGUI;
 	private Nifty nifty;
 	private Screen screen;
     private String currentTime;
@@ -36,7 +37,11 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	/**
 	 * Creates a new controller instance for nifty-gui.
 	 */
-	public ClockController(HUDGUIApp hudGUI) 
+
+	/**
+	 * Creates a new controller instance for nifty-gui.
+	 */
+	public ClockController(HUDGUIState hudGUI) 
 	{
 //		this.sim = sim;
 		this.hudGUI = hudGUI;
@@ -116,45 +121,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	}
 	
 	public void speakTime(){
-//<<<<<<< HEAD
-		
-//		try {
-//			alert = new TTS(currentTime);
-//			Thread alertThread = new Thread(alert);
 			alertThread.start();
-//		} catch (EngineException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (AudioException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (EngineStateError e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (PropertyVetoException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//=======
-//		TTS alert = null;
-//		
-//		try {
-//			alert = new TTS(currentTime);
-//		} catch (EngineException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (AudioException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (EngineStateError e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (PropertyVetoException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//>>>>>>> freetts
-
 	}
 	
 	public String getCurrentTime() {

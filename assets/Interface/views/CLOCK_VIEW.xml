@@ -21,15 +21,15 @@
 	<!-- messages view -->
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
 
-	<screen id="start" controller="julius.sky.voicehud.core.hud.ClockController" width="60%" height="60%">
-		<layer id="HUD" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
-         	<panel childLayout="vertical" width="50%" height="100px" backgroundColor="#0f08">
+	<screen id="start" controller="julius.sky.voicehud.core.hud.ClockController" width="100%" height="100%">
+		<layer id="HUD" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
+         	<panel childLayout="vertical" width="100%" height="100%" backgroundColor="#0f08">
 			</panel>
 	    </layer>
-		<layer id="CLOCK" childLayout="center" backgroundColor="#0000" visible="true" width="60%" height="60%">
-					<control name="label" id = "clockLabel1" text="time" color="#0f88"
-					align="center" valign="center" height="50px" width="100px">
-		<!-- 							font="Interface/Fonts/Arial32px.fnt">-->						
+		<layer id="CLOCK" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
+					<control name="label" id = "clockLabel1" text="time"  color="#0f88"
+					align="center" valign="center" height="30%" width="30%"
+					font="Interface/fonts/verdana-48-regular.fnt">					
 					</control>
 		</layer>
 		

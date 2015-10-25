@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty-1.3.xsd http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+	<!-- +++++++++++++++++++++++++++++++++++++++ -->
+	<!-- load default styles and controls -->
+	<!-- +++++++++++++++++++++++++++++++++++++++ -->
+	<useStyles filename="nifty-default-styles.xml" />
+	<useControls filename="nifty-default-controls.xml" />
+	<style id="console-red" base="button-font">
+		<attributes font="fonts/menu.fnt" color="#f00f" />
+	</style>
+	<style id="console-white" base="button-font">
+		<attributes font="fonts/menu.fnt" color="#ffff" />
+	</style>
+	<style id="console-font">
+		<attributes font="fonts/verdana-48-regular.fnt" color="#00ff" />
+	</style>
+
+	<!-- +++++++++++++++++++++++++++++++++++++++ -->
+	<!-- Loading view -->
+	<!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+	<screen id="start" controller="julius.sky.voicehud.core.hud.HUDGUIController" width="100%" height="100%">
+		
+		<layer id="HUD" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
+         	<panel childLayout="vertical" width="100%" height="100%" backgroundColor="#0f08">
+			</panel>
+	    </layer>
+		
+	</screen>
+
+</nifty>
