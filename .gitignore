@@ -1,5 +1,7 @@
 # ignore video assets cos they’re too big
 assets/Video
+assets/Video/lct1HQ.flv
+assets/Video/sydriveHQ.flv
 
 # Eclipse
 .classpath
