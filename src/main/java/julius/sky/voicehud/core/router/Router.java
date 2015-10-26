@@ -20,6 +20,7 @@ public class Router {
 		public enum GuiLayer 
 		{
 			// MAPS COMMAND(VIEW_NAME, VIEW_ID, VIEW_CONTROLLER)
+			DRIVERHUD("DRIVER_HUD_VIEW", "DRIVERHUD", "HUDGUIController"), 
 			HUD("HUD_VIEW", "HUD", "HUDGUIController"), 
 			MESSAGES("MESSAGES_VIEW", "MESSAGES", "MessagesController"), 
 			TIME("CLOCK_VIEW","CLOCK", "ClockController"),

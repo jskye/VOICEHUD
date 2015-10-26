@@ -122,7 +122,7 @@ public class VoiceCommandManager implements Runnable{
             
             if (utterance.equals("hud") || utterance.equals("hide")) {
                 jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(Router.GuiLayer.HUD);
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.DRIVERHUD);
 //                this.app.getHUDGUI().toggleHUD();
                 jsgfRecognizer.startRecognition(true);
             }
