@@ -44,9 +44,7 @@ public class VoiceCommandManager implements Runnable{
     static {
     	COMMANDS.put("hud", "show");
     	COMMANDS.put("hide", "hide");
-    	
     	COMMANDS.put("hello", "greeting");
-    	
     	COMMANDS.put("music", "music");
     	COMMANDS.put("listen", "music");
     	
@@ -116,46 +114,66 @@ public class VoiceCommandManager implements Runnable{
             String utterance = jsgfRecognizer.getResult().getHypothesis();
             
             System.out.println("Utterance heard by sphinx: " + utterance);
+            
+            
+            
+            // TODO:
+            // this should all be moved into a router lookup.
+            // Router.route(utterance)
+            // for all routes, lookup utterance and call HUD.openLayer(mappedlayer).
+            
+            // first stop recognition
+            jsgfRecognizer.stopRecognition();
 
-            if (utterance.startsWith("exit") || utterance.startsWith("stop") )
-                break;
-            
-            if (utterance.equals("hud") || utterance.equals("hide")) {
-                jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(Router.GuiLayer.DRIVERHUD);
-//                this.app.getHUDGUI().toggleHUD();
+            // route command and determine whether to continue recognition or not.
+            boolean continueRecognition = this.app.getRouter().routeCommand(utterance);
+            if(continueRecognition){
                 jsgfRecognizer.startRecognition(true);
             }
-            
-            if (utterance.equals("messages")) {
-                jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(Router.GuiLayer.MESSAGES);
-                jsgfRecognizer.startRecognition(true);
+            else{
+            	break;
             }
             
-            if (utterance.equals("time") || utterance.equals("clock")) {
-                jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(Router.GuiLayer.TIME);
-                jsgfRecognizer.startRecognition(true);
-            }
-            
-            if (utterance.equals("date")) {
-                jsgfRecognizer.stopRecognition();
-                this.app.getHUDGUI().openLayer(Router.GuiLayer.DATE);
-                jsgfRecognizer.startRecognition(true);
-            }
-            
-            if (utterance.equals("music")) {
-                jsgfRecognizer.stopRecognition();
-                recognizeMusic(jsgfRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
+//            // below represents command logic for specifically driving
+//            if (utterance.startsWith("exit") || utterance.startsWith("stop") )
+//                break;
+//            
+//            if (utterance.equals("hud") || utterance.equals("hide")) {
+//                jsgfRecognizer.stopRecognition();
+//                this.app.getHUDGUI().openLayer(Router.GuiLayer.DRIVERHUD);
+////                this.app.getHUDGUI().toggleHUD();
+//                jsgfRecognizer.startRecognition(true);
+//            }
+//            
+//            if (utterance.equals("messages")) {
+//                jsgfRecognizer.stopRecognition();
+//                this.app.getHUDGUI().openLayer(Router.GuiLayer.MESSAGES);
+//                jsgfRecognizer.startRecognition(true);
+//            }
+//            
+//            if (utterance.equals("time") || utterance.equals("clock")) {
+//                jsgfRecognizer.stopRecognition();
+//                this.app.getHUDGUI().openLayer(Router.GuiLayer.TIME);
+//                jsgfRecognizer.startRecognition(true);
+//            }
+//            
+//            if (utterance.equals("date")) {
+//                jsgfRecognizer.stopRecognition();
+//                this.app.getHUDGUI().openLayer(Router.GuiLayer.DATE);
+//                jsgfRecognizer.startRecognition(true);
+//            }
+//            
+//            if (utterance.equals("music")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizeMusic(jsgfRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
 
-            if (utterance.equals("bank account")) {
-                jsgfRecognizer.stopRecognition();
-                recognizerBankAccount(jsgfRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
+//            if (utterance.equals("bank account")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizerBankAccount(jsgfRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
 
 //            if (utterance.endsWith("weather forecast")) {
 //                jsgfRecognizer.stopRecognition();
@@ -163,8 +181,6 @@ public class VoiceCommandManager implements Runnable{
 //                jsgfRecognizer.startRecognition(true);
 //            }
         }
-
-        jsgfRecognizer.stopRecognition();
     }
 
     private static double parseNumber(String[] tokens) {
@@ -200,39 +216,39 @@ public class VoiceCommandManager implements Runnable{
         recognizer.stopRecognition();
     }
 
-    private static void recognizerBankAccount(LiveSpeechRecognizer recognizer) {
-        System.out.println("This is bank account voice menu");
-        System.out.println("-------------------------------");
-        System.out.println("Example: balance");
-        System.out.println("Example: withdraw zero point five");
-        System.out.println("Example: deposit one two three");
-        System.out.println("Example: back");
-        System.out.println("-------------------------------");
-
-        double savings = .0;
-        recognizer.startRecognition(true);
-
-        while (true) {
-            String utterance = recognizer.getResult().getHypothesis();
-            if (utterance.endsWith("back")) {
-                break;
-            } else if (utterance.startsWith("deposit")) {
-                double deposit = parseNumber(utterance.split("\\s"));
-                savings += deposit;
-                System.out.format("Deposited: $%.2f\n", deposit);
-            } else if (utterance.startsWith("withdraw")) {
-                double withdraw = parseNumber(utterance.split("\\s"));
-                savings -= withdraw;
-                System.out.format("Withdrawn: $%.2f\n", withdraw);
-            } else if (!utterance.endsWith("balance")) {
-                System.out.println("Unrecognized command: " + utterance);
-            }
-
-            System.out.format("Your savings: $%.2f\n", savings);
-        }
-
-        recognizer.stopRecognition();
-    }
+//    private static void recognizerBankAccount(LiveSpeechRecognizer recognizer) {
+//        System.out.println("This is bank account voice menu");
+//        System.out.println("-------------------------------");
+//        System.out.println("Example: balance");
+//        System.out.println("Example: withdraw zero point five");
+//        System.out.println("Example: deposit one two three");
+//        System.out.println("Example: back");
+//        System.out.println("-------------------------------");
+//
+//        double savings = .0;
+//        recognizer.startRecognition(true);
+//
+//        while (true) {
+//            String utterance = recognizer.getResult().getHypothesis();
+//            if (utterance.endsWith("back")) {
+//                break;
+//            } else if (utterance.startsWith("deposit")) {
+//                double deposit = parseNumber(utterance.split("\\s"));
+//                savings += deposit;
+//                System.out.format("Deposited: $%.2f\n", deposit);
+//            } else if (utterance.startsWith("withdraw")) {
+//                double withdraw = parseNumber(utterance.split("\\s"));
+//                savings -= withdraw;
+//                System.out.format("Withdrawn: $%.2f\n", withdraw);
+//            } else if (!utterance.endsWith("balance")) {
+//                System.out.println("Unrecognized command: " + utterance);
+//            }
+//
+//            System.out.format("Your savings: $%.2f\n", savings);
+//        }
+//
+//        recognizer.stopRecognition();
+//    }
 
     private static void recognizeWeather(LiveSpeechRecognizer recognizer) {
 

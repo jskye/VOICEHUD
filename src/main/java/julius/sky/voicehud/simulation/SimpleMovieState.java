@@ -7,7 +7,7 @@
  * Student Id: c3155112
  * Email: julius.skye@gmail.com
  */
-package julius.sky.voicehud.core.hud;
+package julius.sky.voicehud.simulation;
 
 /**
  * SimpleMovie.java class

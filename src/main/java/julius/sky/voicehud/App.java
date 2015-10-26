@@ -5,12 +5,14 @@ import com.jme3.asset.AssetManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.system.AppSettings;
 
-
 import julius.sky.voicehud.core.hud.HUDGUIState;
-import julius.sky.voicehud.core.hud.SimpleMovieState;
 import julius.sky.voicehud.core.hud.StartScreenState;
+import julius.sky.voicehud.core.router.Router;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.plugins.musicplayer.MusicPlayer;
+import julius.sky.voicehud.simulation.SimpleMovieState;
+import julius.sky.voicehud.simulation.Simulation;
+import julius.sky.voicehud.simulation.driving.DrivingSimulation;
 
 public class App extends SimpleApplication
 //public class App
@@ -25,6 +27,8 @@ public class App extends SimpleApplication
 	private Thread voiceThread;
 	private Thread movieThread;
 	private App app;
+	private Router router;
+	private Simulation simulation;
 	
     public static void main( String[] args )
     {
@@ -53,6 +57,7 @@ public class App extends SimpleApplication
 		  setDisplayStatView(false);
 //		  startScreen = new StartScreenState();
 //		  getStateManager().attach(startScreen);
+		  		  
 		  this.initialiseVoiceRecognition();
 		// sleep main thread 5 seconds whilst the voice recognition gets ready
 			try {
@@ -63,10 +68,35 @@ public class App extends SimpleApplication
 				e.printStackTrace();
 			}
 		  this.initialiseAppStates();
+		  this.initSimulation();
+		  this.initRouter();
+
+
 	}
 	
     
     /**
+	 * 
+	 */
+	private void initSimulation() {
+		this.simulation = (Simulation) new DrivingSimulation();
+	}
+
+	/**
+	 * 
+	 */
+	private void initRouter() {
+		this.router = new Router(getHUDGUI(), getSimulation());
+	}
+
+	/**
+	 * @return
+	 */
+	private Simulation getSimulation() {
+		return this.simulation;
+	}
+
+	/**
 	 * 
 	 */
 	private void initialiseVoiceRecognition() {
@@ -113,6 +143,14 @@ public class App extends SimpleApplication
 
 	public VoiceCommandManager getVcm() {
 		return vcm;
+	}
+
+	/**
+	 * @return
+	 */
+	public Router getRouter() {
+		// TODO Auto-generated method stub
+		return this.router;
 	}
 
 
