@@ -21,7 +21,6 @@ grammar dialog;
                   [go to [the]] bank account |
                   weather forecast           |
                   [play] music               |
-                  v	                         |
                   hud						 |
                   messages					 |
                   clock	| time				 |
@@ -39,11 +38,11 @@ grammar dialog;
 					sia					|		
 					random;
 
-<song_command> = 	[a little less] converstion		|
+<song_command> = 	[a little less] conversation |
 					moby				|
 					[the] beatles		|
 					sia					;
 					
 <music_command> = [play] music;
 
-public <command> = <menu_command> | <bank_command>;
+public <command> = <menu_command>;

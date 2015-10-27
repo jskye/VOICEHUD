@@ -28,8 +28,7 @@ public class Route {
 	 * @return
 	 */
 	public Object getViewId() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.viewid;
 	}
 
 	/**

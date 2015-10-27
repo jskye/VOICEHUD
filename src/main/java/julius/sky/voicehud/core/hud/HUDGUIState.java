@@ -183,8 +183,14 @@ public void openView(Route selectedview)
 	Screen screen = getNifty().getCurrentScreen();
 //	System.out.println("current screen: " + "numviews= " 
 //	+ screen.layoutviewsCallCount+ screen.debugOutput());
-
-	String viewXMLPath = "Interface/views/" + selectedview.getViewname() + ".xml";	
+	String viewXMLPath = null;
+	if(selectedview.getViewname()!=null){
+		viewXMLPath = "Interface/views/" + selectedview.getViewname() + ".xml";	
+	}
+	else{
+		System.out.println("No view for that commmand");
+		return;
+	}
 	
 	// go through all current views first to determine whether or not to hide.
 	for(Element view : screen.getLayerElements()){
@@ -200,7 +206,8 @@ public void openView(Route selectedview)
 				visibleview.setVisible(false);
 				System.out.println(visibleview+" is now visible?: "+visibleview.isVisible());
 			}			
-			if(view.getId().equals(getBaseHUDView())){hudVisible = false;}
+//			if(view.getId().equals(getBaseHUDView())){hudVisible = false;}
+			if(view.getId().equals("DRIVERHUD")){hudVisible = false;}
 			return;
 		}
 		
@@ -214,7 +221,7 @@ public void openView(Route selectedview)
 			view.setVisible(false);
 			return;
 		}
-		// when non-hud view selected and not visible and hud visible, show view.
+		// when non-hud view heard and not visible and hud visible, show view.
 		// or when hud not visible and view is hud then show it. 
 		else if(
 				(!selectedview.getViewname().equals(getBaseHUDView()) 
@@ -225,7 +232,8 @@ public void openView(Route selectedview)
 			System.out.println("showing view: " + selectedview.getViewname());
 			view.show();
 			view.setVisible(true);
-			if(view.getId().equals(getBaseHUDView())){hudVisible = true;}
+//			if(view.getId().equals(getBaseHUDView())){hudVisible = true;}
+			if(view.getId().equals("DRIVERHUD")){hudVisible = true;}
 			return;
 		}
 		
