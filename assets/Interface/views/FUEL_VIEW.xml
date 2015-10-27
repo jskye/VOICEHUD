@@ -23,7 +23,7 @@
 
 	<screen id="start" controller="julius.sky.voicehud.core.hud.FuelController" width="100%" height="100%">
 <layer id="DRIVERHUD" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
-         	<panel childLayout="vertical" width="100%" height="100%" backgroundColor="#0f08">
+         	<panel childLayout="vertical" width="100%" height="100%" backgroundColor="#0000">
 			</panel>
 <!-- 	    </layer> -->
  <!--  	    		<layer id="SPEED" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%"-->

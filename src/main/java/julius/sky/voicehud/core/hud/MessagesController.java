@@ -70,8 +70,8 @@ public class MessagesController implements ScreenController{
 	public void onStartScreen() {
 		// TODO Auto-generated method stub
 		setTextToElement("nameLabel1", "Mum");
-		setTextToElement("messageLabel1", "Hello son, how are you today?");
-		this.alert.setTextToSpeak("Mum says: Hello song, how are you today?");
+		setTextToElement("messageLabel1", "Hello");
+		this.alert.setTextToSpeak("Mum says: Hello");
 	    this.alertThread = new Thread(this.alert);
 		speakMessage();
 		try {
