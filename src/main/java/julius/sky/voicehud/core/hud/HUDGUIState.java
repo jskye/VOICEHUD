@@ -206,8 +206,8 @@ public void openView(Route selectedview)
 				visibleview.setVisible(false);
 				System.out.println(visibleview+" is now visible?: "+visibleview.isVisible());
 			}			
-//			if(view.getId().equals(getBaseHUDView())){hudVisible = false;}
-			if(view.getId().equals("DRIVERHUD")){hudVisible = false;}
+
+			if(selectedview.getViewId().equals("DRIVERHUD")){hudVisible = false;}
 			return;
 		}
 		
@@ -232,7 +232,6 @@ public void openView(Route selectedview)
 			System.out.println("showing view: " + selectedview.getViewname());
 			view.show();
 			view.setVisible(true);
-//			if(view.getId().equals(getBaseHUDView())){hudVisible = true;}
 			if(view.getId().equals("DRIVERHUD")){hudVisible = true;}
 			return;
 		}

@@ -63,6 +63,8 @@ public class App extends SimpleApplication
 //		  startScreen = new StartScreenState();
 //		  getStateManager().attach(startScreen);
 		  
+//<<<<<<< HEAD
+		  
 		  /* This constructor creates a new executor with a core pool size of 4. */
 		  executor = new ScheduledThreadPoolExecutor(4);
 		  try {
@@ -84,6 +86,18 @@ public class App extends SimpleApplication
 //		  this.initRouter();
 
 
+//=======
+//		  this.initialiseVoiceRecognition();
+//		// sleep main thread 5 seconds whilst the voice recognition gets ready
+//			try {
+//				Thread.sleep(10000);
+////				this.wait();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		  this.initialiseAppStates();
+//>>>>>>> intermediate-voicehud
 	}
 	
     
