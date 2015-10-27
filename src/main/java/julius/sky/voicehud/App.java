@@ -56,7 +56,7 @@ public class App extends SimpleApplication
 		  this.initialiseVoiceRecognition();
 		// sleep main thread 5 seconds whilst the voice recognition gets ready
 			try {
-				Thread.sleep(6000);
+				Thread.sleep(10000);
 //				this.wait();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

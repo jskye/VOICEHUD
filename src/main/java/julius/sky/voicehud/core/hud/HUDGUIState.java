@@ -200,7 +200,7 @@ public void openLayer(GuiLayer selectedLayer)
 				visiblelayer.setVisible(false);
 				System.out.println(visiblelayer+" is now visible?: "+visiblelayer.isVisible());
 			}			
-			if(layer.getId().equals(getBaseHUDView())){hudVisible = false;}
+			if(layer.getId().equals("DRIVERHUD")){hudVisible = false;}
 			return;
 		}
 		
@@ -225,11 +225,11 @@ public void openLayer(GuiLayer selectedLayer)
 			System.out.println("showing layer: " + selectedLayer.getLayerName());
 			layer.show();
 			layer.setVisible(true);
-			if(layer.getId().equals(getBaseHUDView())){hudVisible = true;}
+			if(layer.getId().equals("DRIVERHUD")){hudVisible = true;}
 			return;
 		}
 		
-		System.out.println(!layer.getId().equals(getBaseHUDView()));
+		System.out.println(!layer.getId().equals("DRIVERHUD"));
 		System.out.println( layer.getId().equals(selectedLayer.getLayerId()));
 		System.out.println( layer.isVisible() );
 		System.out.println( hudVisible);
