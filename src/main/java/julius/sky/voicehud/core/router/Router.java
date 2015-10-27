@@ -24,7 +24,8 @@ public class Router {
 			HUD("HUD_VIEW", "HUD", "HUDGUIController"), 
 			MESSAGES("MESSAGES_VIEW", "MESSAGES", "MessagesController"), 
 			TIME("CLOCK_VIEW","CLOCK", "ClockController"),
-			DATE("DATE_VIEW", "DATE", "DateController");
+			DATE("DATE_VIEW", "DATE", "DateController"), 
+			FUEL("FUEL_VIEW", "FUEL", "FuelController");
 			
 			private String layerName;
 			private String layerId;
