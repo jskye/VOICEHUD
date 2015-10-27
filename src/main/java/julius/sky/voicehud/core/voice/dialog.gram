@@ -16,18 +16,18 @@ grammar dialog;
 
 <number> = <digit>+ [point <digit>+];
 
-<menu_command> =  digits                     |
-					dash					|					
+<other_command> =  digits                    |
                   [go to [the]] bank account |
                   weather forecast           |
-                  [play] music               |
-                  v	                         |
-                  hud						 |
+                  [play] music               ;
+                  
+<menu_command> =  hud						 |
                   messages					 |
                   clock	| time				 |
                   date				         |
                   hide						 |		         
-                  fuel						 ;
+                  fuel						 |
+                  map						;
 
 <bank_command> = [show | check] balance |
                  deposit <number>       |

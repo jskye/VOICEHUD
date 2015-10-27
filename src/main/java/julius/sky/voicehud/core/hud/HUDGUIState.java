@@ -284,6 +284,10 @@ public void openLayer(GuiLayer selectedLayer)
 				System.out.println("constructing clock controller");
 				layersViewController = new FuelController(this);
 			}
+			else if(selectedLayer.getLayerName().equals("MAP_VIEW")){
+				System.out.println("constructing clock controller");
+				layersViewController = new MapController(this);
+			}
 					
 //			getNifty().registerScreenController(layersViewController);	
 			getNifty().fromXml(layerXMLPath, "start", layersViewController);

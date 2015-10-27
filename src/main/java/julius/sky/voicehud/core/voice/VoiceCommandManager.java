@@ -133,6 +133,12 @@ public class VoiceCommandManager implements Runnable{
                 jsgfRecognizer.startRecognition(true);
             }
             
+            if (utterance.equals("map")) {
+                jsgfRecognizer.stopRecognition();
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.MAP);
+                jsgfRecognizer.startRecognition(true);
+            }
+            
             if (utterance.equals("messages")) {
                 jsgfRecognizer.stopRecognition();
                 this.app.getHUDGUI().openLayer(Router.GuiLayer.MESSAGES);
@@ -151,17 +157,17 @@ public class VoiceCommandManager implements Runnable{
                 jsgfRecognizer.startRecognition(true);
             }
             
-            if (utterance.equals("music")) {
-                jsgfRecognizer.stopRecognition();
-                recognizeMusic(jsgfRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
+//            if (utterance.equals("music")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizeMusic(jsgfRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
 
-            if (utterance.equals("bank account")) {
-                jsgfRecognizer.stopRecognition();
-                recognizerBankAccount(jsgfRecognizer);
-                jsgfRecognizer.startRecognition(true);
-            }
+//            if (utterance.equals("bank account")) {
+//                jsgfRecognizer.stopRecognition();
+//                recognizerBankAccount(jsgfRecognizer);
+//                jsgfRecognizer.startRecognition(true);
+//            }
 
 //            if (utterance.endsWith("weather forecast")) {
 //                jsgfRecognizer.stopRecognition();
