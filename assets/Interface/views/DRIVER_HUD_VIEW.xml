@@ -18,11 +18,12 @@
 	</style>
 
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
-	<!-- messages view -->
+	<!-- hud view -->
 	<!-- +++++++++++++++++++++++++++++++++++++++ -->
 
-	<screen id="start" controller="julius.sky.voicehud.core.hud.ClockController" width="100%" height="100%">
-<layer id="DRIVERHUD" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
+	<screen id="start" controller="julius.sky.voicehud.core.hud.HUDGUIController" width="100%" height="100%">
+		
+		<layer id="DRIVERHUD" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
          	<panel childLayout="vertical" width="100%" height="100%" backgroundColor="#0f08">
 			</panel>
 	    </layer>
@@ -45,12 +46,6 @@
 						x="45%" y="90%">					
 						</control>
 					</panel>
-		</layer>
-		<layer id="CLOCK" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
-					<control name="label" id = "clockLabel1" text="time"  color="#0f88"
-					align="center" valign="bottom" height="30%" width="30%"
-					font="Interface/fonts/verdana-48-regular.fnt">					
-					</control>
 		</layer>
 		
 	</screen>

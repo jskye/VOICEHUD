@@ -1,9 +1,22 @@
 package julius.sky.voicehud.core.hud;
 
+import java.beans.PropertyVetoException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import javax.speech.AudioException;
+import javax.speech.EngineException;
+import javax.speech.EngineStateError;
+
+import julius.sky.voicehud.core.voice.tts.TTS;
+
 import com.jme3.app.SimpleApplication;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.events.ElementShowEvent;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -15,6 +28,17 @@ public class DateController implements ScreenController{
 	private HUDGUIState hudGUI;
 	private Nifty nifty;
 	private Screen screen;
+    private String currentTime;
+
+	private TTS alert;
+	private Thread alertThread;
+	private int clockElementShownCount;
+
+
+
+	/**
+	 * Creates a new controller instance for nifty-gui.
+	 */
 
 	/**
 	 * Creates a new controller instance for nifty-gui.
@@ -25,6 +49,22 @@ public class DateController implements ScreenController{
 		this.hudGUI = hudGUI;
 		this.nifty = hudGUI.getNifty();
 		this.screen = nifty.getCurrentScreen();
+		try {
+			this.alert = new TTS();
+		} catch (EngineException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AudioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EngineStateError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.alertThread = null;
 	}
 
 	public void bind(Nifty arg0, Screen arg1) {
@@ -39,8 +79,64 @@ public class DateController implements ScreenController{
 
 	public void onStartScreen() {
 		// TODO Auto-generated method stub
-//		setTextToElement("nameLabel1", "Mum");
+		updateTime();
+		speakDate();
+		try {
+			Thread.sleep(3);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		disappear();
 	}
+	
+	public void disappear(){
+		this.screen.getLayerElements().clear();
+
+	}
+	
+	@NiftyEventSubscriber(id="DATE")
+	public int onElementShow(final String id, ElementShowEvent showevent ) {
+		updateTime();
+		System.out.println("speaking time");
+		speakDate();
+		clockElementShownCount++;
+		try {
+			Thread.sleep(3);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		disappear();		
+		return clockElementShownCount;
+
+	}
+	
+	// needs to be called when command is recognised and layer shown.
+	public void updateTime(){
+       Calendar cal = Calendar.getInstance();       
+       SimpleDateFormat fmt = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);       
+       setCurrentTime(fmt.format(cal.getTime()));
+       System.out.println(fmt.format(cal.getTime()));
+       setTextToElement("dateLabel1", getCurrentTime().toString());
+       this.alert.setTextToSpeak(getCurrentTime());
+       this.alertThread = new Thread(this.alert);
+
+	}
+	
+	public void speakDate(){
+			alertThread.start();
+	}
+	
+	public String getCurrentTime() {
+		return currentTime;
+	}
+	
+	public void setCurrentTime(String currentTime) {
+		this.currentTime = currentTime;
+	}
+	
+	
 	
 	/**
 	 * Sets given text to the given element (e.g. label).
@@ -69,6 +165,5 @@ public class DateController implements ScreenController{
     {
     	return nifty.getCurrentScreen().findElementByName(elementID);
     }
-
 
 }
