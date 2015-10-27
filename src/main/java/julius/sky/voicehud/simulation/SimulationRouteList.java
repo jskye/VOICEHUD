@@ -32,4 +32,11 @@ public abstract class SimulationRouteList implements RouteList{
 	 * @return
 	 */
 	public abstract Route getRoute(String string);
+
+	/**
+	 * @param drivingSimRouteList
+	 */
+	public void setRouteList(List<Route> simRouteList) {
+		this.simRoutes = simRouteList;
+	}
 }

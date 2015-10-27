@@ -1,5 +1,9 @@
 package julius.sky.voicehud;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
@@ -29,6 +33,7 @@ public class App extends SimpleApplication
 	private App app;
 	private Router router;
 	private Simulation simulation;
+	private ScheduledThreadPoolExecutor executor;
 	
     public static void main( String[] args )
     {
@@ -57,19 +62,26 @@ public class App extends SimpleApplication
 		  setDisplayStatView(false);
 //		  startScreen = new StartScreenState();
 //		  getStateManager().attach(startScreen);
-		  		  
-		  this.initialiseVoiceRecognition();
-		// sleep main thread 5 seconds whilst the voice recognition gets ready
-			try {
-				Thread.sleep(6000);
-//				this.wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		  this.initialiseAppStates();
-		  this.initSimulation();
-		  this.initRouter();
+		  
+		  /* This constructor creates a new executor with a core pool size of 4. */
+		  executor = new ScheduledThreadPoolExecutor(4);
+		  try {
+			this.initialiseVoiceRecognition();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// sleep main thread 10 seconds whilst the voice recognition gets ready
+//			try {
+//				Thread.sleep(10000);
+////				this.wait();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		  this.initialiseAppStates();
+//		  this.initSimulation();
+//		  this.initRouter();
 
 
 	}
@@ -97,15 +109,36 @@ public class App extends SimpleApplication
 	}
 
 	/**
+	 * @throws Exception 
 	 * 
 	 */
-	private void initialiseVoiceRecognition() {
-		// TODO Auto-generated method stub
-		vcm = new VoiceCommandManager(app);
+	private void initialiseVoiceRecognition() throws Exception {
+
+		Callable callToCompleteInit = new Callable(){
+	        public Object call() throws Exception {
+	            return completeInit();
+	        }
+	    };
+	    
+		vcm = new VoiceCommandManager(app, callToCompleteInit);
+		
 		voiceThread = new Thread(vcm);
 		 // run as deamon to terminate this thread when app terminates.
 		voiceThread.setDaemon(true);
-		voiceThread.start(); 
+		
+		
+
+//		Future future = executor.submit(completedInitialisation); // complete setup or states, router...
+//		if(future.isDone()){
+			voiceThread.start(); // starts recogniser listening
+//		}
+	}
+	
+	public boolean completeInit(){
+		  this.initialiseAppStates();
+		  this.initSimulation();
+		  this.initRouter();
+		  return true;
 	}
 
 	// start the application
@@ -153,6 +186,11 @@ public class App extends SimpleApplication
 		return this.router;
 	}
 
+    @Override
+    public void destroy() {
+        super.destroy();
+        executor.shutdown();
+    }
 
     
     

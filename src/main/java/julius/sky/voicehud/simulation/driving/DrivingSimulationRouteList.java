@@ -28,6 +28,7 @@ public class DrivingSimulationRouteList extends SimulationRouteList{
 		drivingSimRouteList.add(new Route("HUD_VIEW", "HUD", "HUDGUIController"));
 		drivingSimRouteList.add(new Route("MESSAGES_VIEW", "MESSAGES", "MessagesController"));
 		drivingSimRouteList.add(new Route("DATE_VIEW", "DATE", "DateController"));
+		super.setRouteList(drivingSimRouteList);
 	}
 
 	/**
@@ -48,6 +49,7 @@ public class DrivingSimulationRouteList extends SimulationRouteList{
 	public Route getRoute(String drivingSimCommand) {
 		Route found = null;
 		for(Route r : super.getSimRoutes()){
+			System.out.println("r: " + r);
 			if(r.getViewId().equals(drivingSimCommand))
 				found = r;
 		}

@@ -11,8 +11,10 @@
 
 package julius.sky.voicehud.core.voice;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
@@ -31,10 +33,36 @@ public class VoiceCommandManager implements Runnable{
     "resource:/julius/sky/voicehud/core/voice/";    
     private static final String LANGUAGE_MODEL =
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
+    private LiveSpeechRecognizer jsgfRecognizer;
+    private Callable callOnReady;
     
 
-    public VoiceCommandManager(App app){
+    public VoiceCommandManager(App app, Callable callToCompleteInit) throws Exception{
     	this.app = app;
+    	this.callOnReady = callToCompleteInit; 
+    	// setup configuration, acoustic model, dictionary, grammar
+    	Configuration configuration = new Configuration();
+        configuration.setAcousticModelPath(ACOUSTIC_MODEL);
+        configuration.setDictionaryPath(DICTIONARY_PATH);
+        configuration.setGrammarPath(GRAMMAR_PATH);
+        configuration.setUseGrammar(true);
+        configuration.setGrammarName("dialog");
+		jsgfRecognizer = new LiveSpeechRecognizer(configuration);
+        
+
+     // use more grammars, models etc.
+     // bug in sphinx on windows where only one speech recogniser can be used at once.
+             
+//             configuration.setGrammarName("digits.grxml");
+//             LiveSpeechRecognizer grxmlRecognizer =
+//                 new LiveSpeechRecognizer(configuration);
+     //
+//             configuration.setUseGrammar(false);
+//             configuration.setLanguageModelPath(LANGUAGE_MODEL);
+//             LiveSpeechRecognizer lmRecognizer =
+//                 new LiveSpeechRecognizer(configuration);
+             
+             
     }
     
     
@@ -70,6 +98,7 @@ public class VoiceCommandManager implements Runnable{
     public void run() {
 		// TODO Auto-generated method stub
 		try {
+			this.callOnReady.call();
 			this.startDialog();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -79,32 +108,7 @@ public class VoiceCommandManager implements Runnable{
 	}
     
     public void startDialog() throws Exception{
-        
-    	// setup configuration, acoustic model, dictionary, grammar
-    	Configuration configuration = new Configuration();
-        configuration.setAcousticModelPath(ACOUSTIC_MODEL);
-        configuration.setDictionaryPath(DICTIONARY_PATH);
-        configuration.setGrammarPath(GRAMMAR_PATH);
-        configuration.setUseGrammar(true);
 
-        configuration.setGrammarName("dialog");
-        LiveSpeechRecognizer jsgfRecognizer =
-            new LiveSpeechRecognizer(configuration);
-
-        
-// use more grammars, models etc.
-// bug in sphinx on windows where only one speech recogniser can be used at once.
-        
-//        configuration.setGrammarName("digits.grxml");
-//        LiveSpeechRecognizer grxmlRecognizer =
-//            new LiveSpeechRecognizer(configuration);
-//
-//        configuration.setUseGrammar(false);
-//        configuration.setLanguageModelPath(LANGUAGE_MODEL);
-//        LiveSpeechRecognizer lmRecognizer =
-//            new LiveSpeechRecognizer(configuration);
-        
-        
         jsgfRecognizer.startRecognition(true);
 //    	app.notify();
         while (true) {
@@ -276,6 +280,10 @@ public class VoiceCommandManager implements Runnable{
         recognizer.stopRecognition();
     }
     
+//    public boolean startThread(){
+//    	this.run();
+//		return true;
+//    }
 
 
 
