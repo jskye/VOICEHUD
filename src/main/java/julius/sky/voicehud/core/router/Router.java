@@ -1,5 +1,10 @@
 package julius.sky.voicehud.core.router;
 
+import julius.sky.voicehud.core.hud.HUDGUIState;
+import julius.sky.voicehud.simulation.Simulation;
+
+import com.jme3.app.SimpleApplication;
+
 /**
  * University of Newcastle
  * CSSE, Sofware Engineering 
@@ -11,55 +16,31 @@ package julius.sky.voicehud.core.router;
  */
 
 /**
- * Router class routes commands to their views and controllers
+ * Router class routes commands to their views 
+ * (by loading layers that have associated controllers).
  */
 
 public class Router {
 		
-		// the router class 
-		public enum GuiLayer 
-		{
-			// MAPS COMMAND(VIEW_NAME, VIEW_ID, VIEW_CONTROLLER)
-			DRIVERHUD("DRIVER_HUD_VIEW", "DRIVERHUD", "HUDGUIController"), 
-			HUD("HUD_VIEW", "HUD", "HUDGUIController"), 
-			MESSAGES("MESSAGES_VIEW", "MESSAGES", "MessagesController"), 
-			TIME("CLOCK_VIEW","CLOCK", "ClockController"),
-			DATE("DATE_VIEW", "DATE", "DateController"), 
-			FUEL("FUEL_VIEW", "FUEL", "FuelController");
-			
-			private String layerName;
-			private String layerId;
-			private String controller;
-			
-			
-			GuiLayer(String layerName)
-			{
-				System.out.println("thisgetcalled");
-				this.layerName = layerName;
-			}
-			
-			GuiLayer(String layerName, String layerId, String controller)
-			{
-				this.layerName = layerName;
-				this.layerId = layerId;
-				this.controller = controller;
-			}
-			
-			public String getLayerName()
-			{
-				return layerName;
-			}
-			
-			public String getLayerId()
-			{
-				return layerId;
-			}
-			
-			public String getControllerName()
-			{
-				return controller;
-			}
+	  private HUDGUIState hudgui;
+	  private Simulation simulation;
+		
+	  public Router(HUDGUIState hudgui, Simulation sim){
+		  this.hudgui = hudgui;
+		  this.simulation = sim;
+	  }
+	
+		/**
+		 * @param command
+		 * routes commands to layers
+		 */
+		public boolean routeCommand(String command) {
+			// get layer to load.
+			// TODO use drivingsimulationlogic to determine routes.
+			System.out.println(simulation.getRoute(command));
+			this.hudgui.openView(simulation.getRoute(command));
+			boolean postRoute = this.simulation.getPostRoute();
+			return postRoute;
 		}
-		
-		
+
 }
