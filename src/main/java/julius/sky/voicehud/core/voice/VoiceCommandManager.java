@@ -127,6 +127,12 @@ public class VoiceCommandManager implements Runnable{
                 jsgfRecognizer.startRecognition(true);
             }
             
+            if (utterance.equals("fuel")) {
+                jsgfRecognizer.stopRecognition();
+                this.app.getHUDGUI().openLayer(Router.GuiLayer.FUEL);
+                jsgfRecognizer.startRecognition(true);
+            }
+            
             if (utterance.equals("messages")) {
                 jsgfRecognizer.stopRecognition();
                 this.app.getHUDGUI().openLayer(Router.GuiLayer.MESSAGES);

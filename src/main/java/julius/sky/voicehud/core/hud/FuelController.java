@@ -1,23 +1,37 @@
+/**
+ * University of Newcastle
+ * CSSE, Sofware Engineering 
+ * FINAL INDIVIDUAL THESIS PROJECT 
+ * VoiceHud
+ * Author: Julius Myszkowski
+ * Student Id: c3155112
+ * Email: julius.skye@gmail.com
+ */
 package julius.sky.voicehud.core.hud;
 
 import java.beans.PropertyVetoException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import javax.speech.AudioException;
 import javax.speech.EngineException;
 import javax.speech.EngineStateError;
 
 import julius.sky.voicehud.core.voice.tts.TTS;
-
-import com.jme3.app.SimpleApplication;
-
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.events.ElementShowEvent;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 
+/**
+ * FuelController.java class
+ */
 
-public class MessagesController implements ScreenController{
+public class FuelController implements ScreenController{
 	
 
 	private HUDGUIState hudGUI;
@@ -30,7 +44,7 @@ public class MessagesController implements ScreenController{
 	 * Creates a new controller instance for nifty-gui.
 	 */
 
-	public MessagesController(HUDGUIState hudGUI) 
+	public FuelController(HUDGUIState hudGUI) 
 	{
 //		this.sim = sim;
 		this.hudGUI = hudGUI;
@@ -69,11 +83,10 @@ public class MessagesController implements ScreenController{
 
 	public void onStartScreen() {
 		// TODO Auto-generated method stub
-		setTextToElement("nameLabel1", "Mum");
-		setTextToElement("messageLabel1", "Hello son, how are you today?");
-		this.alert.setTextToSpeak("Mum says: Hello song, how are you today?");
+		setTextToElement("fuelLabel1", "70%");
+		this.alert.setTextToSpeak("Fuel is at 70%");
 	    this.alertThread = new Thread(this.alert);
-		speakMessage();
+		speakFuel();
 		try {
 			Thread.sleep(3);
 		} catch (InterruptedException e1) {
@@ -84,7 +97,7 @@ public class MessagesController implements ScreenController{
 //		disappear();
 	}
 	
-	public void speakMessage(){
+	public void speakFuel(){
 		alertThread.start();
 }
 	

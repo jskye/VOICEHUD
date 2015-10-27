@@ -280,6 +280,10 @@ public void openLayer(GuiLayer selectedLayer)
 				System.out.println("constructing clock controller");
 				layersViewController = new DateController(this);
 			}
+			else if(selectedLayer.getLayerName().equals("FUEL_VIEW")){
+				System.out.println("constructing clock controller");
+				layersViewController = new FuelController(this);
+			}
 					
 //			getNifty().registerScreenController(layersViewController);	
 			getNifty().fromXml(layerXMLPath, "start", layersViewController);

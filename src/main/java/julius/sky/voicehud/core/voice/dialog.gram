@@ -26,7 +26,8 @@ grammar dialog;
                   messages					 |
                   clock	| time				 |
                   date				         |
-                  hide				         ;
+                  hide						 |		         
+                  fuel						 ;
 
 <bank_command> = [show | check] balance |
                  deposit <number>       |

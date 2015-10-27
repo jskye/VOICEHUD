@@ -47,7 +47,7 @@ public class App extends SimpleApplication
 		  AppSettings settings = new AppSettings(true);
 		  this.setShowSettings(false); // splashscreen
 		  // set to fullscreen. turned off while developing.
-		  settings.setFullscreen(false);
+		  settings.setFullscreen(true);
 		  this.setSettings(settings);
 		  setDisplayFps(false);
 		  setDisplayStatView(false);
