@@ -248,7 +248,7 @@
 <dependency>
 	<groupId>com.jme3x</groupId>
 	<artifactId>jfx</artifactId>
-	<version>1.164.2015-10-09_172619-c221abc</version>
+	<version>1.165.2015-10-25_020230-3c0cb5b</version>
 </dependency>
 </dependencies>
 <!--  <modules>
