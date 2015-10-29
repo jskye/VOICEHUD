@@ -1,4 +1,37 @@
+# ignore video assets cos they’re too big
+assets/Sound
+assets/Video
+assets/Sound/
+assets/Video/
+
+
+# Eclipse
 .classpath
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+#logs
+*.log
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+*.log
+/bin/
+
+
+target
+*/target/**
+*/target/*
+*.log
+/bin/
+
+
 target
 bin
 *.pydevproject
@@ -42,3 +75,5 @@ local.properties
 # TeXlipse plugin
 .texlipse
 .settings/org.eclipse.jdt.core.prefs
+
+src/main/java/julius/sky/voicehud/core/hud/HUDGUI.java
