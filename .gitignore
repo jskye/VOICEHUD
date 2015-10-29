@@ -1,8 +1,11 @@
 # ignore video assets cos they’re too big
+assets/Sound
 assets/Video
-assets/Video/lct1HQ.flv
-assets/Video/sydriveHQ.flv
-assets/Video/SydneyDrive3.mp4
+assets/Sound/
+assets/Video/
+assets/Sound/**
+assets/Video/**
+
 
 # Eclipse
 .classpath
@@ -76,3 +79,15 @@ local.properties
 .settings/org.eclipse.jdt.core.prefs
 
 src/main/java/julius/sky/voicehud/core/hud/HUDGUI.java
+
+assets/Video/lct1HQ.flv
+
+assets/Video/sydriveHQ.flv
+
+assets/Video/test.flv
+
+assets/Sound/The_Cars-Drive.ogg
+
+assets/Sound/Elvis_Presley-Burning_Love.ogg
+
+assets/Sound/Elvis_Presley-A_Little_Less_Conversation.ogg
