@@ -34,6 +34,7 @@ public class VoiceCommandManager implements Runnable{
     private static final String LANGUAGE_MODEL =
         "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
     private LiveSpeechRecognizer jsgfRecognizer;
+    private Configuration configuration;
     private Callable callOnReady;
     
 
@@ -41,7 +42,7 @@ public class VoiceCommandManager implements Runnable{
     	this.app = app;
     	this.callOnReady = callToCompleteInit; 
     	// setup configuration, acoustic model, dictionary, grammar
-    	Configuration configuration = new Configuration();
+    	configuration = new Configuration();
         configuration.setAcousticModelPath(ACOUSTIC_MODEL);
         configuration.setDictionaryPath(DICTIONARY_PATH);
         configuration.setGrammarPath(GRAMMAR_PATH);
@@ -299,11 +300,6 @@ public class VoiceCommandManager implements Runnable{
 		Thread.sleep(i);
 	}
     
-//    public boolean startThread(){
-//    	this.run();
-//		return true;
-//    }
-
 
 
 }

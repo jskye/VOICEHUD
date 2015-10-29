@@ -26,6 +26,7 @@ public class App extends SimpleApplication
 
 	private StartScreenState startScreenState;
 	private HUDGUIState hudGuiState;
+	private SimpleMovieState simpMovState;
 	private VoiceCommandManager vcm;
 	private Thread HUDThread;
 	private Thread voiceThread;
@@ -136,8 +137,8 @@ public class App extends SimpleApplication
     	System.out.println( "attaching app states" );
 		try {
 			
-			SimpleMovieState sm = new SimpleMovieState(app);
-			getStateManager().attach(sm);
+			simpMovState = new SimpleMovieState(app);
+			getStateManager().attach(simpMovState);
 			
 			hudGuiState = new HUDGUIState(voiceThread, vcm, app);
 //			hudGuiState = new HUDGUIState(app);
