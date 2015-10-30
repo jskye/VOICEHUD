@@ -1,9 +1,6 @@
-# ignore video assets cos they’re too big
+﻿# ignore video assets cos they’re too big
 assets/Sound
 assets/Video
-assets/Sound/
-assets/Video/
-
 
 # Eclipse
 .classpath

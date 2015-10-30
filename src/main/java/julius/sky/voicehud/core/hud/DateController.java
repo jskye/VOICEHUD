@@ -30,9 +30,9 @@ public class DateController implements ScreenController{
 	private Screen screen;
     private String currentTime;
 
-	private TTS alert;
+	private TTS dateSpeakable;
 	private Thread alertThread;
-	private int clockElementShownCount;
+	private int dateElementShownCount;
 
 
 
@@ -50,7 +50,7 @@ public class DateController implements ScreenController{
 		this.nifty = hudGUI.getNifty();
 		this.screen = nifty.getCurrentScreen();
 		try {
-			this.alert = new TTS();
+			this.dateSpeakable = new TTS();
 		} catch (EngineException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +100,7 @@ public class DateController implements ScreenController{
 		updateTime();
 		System.out.println("speaking time");
 		speakDate();
-		clockElementShownCount++;
+		dateElementShownCount++;
 		try {
 			Thread.sleep(3);
 		} catch (InterruptedException e1) {
@@ -108,7 +108,7 @@ public class DateController implements ScreenController{
 			e1.printStackTrace();
 		}
 		disappear();		
-		return clockElementShownCount;
+		return dateElementShownCount;
 
 	}
 	
@@ -119,8 +119,8 @@ public class DateController implements ScreenController{
        setCurrentTime(fmt.format(cal.getTime()));
        System.out.println(fmt.format(cal.getTime()));
        setTextToElement("dateLabel1", getCurrentTime().toString());
-       this.alert.setTextToSpeak(getCurrentTime());
-       this.alertThread = new Thread(this.alert);
+       this.dateSpeakable.setTextToSpeak(getCurrentTime());
+       this.alertThread = new Thread(this.dateSpeakable);
 
 	}
 	
@@ -164,6 +164,10 @@ public class DateController implements ScreenController{
     private Element getElementByID(String elementID)
     {
     	return nifty.getCurrentScreen().findElementByName(elementID);
+    }
+    
+    private int getElementShownCount(){
+    	return this.dateElementShownCount;
     }
 
 }

@@ -26,26 +26,24 @@
 		<layer id="DRIVERHUD" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
          	<panel childLayout="vertical" width="100%" height="100%" backgroundColor="#0000">
 			</panel>
-<!-- 	    </layer> -->
- <!--  	    		<layer id="SPEED" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%"-->
-					<panel childLayout="absolute">
-			  	   		<control name="label" id ="speedLabel" text="70" color="#0f88"
-						align="left" valign="bottom" height="10%" width="30%"
-						x="30%" y="90%" font="Interface/fonts/verdana-48-regular.fnt">					
-						</control>
-						<control name="label" id ="speedLabel" text="/" color="#0f88"
-						align="left" valign="bottom" height="10%" width="30%"
-						x="35%" y="90%" font="Interface/fonts/verdana-48-regular.fnt">					
-						</control>
-						<control name="label" id ="speedLimitLabel" text="80" 
-						color="#0f88" align="left" valign="bottom" height="10%" width="30%"
-						x="40%" y="90%" font="Interface/fonts/verdana-48-regular.fnt">					
-						</control>
-					    <control name="label" id ="unitsLabel" text="kmh" color="#0f88"
-						align="left" valign="bottom" height="10%" width="30%"
-						x="45%" y="90%">					
-						</control>
-					</panel>
+			<panel childLayout="absolute">
+	  	   		<control name="label" id ="speedLabel" text="70" color="#0f88"
+				align="left" valign="bottom" height="10%" width="30%"
+				x="30%" y="90%" font="Interface/fonts/verdana-48-regular.fnt">					
+				</control>
+				<control name="label" id ="speedLabel" text="/" color="#0f88"
+				align="left" valign="bottom" height="10%" width="30%"
+				x="35%" y="90%" font="Interface/fonts/verdana-48-regular.fnt">					
+				</control>
+				<control name="label" id ="speedLimitLabel" text="80" 
+				color="#0f88" align="left" valign="bottom" height="10%" width="30%"
+				x="40%" y="90%" font="Interface/fonts/verdana-48-regular.fnt">					
+				</control>
+			    <control name="label" id ="unitsLabel" text="kmh" color="#0f88"
+				align="left" valign="bottom" height="10%" width="30%"
+				x="45%" y="90%">					
+				</control>
+			</panel>
 		</layer>
 		
 	</screen>

@@ -29,7 +29,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 	private Screen screen;
     private String currentTime;
 
-	private TTS alert;
+	private TTS timeSpeakable;
 	private Thread alertThread;
 	private int clockElementShownCount;
 
@@ -49,7 +49,7 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
 		this.nifty = hudGUI.getNifty();
 		this.screen = nifty.getCurrentScreen();
 		try {
-			this.alert = new TTS();
+			this.timeSpeakable = new TTS();
 		} catch (EngineException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,8 +118,8 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
        setCurrentTime(sdf.format(cal.getTime()));
        System.out.println(sdf.format(cal.getTime()));
        setTextToElement("clockLabel1", getCurrentTime().toString());
-       this.alert.setTextToSpeak(getCurrentTime());
-       this.alertThread = new Thread(this.alert);
+       this.timeSpeakable.setTextToSpeak(getCurrentTime());
+       this.alertThread = new Thread(this.timeSpeakable);
 
 	}
 	
@@ -163,6 +163,10 @@ public class ClockController extends SpeakableAdapter implements ScreenControlle
     private Element getElementByID(String elementID)
     {
     	return nifty.getCurrentScreen().findElementByName(elementID);
+    }
+    
+    private int getElementShownCount(){
+    	return this.clockElementShownCount;
     }
 
 

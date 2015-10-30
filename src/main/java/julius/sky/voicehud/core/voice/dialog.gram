@@ -16,11 +16,7 @@ grammar dialog;
 
 <number> = <digit>+ [point <digit>+];
 
-<other_command> =  digits                    |
-                  [go to [the]] bank account |
-                  weather forecast           |
-                  [play] music               ;
-                  
+
 <menu_command> =  hud						 |
                   messages					 |
                   clock	| time				 |
@@ -40,11 +36,11 @@ grammar dialog;
 					sia					|		
 					random;
 
-<song_command> = 	[a little less] converstion		|
+<song_command> = 	[a little less] conversation |
 					moby				|
 					[the] beatles		|
 					sia					;
 					
 <music_command> = [play] music;
 
-public <command> = <menu_command> | <bank_command>;
+public <command> = <menu_command>;
