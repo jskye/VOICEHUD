@@ -16,12 +16,14 @@ grammar dialog;
 
 <number> = <digit>+ [point <digit>+];
 
+
 <menu_command> =  hud						 |
                   messages					 |
                   clock	| time				 |
                   date				         |
                   hide						 |		         
-                  fuel						 ;
+                  fuel						 |
+                  map						;
 
 <bank_command> = [show | check] balance |
                  deposit <number>       |

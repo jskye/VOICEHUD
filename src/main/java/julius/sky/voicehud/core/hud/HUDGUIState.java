@@ -296,6 +296,10 @@ public void openView(Route selectedview)
 				System.out.println("constructing clock controller");
 				viewController = new FuelController(this);
 			}
+			else if(selectedview.getViewname().equals("MAP_VIEW")){
+				System.out.println("constructing clock controller");
+				viewController = new MapController(this);
+			}
 					
 //			getNifty().registerScreenController(viewsViewController);	
 			getNifty().fromXml(viewXMLPath, "start", viewController);

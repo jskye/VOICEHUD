@@ -124,14 +124,8 @@ public class VoiceCommandManager implements Runnable{
             String utterance = jsgfRecognizer.getResult().getHypothesis();
             
             System.out.println("Utterance heard by sphinx: " + utterance);
-            
-         
-            
-            // TODO:
-            // this should all be moved into a router lookup.
-            // Router.route(utterance)
-            // for all routes, lookup utterance and call HUD.openLayer(mappedlayer).
-            
+
+//            
             // first stop recognition
             jsgfRecognizer.stopRecognition();
 
@@ -143,58 +137,7 @@ public class VoiceCommandManager implements Runnable{
             else{
             	break;
             }
-            
-//            // below represents command logic for specifically driving
-//            if (utterance.startsWith("exit") || utterance.startsWith("stop") )
-//                break;
-//            
-//            if (utterance.equals("hud") || utterance.equals("hide")) {
-//                jsgfRecognizer.stopRecognition();
-//                this.app.getHUDGUI().openLayer(Router.GuiLayer.DRIVERHUD);
-////                this.app.getHUDGUI().toggleHUD();
-//                jsgfRecognizer.startRecognition(true);
-//            }
-//            //            if (utterance.equals("fuel")) {
-//          jsgfRecognizer.stopRecognition();
-//          this.app.getHUDGUI().openLayer(Router.GuiLayer.FUEL);
-//          jsgfRecognizer.startRecognition(true);
-//      }
-//      
-//            if (utterance.equals("messages")) {
-//                jsgfRecognizer.stopRecognition();
-//                this.app.getHUDGUI().openLayer(Router.GuiLayer.MESSAGES);
-//                jsgfRecognizer.startRecognition(true);
-//            }
-//            
-//            if (utterance.equals("time") || utterance.equals("clock")) {
-//                jsgfRecognizer.stopRecognition();
-//                this.app.getHUDGUI().openLayer(Router.GuiLayer.TIME);
-//                jsgfRecognizer.startRecognition(true);
-//            }
-//            
-//            if (utterance.equals("date")) {
-//                jsgfRecognizer.stopRecognition();
-//                this.app.getHUDGUI().openLayer(Router.GuiLayer.DATE);
-//                jsgfRecognizer.startRecognition(true);
-//            }
-//            
-//            if (utterance.equals("music")) {
-//                jsgfRecognizer.stopRecognition();
-//                recognizeMusic(jsgfRecognizer);
-//                jsgfRecognizer.startRecognition(true);
-//            }
-
-//            if (utterance.equals("bank account")) {
-//                jsgfRecognizer.stopRecognition();
-//                recognizerBankAccount(jsgfRecognizer);
-//                jsgfRecognizer.startRecognition(true);
-//            }
-
-//            if (utterance.endsWith("weather forecast")) {
-//                jsgfRecognizer.stopRecognition();
-//                recognizeWeather(lmRecognizer);
-//                jsgfRecognizer.startRecognition(true);
-//            }
+          
         }
     }
 

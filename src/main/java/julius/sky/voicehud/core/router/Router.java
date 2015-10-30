@@ -24,6 +24,7 @@ public class Router {
 		
 	  private HUDGUIState hudgui;
 	  private Simulation simulation;
+
 		
 	  public Router(HUDGUIState hudgui, Simulation sim){
 		  this.hudgui = hudgui;

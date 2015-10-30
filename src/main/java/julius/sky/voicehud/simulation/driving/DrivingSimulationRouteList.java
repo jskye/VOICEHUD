@@ -30,6 +30,7 @@ public class DrivingSimulationRouteList extends SimulationRouteList{
 		drivingSimRouteList.add(new Route("DATE_VIEW", "DATE", "DateController"));
 		drivingSimRouteList.add(new Route("CLOCK_VIEW", "CLOCK", "ClockController"));
 		drivingSimRouteList.add(new Route("FUEL_VIEW", "FUEL", "FuelController"));
+		drivingSimRouteList.add(new Route("MAP_VIEW", "MAP", "MapController"));
 		super.setRouteList(drivingSimRouteList);
 	}
 
