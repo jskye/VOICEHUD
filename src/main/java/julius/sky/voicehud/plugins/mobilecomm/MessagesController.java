@@ -1,11 +1,14 @@
-package julius.sky.voicehud.core.hud;
+package julius.sky.voicehud.plugins.mobilecomm;
 
 import java.beans.PropertyVetoException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.speech.AudioException;
 import javax.speech.EngineException;
 import javax.speech.EngineStateError;
 
+import julius.sky.voicehud.core.hud.HUDGUIState;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.core.voice.tts.TTS;
 
@@ -30,6 +33,7 @@ public class MessagesController implements ScreenController{
 	private TTS alert;
 	private Thread voiceThread;
 	private VoiceCommandManager vcm;
+	private ArrayList<Message> messageList = new ArrayList<Message>();
 
 	/**
 	 * Creates a new controller instance for nifty-gui.

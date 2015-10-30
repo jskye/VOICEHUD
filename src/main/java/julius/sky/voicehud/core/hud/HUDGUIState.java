@@ -25,6 +25,7 @@ import de.lessvoid.nifty.screen.ScreenController;
 import julius.sky.voicehud.App;
 import julius.sky.voicehud.core.router.Route;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
+import julius.sky.voicehud.plugins.mobilecomm.MessagesController;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;

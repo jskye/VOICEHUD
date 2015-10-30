@@ -19,6 +19,8 @@ import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import julius.sky.voicehud.App;
 
+import java.io.File;
+
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AbstractAppState;
@@ -147,9 +149,11 @@ public class SimpleMovieState extends AbstractAppState implements Runnable{
 //		 setDisplayStatView(false);
 //		 getInputManager().setCursorVisible(true);
 		 this.flyCam.setEnabled(true);
-//		 
+		String workingDir = System.getProperty("user.dir");
+		 
 		@SuppressWarnings("restriction")
-		final Media media = new Media("file:////Users/juliusskye/Desktop/FYPI/simplevoicehud/assets/Video/sydriveHQ.flv");
+		final Media media = new Media(new File(workingDir+"/assets/Video/sydriveHQ.flv").toURI().toASCIIString());
+//		final Media media = new Media("file:////Users/juliusskye/Desktop/FYPI/simplevoicehud/assets/Video/sydriveHQ.flv");
 //		final Media media = new Media("http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv");
 		// final Media media = new Media("file:///archive/movies/kamera/kotywalka1.mp4");
 		// final Media media = new Media("http://techslides.com/demos/sample-videos/small.mp4");
