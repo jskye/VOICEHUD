@@ -1,5 +1,6 @@
 package julius.sky.voicehud.core.router;
 
+import julius.sky.voicehud.core.event.Event;
 import julius.sky.voicehud.core.hud.HUDGUIState;
 import julius.sky.voicehud.simulation.Simulation;
 
@@ -44,5 +45,15 @@ public class Router {
 			boolean postRoute = this.simulation.continueAfterRoute();
 			return postRoute;
 		}
+
+//		public void routeEvent(Event e) {
+//			// get layer to load based on simulations event.
+//			System.out.println("the event to route: "+simulation.getRoute(e));
+//			System.out.println("the route to route to: "+simulation.getRoute(e));
+//			this.hudgui.openView(simulation.getRoute(command));
+//			boolean postRoute = this.simulation.continueAfterRoute();
+//			return postRoute;
+//			
+//		}
 
 }
