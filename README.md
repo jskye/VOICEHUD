@@ -9,4 +9,4 @@ It demonstrates this on a simple DrivingSimulation that plays a video and overla
 The simulation is decoupled such that it can be swapped out for a custom simulation for some other domain.
 tbc.
 
-The user guide is (here)[https://github.com/jskye/voicehud/blob/master/docs/VoiceHudUserGuide.pdf] 
+The user guide is [here](https://github.com/jskye/voicehud/blob/master/docs/VoiceHudUserGuide.pdf)
