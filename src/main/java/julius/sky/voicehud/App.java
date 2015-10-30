@@ -58,6 +58,7 @@ public class App extends SimpleApplication
 		  this.setShowSettings(false); // splashscreen
 		  // set to fullscreen. turned off while developing.
 		  settings.setFullscreen(true);
+		  settings.setSettingsDialogImage("Assets/Interface/images/voicehud.png");
 		  this.setSettings(settings);
 		  setDisplayFps(false);
 		  setDisplayStatView(false);
