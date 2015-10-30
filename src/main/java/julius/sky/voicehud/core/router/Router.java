@@ -41,7 +41,7 @@ public class Router {
 			System.out.println("the command to route: "+simulation.getRoute(command));
 			System.out.println("the route to route to: "+simulation.getRoute(command));
 			this.hudgui.openView(simulation.getRoute(command));
-			boolean postRoute = this.simulation.getPostRoute();
+			boolean postRoute = this.simulation.continueAfterRoute();
 			return postRoute;
 		}
 

@@ -17,44 +17,27 @@ import julius.sky.voicehud.core.router.Route;
  */
 public interface Simulation {
 	
-	String viewtoroute = null;
-	boolean postroute = false;
+	public boolean continueAfterRoute = false;
 
+
+	// at the moment a simulation doesnt really define much.
+	// it couldve rather been a SimulationRouter
+	// but there could be other methods that are common to simulation worth adding.
+	// TODO: Refactor
+	// to that end, it makes sense to refactor SimpleMovieState into Simulation
+	// instead of having App holding both a simulation and movie state independently.
+	// SimRouter could still be abstracted out to implement router.
 	
-	public enum POSTROUTES {
-		CONT_RECOG("continue"),
-		STOP_RECOG("stop");
-		
-		private final String text;
-
-	    /**
-	     * @param text
-	     */
-	    private POSTROUTES(final String text) {
-	        this.text = text;
-	    }
-
-	    /* (non-Javadoc)
-	     * @see java.lang.Enum#toString()
-	     */
-	    @Override
-	    public String toString() {
-	        return text;
-	    }
-	}
-
-
+	
 	/**
 	 * @returns the postroute boolean
 	 */
-	public boolean getPostRoute();
+	public boolean continueAfterRoute();
 
 
 	/**
-	 * @param command
-	 * @return
 	 */
-	public SimulationRouteList getSimulationRouteList(String command);
+	public SimulationRouteList getSimulationRouteList();
 
 
 	/**

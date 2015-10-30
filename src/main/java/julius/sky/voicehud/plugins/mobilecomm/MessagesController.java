@@ -30,10 +30,12 @@ public class MessagesController implements ScreenController{
 	private Nifty nifty;
 	private Screen screen;
 	private Thread alertThread;
-	private TTS alert;
+	private TTS messageSpeakable;
 	private Thread voiceThread;
 	private VoiceCommandManager vcm;
 	private ArrayList<Message> messageList = new ArrayList<Message>();
+	private Message currentMessage;
+	private int currentMessageIndex;
 
 	/**
 	 * Creates a new controller instance for nifty-gui.
@@ -50,7 +52,7 @@ public class MessagesController implements ScreenController{
 //		this.vcm = vcm;
 		
 		try {
-			this.alert = new TTS();
+			this.messageSpeakable = new TTS();
 		} catch (EngineException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,8 +85,8 @@ public class MessagesController implements ScreenController{
 		// TODO Auto-generated method stub
 		setTextToElement("nameLabel1", "Mum");
 		setTextToElement("messageLabel1", "Hello son, how are you today?");
-		this.alert.setTextToSpeak("Mum says: Hello song, how are you today?");
-	    this.alertThread = new Thread(this.alert);
+		this.messageSpeakable.setTextToSpeak("Mum says: Hello song, how are you today?");
+	    this.alertThread = new Thread(this.messageSpeakable);
 	    
 	    
 	    try {
@@ -135,8 +137,8 @@ public class MessagesController implements ScreenController{
 		// TODO Auto-generated method stub
 		setTextToElement("nameLabel1", "Mum");
 		setTextToElement("messageLabel1", "Hello son, how are you today?");
-		this.alert.setTextToSpeak("Mum says: Hello song, how are you today?");
-	    this.alertThread = new Thread(this.alert);
+		this.messageSpeakable.setTextToSpeak("Mum says: Hello song, how are you today?");
+	    this.alertThread = new Thread(this.messageSpeakable);
 	    
 	    
 	    try {
@@ -219,6 +221,11 @@ public class MessagesController implements ScreenController{
     private Element getElementByID(String elementID)
     {
     	return nifty.getCurrentScreen().findElementByName(elementID);
+    }
+    
+    private Message getNextMessage(){
+    	currentMessageIndex++;
+    	return messageList.get(currentMessageIndex);
     }
 
 

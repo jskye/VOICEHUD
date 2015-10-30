@@ -25,7 +25,7 @@ public class DrivingSimulation implements Simulation{
 	private int[] speeds = {10,20,30,40,50,60,70,80,80,80,80,90,100,100,100,80,60,40,30,20};
 	private int[] speedLimits = {40,40,60,60,60,60,80,80,80,100,100,80,80,80,60,60,60,40,40,40};
 	private SimulationRouteList drivingSimulationRoutes;
-	private boolean postroute;
+	private boolean continueAfterRoute;
 	private String route;
 	
 	public DrivingSimulation(){
@@ -42,21 +42,21 @@ public class DrivingSimulation implements Simulation{
 		 Route route = null;
 		  
 		  if (command.startsWith("exit") || command.startsWith("stop") ){
-			  setPostRoute(false);
+			  setContinueAfterRoute(false);
 		  }
           
           if (command.equals("hud") || command.equals("hide")) {
-			  setPostRoute(true);
+			  setContinueAfterRoute(true);
         	  route = drivingSimulationRoutes.getRoute("DRIVERHUD");
           }
           
           if (command.equals("time") || command.equals("clock")) {
-			  setPostRoute(true);
+			  setContinueAfterRoute(true);
         	  route = drivingSimulationRoutes.getRoute("CLOCK");
           }
           
           if (command.equals("date")) {
-        	  setPostRoute(true);
+        	  setContinueAfterRoute(true);
         	  route = drivingSimulationRoutes.getRoute("DATE");
           }
           
@@ -66,16 +66,16 @@ public class DrivingSimulation implements Simulation{
 //          }
           
           if (command.equals("messages")) {
-        	  setPostRoute(true);
+        	  setContinueAfterRoute(true);
         	  route = drivingSimulationRoutes.getRoute("MESSAGES");
           }
           
           if (command.equals("fuel")) {
-        	  setPostRoute(true);
+        	  setContinueAfterRoute(true);
         	  route = drivingSimulationRoutes.getRoute("FUEL");
           }
           if (command.equals("map")) {
-        	  setPostRoute(true);
+        	  setContinueAfterRoute(true);
         	  route = drivingSimulationRoutes.getRoute("MAP");
           }
           
@@ -88,8 +88,8 @@ public class DrivingSimulation implements Simulation{
 	/**
 	 * @param b
 	 */
-	private void setPostRoute(boolean pr) {
-		this.postroute = pr;
+	private void setContinueAfterRoute(boolean pr) {
+		this.continueAfterRoute = pr;
 	}
 
 
@@ -97,9 +97,9 @@ public class DrivingSimulation implements Simulation{
 	 * @see julius.sky.voicehud.simulation.Simulation#getPostRoute()
 	 */
 	@Override
-	public boolean getPostRoute() {
+	public boolean continueAfterRoute() {
 		// TODO Auto-generated method stub
-		return postroute;
+		return continueAfterRoute;
 	}
 
 
@@ -107,7 +107,7 @@ public class DrivingSimulation implements Simulation{
 	 * @see julius.sky.voicehud.simulation.Simulation#getSimulationRouteList(java.lang.String)
 	 */
 	@Override
-	public SimulationRouteList getSimulationRouteList(String command) {
+	public SimulationRouteList getSimulationRouteList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

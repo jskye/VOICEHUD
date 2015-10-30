@@ -63,7 +63,7 @@ import de.lessvoid.nifty.screen.ScreenController;
  * 
  * @author Rafael Math
  */
-public class HUDGUIController extends SimpleApplication implements ScreenController 
+public class HUDGUIController implements ScreenController 
 {
 	
 	
@@ -122,11 +122,6 @@ public class HUDGUIController extends SimpleApplication implements ScreenControl
 	}
 
 
-	@Override
-	public void simpleInitApp() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 	

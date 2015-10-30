@@ -12,40 +12,22 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
-import com.jme3.scene.Spatial.CullHint;
-import com.jme3.texture.Image;
+import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.Button;
-import de.lessvoid.nifty.controls.ListBox;
-import de.lessvoid.nifty.controls.ListBox.SelectionMode;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+
 import julius.sky.voicehud.App;
 import julius.sky.voicehud.core.router.Route;
 import julius.sky.voicehud.core.router.Router;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.plugins.mobilecomm.MessagesController;
 
-import com.jme3.app.Application;
-import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.AbstractAppState;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.input.MouseInput;
-import com.jme3.input.controls.AnalogListener;
-import com.jme3.input.controls.MouseButtonTrigger;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
-import com.jme3.niftygui.NiftyJmeDisplay;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Box;
-import com.jme3.system.AppSettings;
-
-import de.lessvoid.nifty.Nifty;
-
-import java.util.Calendar;
 
 /**
  * University of Newcastle
@@ -77,7 +59,8 @@ public class HUDGUIState extends AbstractAppState implements Runnable {
   private AudioRenderer audioRenderer;
   private FlyByCamera flyCam;
   private Camera cam;
-  private String baseHUDView = "DRIVER_HUD_VIEW";
+//TODO: this needs to be fetched from the simroutes.
+  private String baseHUDView = "DRIVER_HUD_VIEW"; 
 
   
 
