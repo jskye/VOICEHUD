@@ -38,7 +38,8 @@ public class Router {
 		public boolean routeCommand(String command) {
 			// get layer to load.
 			// TODO use drivingsimulationlogic to determine routes.
-			System.out.println(simulation.getRoute(command));
+			System.out.println("the command to route: "+simulation.getRoute(command));
+			System.out.println("the route to route to: "+simulation.getRoute(command));
 			this.hudgui.openView(simulation.getRoute(command));
 			boolean postRoute = this.simulation.getPostRoute();
 			return postRoute;

@@ -74,7 +74,10 @@ public class DrivingSimulation implements Simulation{
         	  setPostRoute(true);
         	  route = drivingSimulationRoutes.getRoute("FUEL");
           }
-          
+          if (command.equals("map")) {
+        	  setPostRoute(true);
+        	  route = drivingSimulationRoutes.getRoute("MAP");
+          }
           
           
 		return route;

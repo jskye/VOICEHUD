@@ -24,6 +24,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import julius.sky.voicehud.App;
 import julius.sky.voicehud.core.router.Route;
+import julius.sky.voicehud.core.router.Router;
 import julius.sky.voicehud.core.voice.VoiceCommandManager;
 import julius.sky.voicehud.plugins.mobilecomm.MessagesController;
 
@@ -187,6 +188,8 @@ public void openView(Route selectedview)
 	Screen screen = getNifty().getCurrentScreen();
 //	System.out.println("current screen: " + "numviews= " 
 //	+ screen.layoutviewsCallCount+ screen.debugOutput());
+	System.out.println("command: "+selectedview.getViewId());
+
 	String viewXMLPath = null;
 	if(selectedview !=null){
 		viewXMLPath = "Interface/views/" + selectedview.getViewname() + ".xml";	
