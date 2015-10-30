@@ -250,6 +250,11 @@
 	<artifactId>jfx</artifactId>
 	<version>1.165.2015-10-25_020230-3c0cb5b</version>
 </dependency>
+<dependency>
+	<groupId>xmlunit</groupId>
+	<artifactId>xmlunit</artifactId>
+	<version>1.6</version>
+</dependency>
 </dependencies>
 <!--  <modules>
 	<module>src/main/java/julius/sky/voicehud/core/voice/marytts</module>
