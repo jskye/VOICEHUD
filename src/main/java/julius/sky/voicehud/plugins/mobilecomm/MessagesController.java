@@ -84,7 +84,7 @@ public class MessagesController implements ScreenController{
 	public void onStartScreen() {
 		// TODO Auto-generated method stub
 		setTextToElement("nameLabel1", "Mum");
-		setTextToElement("messageLabel1", "Hello son, how are you today?");
+//		setTextToElement("messageLabel1", "Hello son, how are you today?");
 		this.messageSpeakable.setTextToSpeak("Mum says: Hello song, how are you today?");
 	    this.alertThread = new Thread(this.messageSpeakable);
 	    
@@ -136,7 +136,7 @@ public class MessagesController implements ScreenController{
 	public void onElementShow(final String id, ElementShowEvent showevent ) {
 		// TODO Auto-generated method stub
 		setTextToElement("nameLabel1", "Mum");
-		setTextToElement("messageLabel1", "Hello son, how are you today?");
+//		setTextToElement("messageLabel1", "Hello son, how are you today?");
 		this.messageSpeakable.setTextToSpeak("Mum says: Hello song, how are you today?");
 	    this.alertThread = new Thread(this.messageSpeakable);
 	    

@@ -27,7 +27,7 @@
          	<panel childLayout="vertical" width="100%" height="100%" backgroundColor="#0000">
 			</panel>
 			<panel childLayout="absolute">
-	  	   		<control name="label" id ="speedLabel" text="70" color="#0f88"
+	  	   		<control name="label" id ="speedLabel" text="90" color="#ff9900"
 				align="left" valign="bottom" height="10%" width="30%"
 				x="30%" y="90%" font="Interface/fonts/verdana-48-regular.fnt">					
 				</control>

@@ -115,7 +115,7 @@ public class DateController implements ScreenController{
 	// needs to be called when command is recognised and layer shown.
 	public void updateTime(){
        Calendar cal = Calendar.getInstance();       
-       SimpleDateFormat fmt = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);       
+       SimpleDateFormat fmt = new SimpleDateFormat("MMM dd", Locale.US);       
        setCurrentTime(fmt.format(cal.getTime()));
        System.out.println(fmt.format(cal.getTime()));
        setTextToElement("dateLabel1", getCurrentTime().toString());

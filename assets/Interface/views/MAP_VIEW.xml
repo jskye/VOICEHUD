@@ -48,7 +48,7 @@
 					<panel childLayout="absolute">
 						<image filename="Interface/images/map.png" align="center" 
 						valign="bottom" childLayout="overlay" width="15%" height="15%"
-						x="10%" y="82%"/>
+						x="45%" y="70%"/>
 					</panel>
 		</layer>
 		

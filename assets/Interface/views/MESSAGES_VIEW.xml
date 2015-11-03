@@ -46,19 +46,18 @@
 		</layer>
 		<layer id="MESSAGES" childLayout="center" backgroundColor="#0000" visible="true" width="100%" height="100%">
 					<panel childLayout="absolute">
-						<image filename="Interface/images/mum.png" align="center" 
+						<image filename="Interface/images/mum_trans.png" align="center" 
 						valign="bottom" childLayout="overlay" width="7%" height="7%"
-						x="10%" y="88%"/>
+						x="45%" y="68%"/>
 			  	   		<control name="label" id ="nameLabel1" text="name" color="#0f88"
 						align="left" valign="bottom" height="50px" width="5%"
-						x="11%" y="93%">
+						x="45%" y="65%">
 			<!-- 							font="Interface/Fonts/Arial32px.fnt">-->						
 						</control>
-						<control name="label" id ="messageLabel1" text="message" 
+						<!--  control name="label" id ="messageLabel1" text="message" 
 						color="#0f88" align="left" valign="bottom" height="50px" width="30%"
-						x="15%" y="90%">
-			<!-- 							font="Interface/Fonts/Arial32px.fnt">-->						
-						</control>
+						x="45%" y="90%"-->
+						<!--  /control-->
 					</panel>
 		</layer>
 		
