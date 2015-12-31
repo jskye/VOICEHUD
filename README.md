@@ -10,4 +10,5 @@ The simulation is decoupled such that it can be swapped out for a custom simulat
 tbc.
 
 The user guide is [here](https://github.com/jskye/voicehud/blob/master/docs/VoiceHudUserGuide.pdf)
+
 The final Thesis document as submitted is [here](https://github.com/jskye/voicehud/blob/master/docs/c3155112_FINALYEARTHESIS_v8final._JuliusM.pdf)
